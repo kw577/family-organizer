@@ -320,9 +320,21 @@ a, a:hover, a:focus {
 }
 
 
+/*For week view*/
 .calendarHeaderDay {
 	
 	width: 14.2857%; 
+	border-top: 1px solid #787878;
+	border-right: 1px solid #787878;
+	border-bottom: 1px solid #787878;
+	
+}
+
+
+/*For day view*/
+.calendarHeaderDay2 {
+	
+	width: 100%; 
 	border-top: 1px solid #787878;
 	border-right: 1px solid #787878;
 	border-bottom: 1px solid #787878;
@@ -335,13 +347,19 @@ a, a:hover, a:focus {
 	display: flex;
 }
 
+/*For week view*/
 .calendarDayColumn {
 	
 	width: 14.2857%; 
 
 }
 	
+/*For day view*/
+.calendarDayColumn2 {
+	
+	width: 100%; 
 
+}
 	
 .calendarDayHour {
 

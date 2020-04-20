@@ -291,6 +291,274 @@ class CalendarWeek {
 }
 
 
+
+
+
+class CalendarDay {
+	
+	
+	constructor (choosenDay) {
+		
+		//current day
+		this.today = new Date();
+		
+		//day for which calendar will be generated
+		this.selectedDay = new Date(choosenDay);
+		
+        this.day = this.selectedDay.getDate();
+        this.month = this.selectedDay.getMonth();
+        this.year = this.selectedDay.getFullYear();
+		
+		//day of the week
+		this.dayName = this.selectedDay.getDay();
+			
+			
+        this.divCalendarCnt = null;
+        this.divCalendarHoursDescription = null;
+        this.divCalendarWorkspace = null;
+        this.divCalendarHeader = null;
+        this.divCalendarMainView = null;
+        
+        this.divCalendarHeaderTitle = null;
+        this.divCalendarHeaderDayList = null;
+		
+		               
+	}
+	
+	//Function to add calendar hours descriptions
+	addHoursDescription() {
+	
+		var insertHTMLcode = "";
+		
+		//add 1 div class calendarEmptyCorner1 and 1 div calendarEmptyCorner2
+		insertHTMLcode += '<div class="calendarEmptyCorner1"></div>';
+		insertHTMLcode += '<div class="calendarEmptyCorner2"></div>';
+		
+		insertHTMLcode += '<div class="calendarDescription">00:00</div>';
+		
+		var hour = 0;
+		var minutes = "";
+		var description = "";
+		
+		var i=0;
+		
+		for (i; i<=46; i++)
+		{
+			
+			var description = "";
+			if ((i+1) % 2 == 0) hour++;
+			
+			if ((i+1) % 2 == 0) {
+				
+				minutes="00";
+			} else {
+				minutes="30";
+			}
+					
+			
+			if (hour < 10) {
+				
+				description = "0" + hour + ":" + minutes;
+			} else {
+				description = hour + ":" + minutes;
+			}
+			
+			
+			insertHTMLcode += '<div class="calendarDescription">' + description +'</div>';
+				
+			
+		}
+		
+	
+		this.divCalendarHoursDescription.innerHTML = insertHTMLcode;
+	}
+	
+	
+	//Function to add calendar days descriptions
+	addDaysDescription() {
+		
+		this.divCalendarHeaderTitle.setAttribute("id","divCalendarHeaderTitle");
+	
+		month_list = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+		day_list = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+		
+		//Add header title
+		var headerTitle = "";
+		
+		headerTitle = day_list[this.selectedDay.getDay()] + " - " + (this.selectedDay.getDate()) + " " + month_list[this.selectedDay.getMonth()];
+	
+		this.divCalendarHeaderTitle.innerHTML = headerTitle;
+		
+		//keeps information about present calendar view (day for which this view was generated) - usufull when switching calendar view 
+		this.divCalendarHeaderTitle.setAttribute("data-identifier", "D" + this.checkDateCode(this.selectedDay));
+					
+		
+		//Add day description
+		var insertHTMLcode = "";
+
+		insertHTMLcode += '<div class="calendarHeaderDay2">' + (this.selectedDay.getDate()) + ' ' + day_list[this.selectedDay.getDay()] +'</div>';
+		
+		this.divCalendarHeaderDayList.innerHTML = insertHTMLcode;
+	
+	
+	
+	}
+	
+	
+	
+	checkDateCode(checkDate) {
+		
+		var result = "";
+			
+		result += checkDate.getFullYear();
+				
+		if (checkDate.getMonth() < 10) {
+				
+			result += "0" + checkDate.getMonth();
+		} else {
+			result += checkDate.getMonth();
+		}
+			
+			
+		if (checkDate.getDate() < 10) {
+				
+			result += "0" + checkDate.getDate();
+		} else {
+			result += checkDate.getDate();
+		}
+		
+		return result;
+	
+	}
+	
+	
+	
+	checkHourCode(checkHour) {
+		
+		var result = "";
+		var min = ""
+		var hr = ""		
+		
+		hr = Math.floor((checkHour) / 2);
+		
+		if ((checkHour) % 2 == 0) {
+				
+			min = "00";
+		} else {
+			min = "30";
+		}
+					
+			
+		if (hr < 10) {
+				
+			result = "_0" + hr + min;
+		} else {
+			result = "_" + hr + min;
+		}
+		
+		return result;
+		
+	}
+
+	
+	//Function to add calendar days descriptions
+	addDayFields() {
+		
+
+		var j=0;
+		var insertHTMLcode = "";	
+		
+		
+		//codes for div id
+		var dateCode = "";
+		var hourCode = "";
+		
+				
+		//Prepare day code - to add id atrribute to each div
+		dateCode = this.checkDateCode(this.selectedDay);
+			
+			
+		insertHTMLcode += '<div class="calendarDayColumn2" id="' + dateCode + '">';
+			
+			for (j=0; j<=47; j++)
+			{
+						
+				hourCode = this.checkHourCode(j);
+				insertHTMLcode += '<div class="calendarDayHour" onclick="selectedByUser(this)" id="' + dateCode + hourCode + '">' + hourCode +'</div>';
+			
+			}
+			
+			
+		insertHTMLcode += '</div>';
+					
+		
+		this.divCalendarMainView.innerHTML = insertHTMLcode;
+		
+	}
+	
+	
+	
+	
+	init() {
+		
+		this.divCalendarCnt = document.createElement("div");
+		this.divCalendarCnt.classList.add("calendarCnt");
+		
+		this.divCalendarHoursDescription = document.createElement("div");
+		this.divCalendarHoursDescription.classList.add("calendarHoursDescription");
+		
+		this.divCalendarWorkspace = document.createElement("div");
+		this.divCalendarWorkspace.classList.add("calendarWorkSpace");
+		
+		this.divCalendarHeader = document.createElement("div");
+		this.divCalendarHeader.classList.add("calendarHeader");
+		
+		this.divCalendarMainView = document.createElement("div");
+		this.divCalendarMainView.classList.add("calendarMainView");
+	
+		this.divCalendarHeaderTitle = document.createElement("div");
+		this.divCalendarHeaderTitle.classList.add("calendarHeaderTitle");
+		
+		this.divCalendarHeaderDayList = document.createElement("div");
+		this.divCalendarHeaderDayList.classList.add("calendarHeaderDayList");
+		
+		this.divCalendarCnt.appendChild(this.divCalendarHoursDescription);
+		this.divCalendarCnt.appendChild(this.divCalendarWorkspace);
+		this.divCalendarWorkspace.appendChild(this.divCalendarHeader);
+		this.divCalendarWorkspace.appendChild(this.divCalendarMainView);
+		this.divCalendarHeader.appendChild(this.divCalendarHeaderTitle);
+		this.divCalendarHeader.appendChild(this.divCalendarHeaderDayList);
+		
+				
+		this.addHoursDescription();
+		this.addDaysDescription();
+		this.addDayFields(); 
+		
+		
+		
+		
+	}
+	
+	
+
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //window.onload = start;
 
 
@@ -355,7 +623,11 @@ function generateCalendarView(dateSelected, viewType) {
 
 
 	} else if (viewType == "D") {
-		str1 = "rwrqerqwr";
+		const cal = new CalendarDay(dateSelected);
+		cal.init();
+		document.getElementById("calendarViewWrapper").appendChild(cal.divCalendarCnt);
+		
+		addCalendarEvents(cal);
 	} else {
 		str1 = "sdhhsds";
 	}
@@ -364,10 +636,6 @@ function generateCalendarView(dateSelected, viewType) {
 	
 	
 }
-
-
-
-
 
 
 
@@ -401,9 +669,15 @@ function switchCalendar(options) {
 		break;
 	case 1:
 		var nextChoosenDay = new Date((currentDay.getTime()+(jumpToDate)*24*60*60*1000));
-		generateCalendarView(nextChoosenDay, calendarType);
-		
+		generateCalendarView(nextChoosenDay, calendarType);	
 		break;
+	case 2:
+		generateCalendarView(currentDay, "D");	
+		break;
+	case 3:
+		generateCalendarView(currentDay, "W");	
+		break;
+		
 
 	}
 	
