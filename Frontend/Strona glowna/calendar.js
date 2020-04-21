@@ -679,6 +679,14 @@ function switchCalendar(options) {
 		break;
 		
 
+	
+	case 5:
+		var nextChoosenDay = new Date();
+		generateCalendarView(nextChoosenDay, calendarType);
+		break;
+	
+
+
 	}
 	
 	

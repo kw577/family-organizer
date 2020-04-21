@@ -10,4 +10,7 @@
   /* font-size: 120%; */
 }
  
-.icon-menu { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf0c9;&nbsp;'); }
+.icon-home { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe900;&nbsp;'); }
+.icon-clock { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe901;&nbsp;'); }
+.icon-briefcase { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe902;&nbsp;'); }
+.icon-tasks { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe903;&nbsp;'); }

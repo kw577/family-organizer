@@ -7,9 +7,27 @@
   "ascent": 850,
   "glyphs": [
     {
-      "uid": "559647a6f430b3aeadbecd67194451dd",
-      "css": "menu",
-      "code": 61641,
+      "uid": "d7271d490b71df4311e32cdacae8b331",
+      "css": "home",
+      "code": 59648,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "598a5f2bcf3521d1615de8e1881ccd17",
+      "css": "clock",
+      "code": 59649,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "053b757d97042e1c94276200c7b64b91",
+      "css": "briefcase",
+      "code": 59650,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "9396b2d8849e0213a0f11c5fd7fcc522",
+      "css": "tasks",
+      "code": 59651,
       "src": "fontawesome"
     }
   ]
