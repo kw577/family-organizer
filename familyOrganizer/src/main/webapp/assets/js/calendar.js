@@ -236,7 +236,7 @@ class CalendarWeek {
 				{
 					
 					hourCode = this.checkHourCode(j);
-					insertHTMLcode += '<div class="calendarDayHour" onclick="selectedByUser(this)" id="' + dateCode + hourCode + '">' + hourCode +'</div>';
+					insertHTMLcode += '<div class="calendarDayHour" onclick="selectedByUser(this)" id="' + dateCode + hourCode + '">' + hourCode + '_0000' + '</div>';
 			
 				}
 			

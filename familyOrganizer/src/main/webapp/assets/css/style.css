@@ -21,6 +21,28 @@ body
 
 }
 
+
+.pageWithSidebar {
+	
+	max-width: calc(100% - 250px) !important; 
+	
+}
+
+
+.pageWithSidebarMini {
+	
+	max-width: calc(100% - 80px) !important;
+	
+}
+
+
+.pageWithoutSidebar {
+	
+	max-width: 100% !important;
+	
+}
+
+
 h1
 {
 	color: black;
@@ -262,6 +284,9 @@ a, a:hover, a:focus {
 	width: 98%;
 
 	display: flex;
+	
+	overflow: auto;
+	
 }
 
 
@@ -334,7 +359,8 @@ a, a:hover, a:focus {
 /*For day view*/
 .calendarHeaderDay2 {
 	
-	width: 100%; 
+	width: 100%;
+	min-width:300px; 
 	border-top: 1px solid #787878;
 	border-right: 1px solid #787878;
 	border-bottom: 1px solid #787878;
@@ -356,8 +382,10 @@ a, a:hover, a:focus {
 	
 /*For day view*/
 .calendarDayColumn2 {
+
 	
 	width: 100%; 
+	min-width:300px;
 
 }
 	

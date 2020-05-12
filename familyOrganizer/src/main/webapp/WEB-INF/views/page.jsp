@@ -265,6 +265,30 @@
 				}
 				
 				
+				$('.page').toggleClass('pageWithoutSidebar');
+				
+				
+				if($('.page').hasClass('pageWithoutSidebar')) {
+				
+					if($('.page').hasClass('pageWithSidebar')) $('.page').removeClass('pageWithSidebar');
+					if($('.page').hasClass('pageWithSidebarMini')) $('.page').removeClass('pageWithSidebarMini');
+				
+				
+				} else {
+				
+					if ($(window).width() < 752) {
+						$('.page').addClass('pageWithSidebarMini');
+						
+						
+					} else {
+						$('.page').addClass('pageWithSidebar');
+					
+					}
+					
+				}
+				
+				
+				
 			});
 
 		});
@@ -273,6 +297,11 @@
 		$(document).ready(function() {
 			
 			$(window).resize(function() {
+				
+				if($('.page').hasClass('pageWithSidebar')) $('.page').removeClass('pageWithSidebar');
+				if($('.page').hasClass('pageWithSidebarMini')) $('.page').removeClass('pageWithSidebarMini');
+				
+				
 				if ($(window).width() < 752) {
 					if ($('#sidebar').hasClass('active')) {
 						$('#sidebar').removeClass('active');
@@ -285,6 +314,25 @@
 						$('#sidebar').addClass('active');
 					}
 				}	
+				
+				
+				
+				if(! ($('.page').hasClass('pageWithoutSidebar'))) {
+					
+					
+					if ($(window).width() < 752) {
+					
+					$('.page').addClass('pageWithSidebarMini');
+					} else {
+					
+					$('.page').addClass('pageWithSidebar');	
+					
+									
+					}
+							
+				
+				}
+				
 				
 				
 			
@@ -300,7 +348,10 @@
 
 			if ($(window).width() < 752) {
 				$('#sidebar').addClass('sidebarMini');
+				if(!$('.page').hasClass('pageWithoutSidebar')) $('.page').addClass('pageWithSidebarMini');
 			} else {
+				if(!$('.page').hasClass('pageWithoutSidebar')) $('.page').addClass('pageWithSidebar');
+				
 					if (!init) {
 					$('#sidebar').removeClass('sidebarMini');
 				}
