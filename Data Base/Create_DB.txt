@@ -1,0 +1,10 @@
+CREATE DATABASE family_organizer;
+USE family_organizer;
+
+CREATE TABLE `notes` (
+	`id`			INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`description`		VARCHAR(255) NOT NULL,
+	`active` 		BOOLEAN,
+
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

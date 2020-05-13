@@ -1,0 +1,3 @@
+INSERT INTO notes (description, active) VALUES ('Notatki uzytkownika nr 1', true);
+INSERT INTO notes (description, active) VALUES ('Notatki - Test test test', true);
+INSERT INTO notes (description, active) VALUES ('To sa notatki z dnia 05.12.2020', true);

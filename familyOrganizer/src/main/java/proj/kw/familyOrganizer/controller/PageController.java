@@ -1,11 +1,18 @@
 package proj.kw.familyOrganizer.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import proj.kw.familyOrganizer.backend.dao.NotesDAO;
+
 @Controller
 public class PageController {
+	
+
+	@Autowired 
+	private NotesDAO notesDAO;
 
 	
 	@RequestMapping(value = {"/", "/home", "/calendar"})
@@ -29,6 +36,11 @@ public class PageController {
 
 		mv.addObject("title", "Notes");
 		mv.addObject("isNotesPage", true);
+		
+		
+		//Test
+		mv.addObject("notesList", notesDAO.list());
+		
 		return mv;
 
 	}
