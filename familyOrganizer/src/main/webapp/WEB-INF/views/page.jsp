@@ -1,8 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%
+    response.setCharacterEncoding("UTF-8");
+    request.setCharacterEncoding("UTF-8");
+%>
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}"/>
 
@@ -51,13 +55,12 @@
 		<nav id="sidebar">
 			<div class="sidebarHeader">
 				<!-- Logo for wide screen -->
-				<a href="#" class="d-none d-md-block"><img src="${images}/logo_white.png" alt="Logo" title="Main page"></a>
-				
+				<a href="${contextRoot}/home" class="d-none d-md-block"><img src="${images}/logo_white.png" alt="Logo" title="Main page"></a>
+					
 				<!-- Logo for narrow view -->
-				<a href="#" class="d-block d-md-none"><img src="${images}/logo_mini.png" alt="Logo" title="Main page"></a>
-
+				<a href="${contextRoot}/home" class="d-block d-md-none"><img src="${images}/logo_mini.png" alt="Logo" title="Main page"></a>
+	
 			</div>
-			
 			<div id="sidebarUser">
 				<a href="#" title="User panel"> <i class="icon-user"></i><span class="d-none d-md-inline-block ml-1">  Jan Kowalski </span></a>
 			</div>
@@ -102,7 +105,7 @@
 				</li>
 				
 				<li>
-					<a href="#" title="Notes"><i class="icon-edit"></i><span class="d-none d-md-inline-block ml-1">  Notes </span></a>
+					<a href="${contextRoot}/notes" title="User Notes page"><i class="icon-edit"></i><span class="d-none d-md-inline-block ml-1">  Notes </span></a>
 				</li>
 
 				<li>
@@ -163,64 +166,38 @@
 				</nav>
 				
 				
-		
-				<nav class="navbar navbar-expand-md navbar-dark" id="calendarControls">
+				
+				<!-- Home page - calendar view -->	
+				<c:if test="${isMainPage == true }"> 
+					<%@include file="calendarControls.jsp"%>
+				</c:if>	
+				
 								
-					 <div class="btn-group">
-						<!-- Button to switch calendar left  -->
-						<button type="button" id="switchLeft" class="btn btn-warning" onclick="switchCalendar(0)"><i class="icon-angle-circled-left"></i></button>	
-							
-						<!-- Button to jump to current date  -->
-						<button type="button" id="switchOnToday" class="btn btn-warning" onclick="switchCalendar(5)"><i class="icon-home"></i></button>							
-						
-						<!-- Button to switch calendar right  -->
-						<button type="button" id="switchRight" class="btn btn-warning" onclick="switchCalendar(1)"><i class="icon-angle-circled-right"></i></button>
-					</div> 
-					
-									
-					<!-- Button for mobile view  -->
-					<button class="navbar-toggler calendarToggler" type="button" data-target="#switchViews" data-toggle="collapse" aria-label="Calendar views toggle" aria-controls="switchViews" aria-expanded="false">
-						<!--<i class="icon-menu"></i>-->
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					
-					<div id="switchViews" class="collapse navbar-collapse ml-auto w-100 justify-content-end">
-								
-						<div class="btn-group">								
-							<button type="button" id="dayView" class="btn btn-warning mybutton" onclick="switchCalendar(2)"><span>D</span></button>
-							<button type="button" id="weekView" class="btn btn-warning mybutton" onclick="switchCalendar(3)"><span>W</span></button>	
-							<button type="button" id="monthView" class="btn btn-warning mybutton" onclick="switchCalendar(4)"><span>M</span></button>	
-						</div> 							
-												
-					</div>
-									
-				</nav>
-						
 			</header>
 
 
 				
 			<main>
 			
-			<section class="calendarView">
 			
-				<div class="container-fluid">
-					
-					<div class="row">
-						
-						<div class="calendarWrapper" id="calendarViewWrapper">
-						
-		
 			
-		
-						
-						</div>
-									
-					</div>
-					
-				</div>	
-					
-			</section>
+				<!-- Home page - calendar view -->	
+				<c:if test="${isMainPage == true }"> 
+					<%@include file="homePage.jsp"%>
+				</c:if>	
+			
+			
+			
+				<!-- User Notes page - calendar view -->	
+				<c:if test="${isNotesPage == true }"> 
+					<%@include file="userNotesPage.jsp"%>
+				</c:if>	
+			
+			
+			
+			
+			
+
 			
 			</main>
 			
@@ -245,7 +222,10 @@
 		
 		function start() {
 			checkTime();
-			loadCalendar();
+			
+			if(document.body.contains(document.getElementById('calendarViewWrapper'))){
+				loadCalendar();
+			}
 		}
 		
 		

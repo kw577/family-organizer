@@ -8,15 +8,33 @@ import org.springframework.web.servlet.ModelAndView;
 public class PageController {
 
 	
-	@RequestMapping(value = {"/", "/home", "/index"})
-	public ModelAndView index() {
+	@RequestMapping(value = {"/", "/home", "/calendar"})
+	public ModelAndView startPage() {
 		
 		ModelAndView mv = new ModelAndView("page");
-		mv.addObject("greeting","Welcome to Spring Web MVC");
-		mv.addObject("title", "Online Shopping");
+		mv.addObject("title", "Home");
+		mv.addObject("isMainPage", true);
+		
 		return mv;
 		
 		
 	}
+	
+	
+	//strona z regulaminem zakupow
+	@RequestMapping(value = { "/notes" })
+	public ModelAndView notesPage() {
+
+		ModelAndView mv = new ModelAndView("page");
+
+		mv.addObject("title", "Notes");
+		mv.addObject("isNotesPage", true);
+		return mv;
+
+	}
+
+
+	
+	
 	
 }
