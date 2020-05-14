@@ -70,6 +70,15 @@
 		</dependency>
 
 
+
+		<!-- PostgresSQL Database -->
+	    <dependency>
+	      <groupId>org.postgresql</groupId>
+	      <artifactId>postgresql</artifactId>
+	      <version>42.2.2.jre7</version>
+	    </dependency>
+
+
 		<!-- Hibernate -->
 		<dependency>
 		    <groupId>org.hibernate</groupId>

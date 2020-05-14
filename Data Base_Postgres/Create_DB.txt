@@ -1,0 +1,7 @@
+/* database family_organizer */
+
+CREATE TABLE notes (
+	id serial PRIMARY KEY,
+	description VARCHAR (50) NOT NULL,
+	active BOOLEAN NOT NULL
+);

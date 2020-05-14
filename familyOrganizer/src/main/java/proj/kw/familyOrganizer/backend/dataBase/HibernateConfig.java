@@ -18,16 +18,26 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class HibernateConfig {
 
+	//MySQL Database
+	//private final static String DATABASE_URL = "jdbc:mysql://localhost:3306/family_organizer"; 
+	//private final static String DATABASE_DRIVER = "com.mysql.jdbc.Driver";
+	//private final static String DATABASE_DIALECT = "org.hibernate.dialect.MySQLDialect";
 
-	private final static String DATABASE_URL = "jdbc:mysql://localhost:3306/family_organizer"; 
-	private final static String DATABASE_DRIVER = "com.mysql.jdbc.Driver";
-	private final static String DATABASE_DIALECT = "org.hibernate.dialect.MySQLDialect";
+	//private final static String DATABASE_USERNAME = "root";
+	//private final static String DATABASE_PASSWORD = "";
 
 
-	private final static String DATABASE_USERNAME = "root";
-	private final static String DATABASE_PASSWORD = "";
+	//Postgres Database
+	private final static String DATABASE_URL = "jdbc:postgresql://localhost:5432/family_organizer"; 
+	private final static String DATABASE_DRIVER = "org.postgresql.Driver";
+	private final static String DATABASE_DIALECT = "org.hibernate.dialect.PostgreSQLDialect";
 
-
+	private final static String DATABASE_USERNAME = "postgres";
+	private final static String DATABASE_PASSWORD = "postgresAdmin";
+	
+	
+	
+	
 	@Bean
 	public DataSource getDataSource() {
 
