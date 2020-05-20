@@ -1,0 +1,826 @@
+
+/*--------------------------------Main Settings--------------------------------*/
+
+body
+{
+	background-color: #fafafa;
+	color: #black;
+    font-family: 'PT Sans', sans-serif; 
+    font-size: 17px;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+.page {
+ 
+    width: 100%;
+
+}
+
+h1
+{
+	color: black;
+	font-weight: 400;
+	font-size: 36px;
+	margin: 20px;
+}
+
+
+/*---------------------------------Navbar---------------------------------*/
+
+#navbarTop
+{
+	min-height: 57px;
+	
+}
+
+.navbarMyColor {
+	
+	background: #0053AE;
+}
+
+#navbarTop ul li a:hover {
+    color: #95A8F7;
+    #background: #fff;  #8497E6  #95A8F7
+}
+
+
+.mirrorView {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+	
+}
+
+.sidebarToggler{
+	background: #283454;
+	
+}
+
+
+/*------------------------------Calendar Controls Bar------------------------------*/
+
+
+#calendarControls {
+	width: 100%;
+	background-color: #fafafa;
+	margin-top: 50px;
+	border-bottom: 3px solid #283454;
+}
+
+#calendarControls:hover {
+
+	background-color: #e0e0e0;
+}
+
+.calendarToggler {
+	
+	#background: #394565;
+	background: #c8c8c8;
+}
+
+.mybutton{
+	font-weight: bold;
+	font-size: 20px;
+	margin-top: 3px;
+	#border: 1px solid black;
+	
+}
+
+
+/*---------------------------------Footer---------------------------------*/
+#footer
+{
+	font-size: 20px;
+	background-color: #0053AE;
+	text-align: center;
+	#margin-top: 20px;
+	padding: 10px;
+}
+
+
+
+/*------------------------------Sidebar------------------------------*/
+
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+	color: #ffffff;
+    min-height: 100vh;
+	background: #283454;
+    
+    #transition: all 0.3s;
+	
+
+}
+
+#sidebar .sidebarHeader {
+	background: #283454;
+    padding: 5px;
+    
+}
+
+#sidebar .sidebarHeader img {
+	width: 100%;
+	height: auto;
+}
+
+#sidebarUser {
+	background-color: #394565;
+	font-size: 20px;
+	letter-spacing: 2px;
+    padding: 10px;
+	text-align: center;
+
+}
+
+#sidebarClock {
+	background-color: #394565;
+	font-size: 30px;
+	letter-spacing: 2px;
+    padding: 10px;
+	text-align: center;
+	font-family: 'BenchNine', sans-serif;
+
+}
+
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+#sidebar ul.components {
+    border-bottom: 1px solid #47748b;
+	padding: 20px 0;
+	
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+	top: 50%;
+    right: 15px;
+    position: absolute;
+
+    transform: translateY(-50%);
+}
+
+
+#sidebar ul li a {
+    font-size: 1.1em;
+	padding: 12px;
+    display: block;
+	
+	
+}
+
+#sidebar ul li a:hover {
+    color: #7386D5;
+    background: #fafafa;
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+    color: #fff;
+    background: #394565;
+		
+}
+
+a, a:hover, a:focus {
+    text-decoration: none;
+	color: inherit;
+    transition: all 0.3s;
+}
+
+
+/*------------------------------Sidebar-mini------------------------------*/
+
+
+
+.sidebarMini {
+	min-width: 80px !important;
+    max-width: 80px !important;
+    
+    transition: all 0.0s !important;
+	text-align: center !important;
+	
+}
+
+
+#sidebar.activeMini {
+    margin-left: -80px;
+	
+	
+}
+
+
+
+
+/*------------------------------Section calendarView------------------------------*/
+
+.calendarView
+{
+	text-align: center;
+}
+
+.calendarView img
+{
+	width: 100%;
+	height: auto;
+}
+
+.calendarView figcaption
+{
+	margin-top: 8px;
+}
+
+
+
+
+/*------------------------------Calendar - week view------------------------------*/
+
+.calendarWrapper {
+	
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	
+}
+
+.calendarCnt {
+	
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 40px;
+	margin-bottom: 70px;
+	width: 98%;
+
+	display: flex;
+}
+
+
+.calendarHoursDescription {
+	
+	width: 80px;
+	
+}
+
+
+
+.calendarWorkSpace {
+	
+	width: 100%; /* 100% of space left - the rest is used by div class calendarHoursDescription*/
+	
+}
+
+
+.calendarHeader {
+	
+	width: 100%;
+
+
+}
+
+
+.calendarHeaderTitle {
+	
+	width: 100%;
+	height: 40px; /* calendarEmptyCorner1 height must be equal to calendarHeaderTitle's height */
+	#text-align: center;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	font-size: 20px;
+	letter-spacing: 2px;
+	
+}
+
+
+.calendarHeaderDayList {
+	
+	width: 100%;
+	height: 30px; /* calendarEmptyCorner1 height must be equal to calendarHeaderDayList's height */
+	line-height: 30px;
+	
+	#background: #ababab;
+	font-size: 15px;
+	font-weight: bold;
+	
+	display: flex;
+	
+	
+}
+
+
+/*For week view*/
+.calendarHeaderDay {
+	
+	width: 14.2857%; 
+	border-top: 1px solid #787878;
+	border-right: 1px solid #787878;
+	border-bottom: 1px solid #787878;
+	
+}
+
+
+/*For day view*/
+.calendarHeaderDay2 {
+	
+	width: 100%; 
+	border-top: 1px solid #787878;
+	border-right: 1px solid #787878;
+	border-bottom: 1px solid #787878;
+	
+}
+
+.calendarMainView {
+	
+	width: 100%;
+	display: flex;
+}
+
+/*For week view*/
+.calendarDayColumn {
+	
+	width: 14.2857%; 
+
+}
+	
+/*For day view*/
+.calendarDayColumn2 {
+	
+	width: 100%; 
+
+}
+	
+.calendarDayHour {
+
+	width: 100%;
+	height: 35px;
+	border-bottom: 1px solid #787878;
+	border-right: 1px solid #787878;
+	
+}	
+
+
+.calendarMarkToday {
+	
+	background-color: #DFECFF;
+	
+}
+
+.calendarUserSelect {
+	
+	background-color: #95BC65;
+	
+}
+
+
+
+.calendarEmptyCorner1 {
+	
+	/* calendarEmptyCorner1 height must be equal to calendarHeaderTitle's height */
+	width: 100%;
+	height: 40px;
+	
+	
+}
+
+.calendarEmptyCorner2 {
+	
+	/* calendarEmptyCorner1 height must be equal to calendarHeaderDayList's height */
+	width: 100%;
+	height: 30px;
+	border-right: 1px solid #787878;
+	border-bottom: 1px solid #787878;
+	
+}
+
+
+
+.calendarDescription {
+	
+	width: 100%;
+	background: #dedede;
+	height: 35px; /*same as on class calendarDayHour*/
+	border-bottom: 1px solid #787878;
+	border-right: 1px solid #787878;
+	font-size: 16px;
+	
+}
+
+
+
+/*------------------------------Calendar - month view------------------------------*/
+
+
+.calendarHeaderDay3 {
+	
+	width: 14.2857%; 
+	
+}
+
+.calendarMainView2 {
+	
+	width: 100%;
+	
+}
+
+
+
+.calendarDaysRow {
+	
+	width: 100%;
+	min-height: 170px;
+	max-height: 170px;
+	#background: green;
+	display: flex;
+	margin-bottom: 12px;
+}
+
+
+
+.calendarDayTile {
+	
+	width: 14.2857%; 
+	height: 100%;
+	#background: #9A9A9A;
+	border: 1px solid #787878;
+	
+	
+}
+
+
+
+.calendarDayTileHeader {
+	
+	width: 100%;
+	height: 20px;
+	background: #A6D1F3;
+	font-size: 15px;
+	line-height: 20px;
+	text-align: right;
+	padding-right: 10px;
+	
+	
+}
+
+.calendarDayTileHeader2 {
+	
+	width: 100%;
+	height: 20px;
+	#background: #A6D1F3;
+	font-size: 15px;
+	line-height: 20px;
+	text-align: right;
+	padding-right: 10px;
+
+	
+	
+}
+
+
+.calendarDayTileHour {
+	
+	width: 100%;
+	height: 25px;
+	#background: #736396;
+
+	line-height: 25px;
+	
+}
+
+
+
+
+
+
+
+
+
+/*--------------------------------- Login page ---------------------------------*/
+
+
+
+.loginContainer {
+	
+	#height: 400px;
+	width: 350px;
+	
+	margin-left: auto;
+	margin-right: auto;
+	vertical-align: middle;
+	
+	/*Vertically alignment*/
+	margin: 0;
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	-ms-transform: translate(-50%, -30%);
+	transform: translate(-50%, -30%);
+	
+	padding: 5px;
+	#background-color: green;
+	
+	
+	
+}
+
+
+.loginContainerTop {
+	
+	
+	#height: 100px;
+	width: 100%;
+	#padding: 5px;
+	text-align: center;
+	font-size: 20px;
+	#background-color: blue;
+	
+	margin-bottom: 10px;
+}
+
+
+.loginContainerTop img {
+	width: 55px;
+	height: auto;
+}
+
+
+.loginContainerMiddle {
+	
+	
+	height: 250px;
+	width: 100%;
+	
+	
+	border: 1px solid #d9d9d9;
+	border-radius: 5px; 
+	
+	padding: 20px;
+	
+	background-color: white;
+	
+}
+
+.loginContainerBottom {
+	
+	margin-top: 20px;
+	height: 50px;
+	width: 100%;
+	
+	line-height: 50px;
+	font-size: 15px;
+	text-align: center;
+	
+	border: 1px solid #d9d9d9;
+	border-radius: 5px; 
+	
+	#background-color: red;
+	
+	
+	text-decoration: blue !important;
+	
+}
+
+.loginContainerBottom a {
+	
+	text-decoration: blue !important;
+	color: blue !important;
+	
+}
+
+
+/*--------------------------------- Forms ---------------------------------*/
+
+input[type=text],[type=email],[type=password],[type=number]
+{
+	width: 100%;
+	background-color: #efefef;
+	color: #888;
+	border: 2px solid #ddd;
+	border-radius: 5px; 
+	font-size: 15px;
+	padding: 10px;
+	box-sizing: border-box; 
+	outline: none; 
+	margin-bottom: 12px;
+
+}
+	
+	
+input[type=text]:focus
+{
+
+	border: 2px solid #5EBAE9; 
+	background-color: #DFECFF; 
+	color: black;
+}	
+
+input[type=email]:focus
+{
+
+	border: 2px solid #5EBAE9; 
+	background-color: #DFECFF; 
+	color: black;
+}	
+
+input[type=password]:focus
+{
+
+	border: 2px solid #5EBAE9; 
+	background-color: #DFECFF; 
+	color: black;
+}	
+
+input[type=number]:focus
+{
+
+	border: 2px solid #5EBAE9; 
+	background-color: #DFECFF; 
+	color: black;
+}	
+
+
+.loginButton
+{
+	width:100%;
+	padding: 8px;
+	text-align: center;
+	font-size: 15px;
+	color: white;
+	text-decoration: none;
+	background-color: #0053AE;
+
+	height: 45px;
+	border-radius: 7px; 
+	
+	display: inline-block;
+}
+
+
+
+.loginButton:hover {
+
+	background-color: #1164BF;
+}
+
+
+
+
+
+
+
+
+/*--------------------------------- Register page ---------------------------------*/
+
+
+
+.registerContainer {
+	
+	width: 350px;
+	
+	margin-left: auto;
+	margin-right: auto;
+	vertical-align: middle;
+	
+	/*Vertically alignment*/
+	margin: 0;
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	-ms-transform: translate(-50%, -30%);
+	transform: translate(-50%, -30%);
+	
+	padding: 5px;
+
+	
+	
+	
+}
+
+
+.registerContainerTop {
+	
+	width: 100%;
+	text-align: center;
+	font-size: 20px;
+
+	
+	margin-bottom: 10px;
+}
+
+
+.registerContainerTop img {
+	width: 55px;
+	height: auto;
+}
+
+
+.registerContainerMiddle {
+	
+	
+	height: 500px;
+	width: 100%;
+	
+	
+	border: 1px solid #d9d9d9;
+	border-radius: 5px; 
+	
+	padding: 20px;
+	
+	background-color: white;
+	
+}
+
+.registerContainerBottom {
+	
+	margin-top: 20px;
+	height: 50px;
+	width: 100%;
+	
+	line-height: 50px;
+	font-size: 15px;
+	text-align: center;
+	
+	border: 1px solid #d9d9d9;
+	border-radius: 5px; 
+	
+	text-decoration: blue !important;
+	
+}
+
+.registerContainerBottom a {
+	
+	text-decoration: blue !important;
+	color: blue !important;
+	
+}
+
+
+
+.registerButton
+{
+	width:100%;
+	padding: 8px;
+	text-align: center;
+	font-size: 15px;
+	color: white;
+	text-decoration: none;
+	background-color: #0053AE;
+
+	height: 45px;
+	border-radius: 7px; 
+	
+	display: inline-block;
+}
+
+
+
+.registerButton:hover {
+
+	background-color: #1164BF;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*------------------------------Pomocnicze------------------------------*/
+
+.test
+{
+	width:20%;
+	height:120px;
+	background-color: yellow;
+	color: black;
+
+	display: inline-block;
+	
+	#float:left; 
+	padding: 10px;
+	margin: 20px;
+
+}
+

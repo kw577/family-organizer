@@ -1,0 +1,11 @@
+Telefon Grudzyny, Michalscy
+
+
+
+
+Kalendarz Java Script:
+http://kursjs.pl/kurs/date/date-calendar.php
+https://www.webcodegeeks.com/javascript/javascript-calendar-example/
+https://medium.com/@nitinpatel_20236/challenge-of-building-a-calendar-with-pure-javascript-a86f1303267d
+https://yuilibrary.com/yui/docs/calendar/calendar-simple.html
+https://www.thatsoftwaredude.com/content/6396/coding-a-calendar-in-javascript
