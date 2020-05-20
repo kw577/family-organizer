@@ -527,6 +527,290 @@ a, a:hover, a:focus {
 
 
 
+/*--------------------------------- Login page ---------------------------------*/
+
+
+
+.loginContainer {
+	
+	#height: 400px;
+	width: 350px;
+	
+	margin-left: auto;
+	margin-right: auto;
+	vertical-align: middle;
+	
+	/*Vertically alignment*/
+	margin: 0;
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	-ms-transform: translate(-50%, -30%);
+	transform: translate(-50%, -30%);
+	
+	padding: 5px;
+	#background-color: green;
+	
+	
+	
+}
+
+
+.loginContainerTop {
+	
+	
+	#height: 100px;
+	width: 100%;
+	#padding: 5px;
+	text-align: center;
+	font-size: 20px;
+	#background-color: blue;
+	
+	margin-bottom: 10px;
+}
+
+
+.loginContainerTop img {
+	width: 55px;
+	height: auto;
+}
+
+
+.loginContainerMiddle {
+	
+	
+	height: 250px;
+	width: 100%;
+	
+	
+	border: 1px solid #d9d9d9;
+	border-radius: 5px; 
+	
+	padding: 20px;
+	
+	background-color: white;
+	
+}
+
+.loginContainerBottom {
+	
+	margin-top: 20px;
+	height: 50px;
+	width: 100%;
+	
+	line-height: 50px;
+	font-size: 15px;
+	text-align: center;
+	
+	border: 1px solid #d9d9d9;
+	border-radius: 5px; 
+	
+	#background-color: red;
+	
+	
+	text-decoration: blue !important;
+	
+}
+
+.loginContainerBottom a {
+	
+	text-decoration: blue !important;
+	color: blue !important;
+	
+}
+
+
+/*--------------------------------- Forms ---------------------------------*/
+
+input[type=text],[type=email],[type=password],[type=number]
+{
+	width: 100%;
+	background-color: #efefef;
+	color: #888;
+	border: 2px solid #ddd;
+	border-radius: 5px; 
+	font-size: 15px;
+	padding: 10px;
+	box-sizing: border-box; 
+	outline: none; 
+	margin-bottom: 12px;
+
+}
+	
+	
+input[type=text]:focus
+{
+
+	border: 2px solid #5EBAE9; 
+	background-color: #DFECFF; 
+	color: black;
+}	
+
+input[type=email]:focus
+{
+
+	border: 2px solid #5EBAE9; 
+	background-color: #DFECFF; 
+	color: black;
+}	
+
+input[type=password]:focus
+{
+
+	border: 2px solid #5EBAE9; 
+	background-color: #DFECFF; 
+	color: black;
+}	
+
+input[type=number]:focus
+{
+
+	border: 2px solid #5EBAE9; 
+	background-color: #DFECFF; 
+	color: black;
+}	
+
+
+.loginButton
+{
+	width:100%;
+	padding: 8px;
+	text-align: center;
+	font-size: 15px;
+	color: white;
+	text-decoration: none;
+	background-color: #0053AE;
+
+	height: 45px;
+	border-radius: 7px; 
+	
+	display: inline-block;
+}
+
+
+
+.loginButton:hover {
+
+	background-color: #1164BF;
+}
+
+
+
+
+
+
+
+
+/*--------------------------------- Register page ---------------------------------*/
+
+
+
+.registerContainer {
+	
+	width: 350px;
+	
+	margin-left: auto;
+	margin-right: auto;
+	vertical-align: middle;
+	
+	/*Vertically alignment*/
+	margin: 0;
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	-ms-transform: translate(-50%, -30%);
+	transform: translate(-50%, -30%);
+	
+	padding: 5px;
+
+	
+	
+	
+}
+
+
+.registerContainerTop {
+	
+	width: 100%;
+	text-align: center;
+	font-size: 20px;
+
+	
+	margin-bottom: 10px;
+}
+
+
+.registerContainerTop img {
+	width: 55px;
+	height: auto;
+}
+
+
+.registerContainerMiddle {
+	
+	
+	height: 500px;
+	width: 100%;
+	
+	
+	border: 1px solid #d9d9d9;
+	border-radius: 5px; 
+	
+	padding: 20px;
+	
+	background-color: white;
+	
+}
+
+.registerContainerBottom {
+	
+	margin-top: 20px;
+	height: 50px;
+	width: 100%;
+	
+	line-height: 50px;
+	font-size: 15px;
+	text-align: center;
+	
+	border: 1px solid #d9d9d9;
+	border-radius: 5px; 
+	
+	text-decoration: blue !important;
+	
+}
+
+.registerContainerBottom a {
+	
+	text-decoration: blue !important;
+	color: blue !important;
+	
+}
+
+
+
+.registerButton
+{
+	width:100%;
+	padding: 8px;
+	text-align: center;
+	font-size: 15px;
+	color: white;
+	text-decoration: none;
+	background-color: #0053AE;
+
+	height: 45px;
+	border-radius: 7px; 
+	
+	display: inline-block;
+}
+
+
+
+.registerButton:hover {
+
+	background-color: #1164BF;
+}
+
 
 
 

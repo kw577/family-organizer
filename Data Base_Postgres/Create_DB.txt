@@ -5,3 +5,24 @@ CREATE TABLE notes (
 	description VARCHAR (50) NOT NULL,
 	active BOOLEAN NOT NULL
 );
+
+
+CREATE TABLE family (
+	id 	serial PRIMARY KEY,
+	name	VARCHAR (50) NOT NULL
+);
+
+CREATE TABLE user_account (
+	id 		serial PRIMARY KEY,
+	name		VARCHAR (50) NOT NULL,
+	surname		VARCHAR (50) NOT NULL,
+	email		VARCHAR (50) NOT NULL,
+	password	VARCHAR (50) NOT NULL,
+	role		VARCHAR (50) NOT NULL,
+	enabled		BOOLEAN NOT NULL,
+	family_id	int references family(id)
+);
+
+
+
+
