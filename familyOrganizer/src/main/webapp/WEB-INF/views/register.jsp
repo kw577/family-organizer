@@ -61,19 +61,20 @@
 					
 					<sform:form id="registerForm" modelAttribute="newUser" action="${contextRoot}/register" name="registerForm" method="post">
 					
-						Name: 
-						<sform:input type="text" placeholder="Name" path="name" id="name"/>
 						
-						Surname: 
+						<div class="formLabels">Name:</div> 
+						<sform:input type="text" placeholder="Name" path="name" id="name"/>
+								
+						<div class="formLabels">Surname:</div>  
 						<sform:input type="text" placeholder="Surname" path="surname" id="surname"/>
 						
-						Email address: 
+						<div class="formLabels">Email address:</div> 
 						<sform:input type="email" placeholder="e-mail" path="email" id="email"/>
 						
-						Password:
+						<div class="formLabels">Password:</div> 
 						<sform:input type="password" placeholder="Password" path="password" id="password"/>
 						
-						Repeat Password:
+						<div class="formLabels">Repeat Password:</div> 
 						<input type="password" placeholder="Repeat Password" name="repeatPassword" id="repeatPassword">
 						
 						<input type="submit" class="registerButton" value="Create account">
@@ -107,10 +108,73 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="${js}/bootstrap.min.js"></script>
 
+	<!-- jQuery validator -->
+	<script src="${js}/jquery.validate.js"></script>
 	
 	<script>
 
-		//Test 1
+	$registerForm = $('#registerForm'); 
+	if($registerForm.length) {
+		$registerForm.validate({			
+				rules: {
+					name: {
+						required: true,
+						minlength: 3
+					},
+					surname: {
+						required: true,
+						minlength: 3
+					},
+					email: { 
+						required: true,
+						email: true,
+						minlength: 5					
+					},
+					password: { 
+						required: true,
+						minlength: 5					
+					},
+					repeatPassword: { 
+						equalTo: "#password"				
+					}
+				},
+				messages: {					
+					name: {
+						required: 'This field can not be empty!',
+						minlength: 'Name field must cantain at least 3 characters'
+					},
+					surname: {
+						required: 'This field can not be empty!',
+						minlength: 'Surname field must cantain at least 3 characters'
+					},
+					email: {
+						required: 'This field can not be empty!',
+						minlength: 'Enter a valid email address!',
+						email: 'Enter a valid email address!'
+					},	
+					password: {
+						required: 'This field can not be empty!',
+						minlength: 'Password field must cantain at least 5 characters'
+					},
+					repeatPassword: {
+						equalTo: 'Fields: Password and Repeat Password are not equal!'
+				
+					}	
+					
+			
+					
+				},
+				errorElement : "em",
+				errorPlacement : function(error, element) {
+					error.addClass('formAlerts');
+					
+					error.insertBefore(element);
+					
+					
+				}				
+			}
+		);
+	}
 			
 		
 		

@@ -695,8 +695,11 @@ input[type=number]:focus
 }
 
 
+.formAlerts {
+	color: red;
+	font-size: 12px;
 
-
+}
 
 
 
@@ -749,7 +752,7 @@ input[type=number]:focus
 .registerContainerMiddle {
 	
 	
-	height: 500px;
+
 	width: 100%;
 	
 	
