@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import proj.kw.familyOrganizer.backend.dao.FamilyDAO;
 import proj.kw.familyOrganizer.backend.dao.NotesDAO;
 import proj.kw.familyOrganizer.backend.dao.UserDAO;
+import proj.kw.familyOrganizer.backend.dto.Family;
 import proj.kw.familyOrganizer.backend.dto.User;
 
 @Controller
@@ -20,6 +22,9 @@ public class PageController {
 	
 	@Autowired 
 	private UserDAO userDAO;
+	
+	@Autowired 
+	private FamilyDAO familyDAO;
 
 	
 	@RequestMapping(value = {"/", "/home", "/calendar"})
@@ -74,28 +79,23 @@ public class PageController {
 	// dodawanie nowego uzytkownika
 	@RequestMapping(value = "register", method = RequestMethod.POST) 
 	public String handleProductSubmission(@ModelAttribute("newUser") User nUser) { 
-
-
-		nUser.setRole("USER");
-		nUser.setFamily_id(1);
-
-		System.out.println("\n\n\nAdding new user");
-		System.out.println("New user id: " + nUser.getId());
-		System.out.println("New user name: " + nUser.getName());
-		System.out.println("New user surname: " + nUser.getSurname());
-		System.out.println("New user email: " + nUser.getEmail());
-		//System.out.println("New user address: " + nUser.getAddress());
-		System.out.println("New user password: " + nUser.getPassword());
-		System.out.println("New user role: " + nUser.getRole());
-
+		
+		int familyAccountID;
+		
+		//Create new Family Account with default name
+		Family nFamily = new Family();
+		nFamily.setName("Family Account");
+		familyAccountID = familyDAO.createFamilyAccount(nFamily);
 		
 		
+		//Add Admin for family account
+		nUser.setRole("ADMIN");
+		nUser.setEnabled(true);
+		nUser.setFamily_id(familyAccountID);
 
-		// create a new product record
 		userDAO.addUser(nUser);
+	
 		
-
-
 		return "redirect:/home";
 	}
 	
