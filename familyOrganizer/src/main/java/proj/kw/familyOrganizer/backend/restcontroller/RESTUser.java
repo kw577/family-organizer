@@ -1,6 +1,7 @@
 package proj.kw.familyOrganizer.backend.restcontroller;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,20 @@ public class RESTUser implements UserDAO{
 		catch(Exception ex) {
 			return false;
 		}
+	}
+
+	@Override
+	public boolean checkEmail(String email) {
+		
+
+		String checkEmailQuery = "FROM user_account WHERE email = :email";
+
+		Query query = sessionFactory.getCurrentSession().createQuery(checkEmailQuery);
+		query.setParameter("email", email);
+
+		return query.getResultList().isEmpty();
+		
+		
 	}
 
 

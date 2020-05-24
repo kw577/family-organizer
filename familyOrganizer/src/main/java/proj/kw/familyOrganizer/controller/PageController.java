@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import proj.kw.familyOrganizer.backend.dao.FamilyDAO;
@@ -14,6 +15,7 @@ import proj.kw.familyOrganizer.backend.dao.NotesDAO;
 import proj.kw.familyOrganizer.backend.dao.UserDAO;
 import proj.kw.familyOrganizer.backend.dto.Family;
 import proj.kw.familyOrganizer.backend.dto.User;
+import proj.kw.familyOrganizer.backend.mailSending.MailSenderService;
 
 @Controller
 public class PageController {
@@ -27,9 +29,9 @@ public class PageController {
 	
 	@Autowired 
 	private FamilyDAO familyDAO;
-	
+	  
     @Autowired
-    private JavaMailSender mailSender;
+    private MailSenderService emailService;
 
 	
 	@RequestMapping(value = {"/", "/home", "/calendar"})
@@ -98,26 +100,54 @@ public class PageController {
 		nUser.setEnabled(true);
 		nUser.setFamily_id(familyAccountID);
 
-		userDAO.addUser(nUser);
 		
+		//Check if user with this email is not in data base already
 		
-		///////email-test////////
-		
-	       // creates a simple e-mail object
-        SimpleMailMessage email = new SimpleMailMessage();
-        email.setTo("kw577@wp.pl");
-        email.setSubject("Account - Family Organizer");
-        email.setText("Account was successfully created");
-         
-        // sends the e-mail
-        mailSender.send(email);
-		
-		
-		/////////////////////////
-		
-	
+		if(userDAO.checkEmail(nUser.getEmail())) {
+			
+			if(emailService.sendAdminWelcomeMessage(nUser)) {
+				
+				 userDAO.addUser(nUser);
+				
+			} else {
+				
+				return "redirect:/register/error?mailError";
+			}
+				
+		} else {
+			
+			System.out.println("\nEmail already in use !!! \n");
+			return "redirect:/register/error?mailUsedAlready";
+		}
 		
 		return "redirect:/home";
+	}
+	
+	
+	
+	
+	@RequestMapping(value = "register/error", method = RequestMethod.GET)
+	public ModelAndView registerError(@RequestParam(name="mailError", required=false)String mailError,
+			@RequestParam(name="mailUsedAlready", required=false)String mailUsedAlready) {
+
+		ModelAndView mv = new ModelAndView("registerError");
+		mv.addObject("title", "RegistrationError");
+
+
+		if(mailError!=null) {
+			mv.addObject("message", "Registration failure: Could not send email message ! Account was not created. Please try again.");
+			
+		}
+		
+		if(mailUsedAlready!=null) {
+			mv.addObject("message", "Registration failure: Account for given email address already exist. Please use another email address.");
+			
+		}
+		
+
+		return mv;
+
+
 	}
 	
 	
