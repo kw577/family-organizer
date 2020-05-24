@@ -816,8 +816,82 @@ input[type=number]:focus
 
 
 
+/*--------------------------------- Register error page ---------------------------------*/
 
 
+.errorMessage {
+		margin: auto;
+		text-align: center;
+		margin-top: 70px;
+	
+}
+
+
+
+
+
+.errorMessageLogo {
+	
+	width: 100%;
+	text-align: center;
+	font-size: 20px;
+
+
+}
+
+
+.errorMessageLogo img {
+	width: 55px;
+	height: auto;
+}
+
+
+
+
+
+
+.goBackButton
+{
+	
+
+	width:100px;
+	padding: 8px;
+
+	font-size: 15px;
+	color: white;
+	text-decoration: none;
+	background-color: #832D35;
+	vertical-align: middle; 
+	border-radius: 7px; 	
+	display: inline-block;
+	
+	
+		
+}
+
+
+.goBackButton:hover{
+	
+	background-color: #721C24;
+	
+}
+
+
+
+.errorAlert {
+	
+	display: flex;
+	
+}
+
+.errorAlert a {
+	
+	margin-left:auto; 
+	margin-right:0;
+	cursor: pointer;
+	
+	
+}
 
 
 

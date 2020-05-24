@@ -48,11 +48,28 @@
 	<div class="wrapper">
 	
 	    <c:if test="${not empty message}">
-			<div class="row">
-				<div class="col-md-offset-3 col-md-6">
-					<div class="alert alert-danger">${message}</div>
-				</div>
+	    
+	    
+	    
+		    <div class="errorMessage col-xs-10 col-md-8">
+					
+					<div class="errorMessageLogo">
+						<div><img src="${images}/logo_mini.png" alt="Logo"></div>
+										
+					</div>
+		
+					<div class="alert alert-danger errorAlert">
+				
+						<div>
+							${message}
+						</div>
+						<a onclick="window.history.back();" class="backButton"><div class="goBackButton">Return</div></a>
+						
+					</div>
+					
 			</div>
+		        
+
 		</c:if>
 	
 	</div>

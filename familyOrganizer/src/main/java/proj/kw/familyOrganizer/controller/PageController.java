@@ -89,23 +89,23 @@ public class PageController {
 		
 		int familyAccountID;
 		
-		//Create new Family Account with default name
-		Family nFamily = new Family();
-		nFamily.setName("Family Account");
-		familyAccountID = familyDAO.createFamilyAccount(nFamily);
-		
-		
-		//Add Admin for family account
-		nUser.setRole("ADMIN");
-		nUser.setEnabled(true);
-		nUser.setFamily_id(familyAccountID);
-
 		
 		//Check if user with this email is not in data base already
 		
 		if(userDAO.checkEmail(nUser.getEmail())) {
-			
+					
 			if(emailService.sendAdminWelcomeMessage(nUser)) {
+				
+				//Create new Family Account with default name
+				Family nFamily = new Family();
+				nFamily.setName("Family Account");
+				familyAccountID = familyDAO.createFamilyAccount(nFamily);
+				
+				
+				//Add Admin for family account
+				nUser.setRole("ADMIN");
+				nUser.setEnabled(true);
+				nUser.setFamily_id(familyAccountID);
 				
 				 userDAO.addUser(nUser);
 				
@@ -149,6 +149,24 @@ public class PageController {
 
 
 	}
+	
+	
+	
+	// login
+	@RequestMapping(value = { "/login" })
+	public ModelAndView login() {
+
+
+		ModelAndView mv = new ModelAndView("login");
+		mv.addObject("title", "Login");
+		
+
+		return mv;
+
+
+
+	}
+	
 	
 	
 	
