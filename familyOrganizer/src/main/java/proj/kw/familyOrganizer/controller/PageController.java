@@ -1,6 +1,8 @@
 package proj.kw.familyOrganizer.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,9 @@ public class PageController {
 	
 	@Autowired 
 	private FamilyDAO familyDAO;
+	
+    @Autowired
+    private JavaMailSender mailSender;
 
 	
 	@RequestMapping(value = {"/", "/home", "/calendar"})
@@ -94,6 +99,22 @@ public class PageController {
 		nUser.setFamily_id(familyAccountID);
 
 		userDAO.addUser(nUser);
+		
+		
+		///////email-test////////
+		
+	       // creates a simple e-mail object
+        SimpleMailMessage email = new SimpleMailMessage();
+        email.setTo("kw577@wp.pl");
+        email.setSubject("Account - Family Organizer");
+        email.setText("Account was successfully created");
+         
+        // sends the e-mail
+        mailSender.send(email);
+		
+		
+		/////////////////////////
+		
 	
 		
 		return "redirect:/home";

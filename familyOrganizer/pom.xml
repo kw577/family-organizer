@@ -7,12 +7,12 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>familyOrganizer Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-	
+		
 	<properties>
 		<javaee.version>7.0</javaee.version>
-		<spring.version>4.3.6.RELEASE</spring.version>
-		<hibernate.version>5.2.7.Final</hibernate.version>					
-	</properties>	
+		<spring.version>5.2.0.RELEASE</spring.version>
+		<hibernate.version>5.2.7.Final</hibernate.version>				
+	</properties>		
 	
 	<dependencies>
 		<!-- JAVA EE -->
@@ -60,6 +60,21 @@
 		    <artifactId>jstl</artifactId>
 		    <version>1.2</version>
 		</dependency>
+		
+		
+		<!-- Spring Email Support -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
+			 
+		<dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>mail</artifactId>
+		    <version>1.4</version>
+		</dependency>	
+		
 		
 		
 		<!-- MySQL Database -->
