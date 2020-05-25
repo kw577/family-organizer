@@ -23,6 +23,9 @@
 		<intercept-url pattern="/**" access="hasAnyAuthority('ADMIN','USER')" />
 		
 		<form-login login-page="/login" />
+		
+		<access-denied-handler error-page="/access-denied"/>
+		
 		<logout />
 	</http>
      

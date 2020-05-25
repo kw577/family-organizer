@@ -47,57 +47,31 @@
 <body>
 	<div class="wrapper">
 	
-		<div class="loginContainer">
-	
-				<div class="loginContainerTop">
-	
-					<div><img src="${images}/logo_mini.png" alt="Logo"></div>
-					<div>Sign in to Family Organizer</div>
-	
-				</div>
-				
-				
-				<c:if test="${not empty errorMessage}">
-					<div class="loginAlertsWindow">
-						<div class="alert alert-danger text-center">${errorMessage}</div>
+	    <c:if test="${not empty errorDescription}">
+	    
+	    
+	    
+		    <div class="errorMessage col-xs-10 col-md-8">
+					
+					<div class="errorMessageLogo">
+						<div><img src="${images}/logo_mini.png" alt="Logo"></div>
+										
 					</div>
-				</c:if>
-				
-				
-				<c:if test="${not empty logoutMessage}">
-					<div class="loginAlertsWindow">
-						<div class="alert alert alert-success text-center">${logoutMessage}</div>
-					</div>
-				</c:if>
-				
 		
-				<div class="loginContainerMiddle">
-	
+					<div class="alert alert-danger errorAlert">
+				
+						<div>
+							${errorDescription}
+						</div>
+						<a onclick="window.history.back();" class="backButton"><div class="goBackButton">Return</div></a>
+						
+					</div>
 					
-					<form action="${contextRoot}/login" method="POST" id="loginForm">
-						
-						Email address: 
-						<input type="text" placeholder="email" name="username" id="username" >
-						
-						Password:
-						<input type="password" placeholder="Password" name="password" id="password" >
-						
-						<input type="submit" class="loginButton" value="Login">
-						
-					</form>
-					
-	
-				</div>	
+			</div>
+		        
 
-				<div class="loginContainerBottom">
+		</c:if>
 	
-					You are not registered ? <a href="${contextRoot}/register">Create an account.</a> 
-	
-				</div>	
-		
-		
-		</div>
-		
 	</div>
 	
 	
@@ -107,49 +81,7 @@
 	<script src="${js}/bootstrap.min.js"></script>
 
 
-		<!-- jQuery validator -->
-	<script src="${js}/jquery.validate.js"></script>
 	
-	<script>
-
-	$loginForm = $('#loginForm'); 
-	if($loginForm.length) {
-		$loginForm.validate({			
-				rules: {
-					username: {
-						required: true,
-						email: true
-					},
-					password: { 
-						required: true				
-					}
-				},
-				messages: {					
-					username: {
-						required: 'Please enter your email!',
-						email: 'Enter a valid email address!'
-					},	
-					password: {
-						required: 'Please enter your password!'
-					}
-					
-				},
-				errorElement : "em",
-				errorPlacement : function(error, element) {
-					error.addClass('formAlerts');
-					
-					error.insertBefore(element);
-					
-					
-				}				
-			}
-		);
-	}
-			
-		
-		
-	</script>
-
 	
 </body>
 </html>

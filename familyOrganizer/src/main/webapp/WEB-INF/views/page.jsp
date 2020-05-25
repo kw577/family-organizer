@@ -154,7 +154,7 @@
 									
 										<a class="dropdown-item" href="#"><i class="icon-cog"></i> My account </a>
 										<a class="dropdown-item" href="#"><i class="icon-wrench"></i> Settings </a>								
-										<a class="dropdown-item" href="#"><i class="icon-logout"></i> Logout </a>
+										<a class="dropdown-item" href="${contextRoot}/logout"><i class="icon-logout"></i> Logout </a>
 									
 									</div>					
 								

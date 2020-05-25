@@ -160,7 +160,8 @@ public class PageController {
 	
 	// login
 	@RequestMapping(value = { "/login" })
-	public ModelAndView login(@RequestParam(name="error", required=false)String error) {
+	public ModelAndView login(@RequestParam(name="error", required=false)String error, 
+			@RequestParam(name="logout", required=false)String logout) {
 
 
 		ModelAndView mv = new ModelAndView("login");
@@ -168,17 +169,33 @@ public class PageController {
 		
 		//Check if information about unsuccessful login will be added
 		if(error!=null) {
-			mv.addObject("message", "Invalid Username or Password!");
+			mv.addObject("errorMessage", "Invalid Username or Password!");
+
+		}
+		
+		if(logout!=null) {
+			mv.addObject("logoutMessage", "You have successfully sign out!");
 
 		}
 		
 
 		return mv;
 
+	}
 
+	
+	
+	// access denied page - when usser is not authorized to view page
+	@RequestMapping(value = { "/access-denied" }) 
+	public ModelAndView accessDenied() {
+
+		ModelAndView mv = new ModelAndView("errorPage");
+
+		mv.addObject("errorDescription", "403 - Access Denied! You are not authorized to view this page!");
+
+		return mv;
 
 	}
-	
 	
 	
 	
