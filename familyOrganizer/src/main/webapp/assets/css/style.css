@@ -620,6 +620,13 @@ a, a:hover, a:focus {
 }
 
 
+.loginErrorMessage {
+	
+	width: 100%;
+	
+}
+
+
 /*--------------------------------- Forms ---------------------------------*/
 
 input[type=text],[type=email],[type=password],[type=number]

@@ -160,11 +160,17 @@ public class PageController {
 	
 	// login
 	@RequestMapping(value = { "/login" })
-	public ModelAndView login() {
+	public ModelAndView login(@RequestParam(name="error", required=false)String error) {
 
 
 		ModelAndView mv = new ModelAndView("login");
 		mv.addObject("title", "Login");
+		
+		//Check if information about unsuccessful login will be added
+		if(error!=null) {
+			mv.addObject("message", "Invalid Username or Password!");
+
+		}
 		
 
 		return mv;

@@ -91,7 +91,7 @@
 
 				<div class="registerContainerBottom">
 	
-					Already have an account ? <a href="#" title="Calendar">Login here.</a> 
+					Already have an account ? <a href="${contextRoot}/login">Login here.</a> 
 	
 				</div>	
 		

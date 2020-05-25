@@ -17,11 +17,12 @@
     
 	<http>
 		<csrf disabled="true"/>
+		<intercept-url pattern="/login" access="permitAll" />
 		<intercept-url pattern="/register/**" access="permitAll" />
 		<intercept-url pattern="/notes/**" access="hasAuthority('ADMIN')" />
 		<intercept-url pattern="/**" access="hasAnyAuthority('ADMIN','USER')" />
 		
-		<form-login />
+		<form-login login-page="/login" />
 		<logout />
 	</http>
      
