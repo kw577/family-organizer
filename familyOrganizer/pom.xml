@@ -11,7 +11,8 @@
 	<properties>
 		<javaee.version>7.0</javaee.version>
 		<spring.version>5.2.0.RELEASE</spring.version>
-		<hibernate.version>5.2.7.Final</hibernate.version>				
+		<hibernate.version>5.2.7.Final</hibernate.version>
+		<spring.security.version>5.2.1.RELEASE</spring.security.version>				
 	</properties>		
 	
 	<dependencies>
@@ -114,6 +115,34 @@
 		    <artifactId>commons-dbcp2</artifactId>
 		    <version>2.1.1</version>
 		</dependency>
+		
+		
+		 <!-- Spring Security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		
+		<dependency>  
+	        <groupId>org.springframework.security</groupId>  
+		    <artifactId>spring-security-core</artifactId>  
+			<version>${spring.security.version}</version>
+		</dependency>  
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		
+		
 		
 	</dependencies>
 	
