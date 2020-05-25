@@ -16,6 +16,7 @@ import proj.kw.familyOrganizer.backend.dao.UserDAO;
 import proj.kw.familyOrganizer.backend.dto.Family;
 import proj.kw.familyOrganizer.backend.dto.User;
 import proj.kw.familyOrganizer.backend.mailSending.MailSenderService;
+import proj.kw.familyOrganizer.backend.registerHandler.RegisterPasswordEncoder;
 
 @Controller
 public class PageController {
@@ -32,6 +33,9 @@ public class PageController {
 	  
     @Autowired
     private MailSenderService emailService;
+    
+    @Autowired
+    private RegisterPasswordEncoder passwordCoder;
 
 	
 	@RequestMapping(value = {"/", "/home", "/calendar"})
@@ -106,6 +110,8 @@ public class PageController {
 				nUser.setRole("ADMIN");
 				nUser.setEnabled(true);
 				nUser.setFamily_id(familyAccountID);
+				nUser.setPassword(passwordCoder.codePassword(nUser.getPassword()));
+				
 				
 				 userDAO.addUser(nUser);
 				
