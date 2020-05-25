@@ -10,5 +10,8 @@ public interface UserDAO {
 	//check if any user from database has this email, email can be used only once
 	boolean checkEmail(String email);
 	
+	//get user by email address
+	User getByEmail(String email);
+	
 	
 } 

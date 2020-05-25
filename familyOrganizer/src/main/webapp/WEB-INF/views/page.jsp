@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <%
     response.setCharacterEncoding("UTF-8");
@@ -61,12 +62,15 @@
 				<a href="${contextRoot}/home" class="d-block d-md-none"><img src="${images}/logo_mini.png" alt="Logo" title="Main page"></a>
 	
 			</div>
-			<div id="sidebarUser">
-				<a href="#" title="User panel"> <i class="icon-user"></i><span class="d-none d-md-inline-block ml-1">  Jan Kowalski </span></a>
-			</div>
+			
+			<security:authorize access="isAuthenticated()">
+				<div id="sidebarUser">
+					<a href="#" title="User panel"> <i class="icon-user"></i><span class="d-none d-md-inline-block ml-1">  ${userModel.name} ${userModel.surname} </span></a>
+				</div>
+			</security:authorize>	
 			
 			<div id="sidebarClock" class="d-none d-md-block">
-				<a href="#" title="User panel">Loading day&time</a>
+				<a href="#" title="User panel">Loading..</a>
 			</div>
 
 
@@ -137,9 +141,11 @@
 						<ul class="navbar-nav  ml-auto w-100 justify-content-end">
 						
 							<!-- This is available only for Admin of Family  -->
-							<li class="nav-item active">
-								<a class="nav-link" href="#"> Admin panel <i class="icon-users"></i></a>
-							</li>
+							<security:authorize access="hasAuthority('ADMIN')">
+								<li class="nav-item active">
+									<a class="nav-link" href="#"> Admin panel <i class="icon-users"></i></a>
+								</li>
+							</security:authorize>
 						
 							<li class="nav-item active">
 								<a class="nav-link" href="#"> Notifications <i class="icon-bell-alt"></i></a>
@@ -217,6 +223,11 @@
 	<script src="${js}/bootstrap.min.js"></script>
 
 	<!-- Link scripts below in separate file -->
+	<script>
+		window.userRole = '${userModel.role}';
+	</script>
+	
+	
 	<script>
 
 		
