@@ -24,5 +24,10 @@ CREATE TABLE user_account (
 );
 
 
+CREATE TABLE email_verification (
+	id 	serial PRIMARY KEY,
+	token	VARCHAR (100) NOT NULL,
+	email 	VARCHAR (100) NOT NULL
+);
 
 

@@ -1,6 +1,12 @@
 package proj.kw.familyOrganizer.controller;
 
+import java.util.UUID;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
@@ -10,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import proj.kw.familyOrganizer.backend.dao.EmailVerificationDAO;
 import proj.kw.familyOrganizer.backend.dao.FamilyDAO;
 import proj.kw.familyOrganizer.backend.dao.NotesDAO;
 import proj.kw.familyOrganizer.backend.dao.UserDAO;
@@ -30,13 +37,16 @@ public class PageController {
 	
 	@Autowired 
 	private FamilyDAO familyDAO;
+	
+	@Autowired 
+	private EmailVerificationDAO emailVerificationDAO;
 	  
     @Autowired
     private MailSenderService emailService;
     
     @Autowired
     private RegisterPasswordEncoder passwordCoder;
-
+         
 	
 	@RequestMapping(value = {"/", "/home", "/calendar"})
 	public ModelAndView startPage() {
@@ -89,16 +99,19 @@ public class PageController {
 	
 	// dodawanie nowego uzytkownika
 	@RequestMapping(value = "register", method = RequestMethod.POST) 
-	public String handleProductSubmission(@ModelAttribute("newUser") User nUser) { 
+	public String handleProductSubmission(@ModelAttribute("newUser") User nUser, HttpServletRequest request) { 
 		
 		int familyAccountID;
-		
-		
+			
 		//Check if user with this email is not in data base already
 		
 		if(userDAO.checkEmail(nUser.getEmail())) {
+			
+			//Create email verification token
+			String token = UUID.randomUUID().toString();
+			int tokenId = emailVerificationDAO.createVerificationToken(token, nUser.getEmail());
 					
-			if(emailService.sendAdminWelcomeMessage(nUser)) {
+			if(emailService.sendAdminWelcomeMessage(nUser, tokenId, token, request.getRequestURL().toString())) {
 				
 				//Create new Family Account with default name
 				Family nFamily = new Family();
@@ -108,7 +121,7 @@ public class PageController {
 				
 				//Add Admin for family account
 				nUser.setRole("ADMIN");
-				nUser.setEnabled(true);
+				nUser.setEnabled(false);
 				nUser.setFamily_id(familyAccountID);
 				nUser.setPassword(passwordCoder.codePassword(nUser.getPassword()));
 				

@@ -1,6 +1,11 @@
 package proj.kw.familyOrganizer.backend.mailSending;
 
+import javax.servlet.ServletContext;
+
+
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
@@ -10,17 +15,19 @@ import proj.kw.familyOrganizer.backend.dto.User;
 
 @Component("emailService")
 public class MailSenderService {
-
+ 
     @Autowired
     private JavaMailSender mailSender;
-
-
-    public boolean sendAdminWelcomeMessage(User user) {
+    
+    public boolean sendAdminWelcomeMessage(User user, int tokenId, String token, String pageUrl) {
     	
+    	//String activationLink = appContext
+    	String activationLink = pageUrl + "/emailVerification?emailCode=" + tokenId + "?token=" + token;
+    	  	
     	SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(user.getEmail());
-        email.setSubject("Account - Family Organizer");
-        email.setText("Your Admin account was successfully created. You can now add other members of your family in Admin panel");
+        email.setSubject("New Account - Family Organizer");
+        email.setText("Your Admin account was successfully created. You can activate your account by clicking this link:\n" + activationLink);
     	
         try {
         	mailSender.send(email);
