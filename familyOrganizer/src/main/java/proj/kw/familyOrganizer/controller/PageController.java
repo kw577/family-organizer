@@ -20,6 +20,7 @@ import proj.kw.familyOrganizer.backend.dao.EmailVerificationDAO;
 import proj.kw.familyOrganizer.backend.dao.FamilyDAO;
 import proj.kw.familyOrganizer.backend.dao.NotesDAO;
 import proj.kw.familyOrganizer.backend.dao.UserDAO;
+import proj.kw.familyOrganizer.backend.dto.EmailVerification;
 import proj.kw.familyOrganizer.backend.dto.Family;
 import proj.kw.familyOrganizer.backend.dto.User;
 import proj.kw.familyOrganizer.backend.mailSending.MailSenderService;
@@ -129,7 +130,7 @@ public class PageController {
 				 userDAO.addUser(nUser);
 				
 			} else {
-				
+				emailVerificationDAO.delete(emailVerificationDAO.get(tokenId));
 				return "redirect:/register/error?mailError";
 			}
 				
@@ -139,7 +140,7 @@ public class PageController {
 			return "redirect:/register/error?mailUsedAlready";
 		}
 		
-		return "redirect:/home";
+		return "redirect:/login?registrationInfo";
 	}
 	
 	
@@ -174,7 +175,8 @@ public class PageController {
 	// login
 	@RequestMapping(value = { "/login" })
 	public ModelAndView login(@RequestParam(name="error", required=false)String error, 
-			@RequestParam(name="logout", required=false)String logout) {
+			@RequestParam(name="logout", required=false)String logout,
+			@RequestParam(name="registrationInfo", required=false)String registrationInfo) {
 
 
 		ModelAndView mv = new ModelAndView("login");
@@ -188,6 +190,11 @@ public class PageController {
 		
 		if(logout!=null) {
 			mv.addObject("logoutMessage", "You have successfully sign out!");
+
+		}
+		
+		if(registrationInfo!=null) {
+			mv.addObject("registrationMessage", "Your admin account was successfully created, but you can not login until you will verify your email address. Please check your email box, you should find activation link there.");
 
 		}
 		
@@ -209,6 +216,82 @@ public class PageController {
 		return mv;
 
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//http://localhost:8080/familyOrganizer/register/emailVerification?emailCode=7?token=7bdafd0b-3ee5-402b-a8e4-eb4dbf1269cd
+	@RequestMapping(value = { "/register/emailVerification" })
+	public String activateAdminAccount(@RequestParam(name="emailCode", required=false)String emailCode, 
+			@RequestParam(name="token", required=false)String token) {
+
+		
+		System.out.println("\n\n\n#######################\nemailCode: " + emailCode + "\ntoken: " + token);
+		
+		
+		EmailVerification emailToken =  emailVerificationDAO.get(Integer.parseInt(emailCode));
+		
+		if(emailToken!=null) {
+			
+			
+			System.out.println("\nemail: " + emailToken.getEmail());
+			
+			
+			if(emailToken.getToken().equals(token)) {
+				
+				System.out.println("\n\n\nZgodne tokeny !!!!\n\n");
+				
+				//activate Admin account
+				User user = userDAO.getByEmail(emailToken.getEmail());
+				user.setEnabled(true);
+				userDAO.update(user);
+				
+				//delete token after activation
+				emailVerificationDAO.delete(emailToken);
+				
+			} else {
+				System.out.println("\n\n\nToken nie pasuje !!!!\n\n");
+			}
+			
+			
+			//email = emailToken.getEmail();
+			
+			
+			
+			
+			
+			
+			
+		}
+		
+		
+				
+
+		return "redirect:/login";
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

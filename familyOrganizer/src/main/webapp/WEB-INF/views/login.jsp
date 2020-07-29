@@ -70,6 +70,13 @@
 					</div>
 				</c:if>
 				
+				
+				<c:if test="${not empty registrationMessage}">
+					<div class="loginAlertsWindow">
+						<div class="alert alert alert-secondary text-center">${registrationMessage}</div>
+					</div>
+				</c:if>
+				
 		
 				<div class="loginContainerMiddle">
 	

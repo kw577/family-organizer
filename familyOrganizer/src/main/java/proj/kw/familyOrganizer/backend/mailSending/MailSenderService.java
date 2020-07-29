@@ -22,7 +22,7 @@ public class MailSenderService {
     public boolean sendAdminWelcomeMessage(User user, int tokenId, String token, String pageUrl) {
     	
     	//String activationLink = appContext
-    	String activationLink = pageUrl + "/emailVerification?emailCode=" + tokenId + "?token=" + token;
+    	String activationLink = pageUrl + "/emailVerification?emailCode=" + tokenId + "&token=" + token;
     	  	
     	SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(user.getEmail());

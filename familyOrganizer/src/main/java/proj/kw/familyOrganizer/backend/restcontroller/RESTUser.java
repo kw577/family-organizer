@@ -65,6 +65,23 @@ public class RESTUser implements UserDAO{
 	}
 	
 	
+	
+	
+	@Override
+	public boolean update(User user) {
+		try {			
+			sessionFactory
+					.getCurrentSession()
+						.update(user);
+			return true;
+		}
+		catch(Exception ex) {		
+			ex.printStackTrace();			
+		}		
+		return false;		
+	}
+	
+	
 
 
 }

@@ -39,5 +39,35 @@ public class RESTEmailVerification implements EmailVerificationDAO {
 		}
 	}
 
+	@Override
+	public EmailVerification get(int tokenId) {
+		
+		try {			
+			return sessionFactory
+					.getCurrentSession()
+						.get(EmailVerification.class,Integer.valueOf(tokenId));			
+		}
+		catch(Exception ex) {		
+			ex.printStackTrace();			
+		}
+		return null;
+	}
+
+	@Override
+	public boolean delete(EmailVerification token) {
+		try {			
+			sessionFactory
+					.getCurrentSession()
+						.delete(token);
+			return true;
+		}
+		catch(Exception ex) {		
+			ex.printStackTrace();			
+		}		
+		return false;		
+	
+	
+	}
+
 
 }
