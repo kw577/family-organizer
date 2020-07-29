@@ -176,6 +176,8 @@ public class PageController {
 	@RequestMapping(value = { "/login" })
 	public ModelAndView login(@RequestParam(name="error", required=false)String error, 
 			@RequestParam(name="logout", required=false)String logout,
+			@RequestParam(name="activationSuccess", required=false)String activationSuccess,
+			@RequestParam(name="activationFailure", required=false)String activationFailure,
 			@RequestParam(name="registrationInfo", required=false)String registrationInfo) {
 
 
@@ -190,6 +192,16 @@ public class PageController {
 		
 		if(logout!=null) {
 			mv.addObject("logoutMessage", "You have successfully sign out!");
+
+		}
+		
+		if(activationSuccess!=null) {
+			mv.addObject("activationSuccessMessage", "Email verification completed. You can now login on your Family Admin account!");
+
+		}
+		
+		if(activationFailure!=null) {
+			mv.addObject("activationFailureMessage", "Error while trying to activate your Family Admin account. Please check your email and search for activation link.");
 
 		}
 		
@@ -219,39 +231,17 @@ public class PageController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//http://localhost:8080/familyOrganizer/register/emailVerification?emailCode=7?token=7bdafd0b-3ee5-402b-a8e4-eb4dbf1269cd
 	@RequestMapping(value = { "/register/emailVerification" })
 	public String activateAdminAccount(@RequestParam(name="emailCode", required=false)String emailCode, 
 			@RequestParam(name="token", required=false)String token) {
 
-		
-		System.out.println("\n\n\n#######################\nemailCode: " + emailCode + "\ntoken: " + token);
-		
-		
+				
 		EmailVerification emailToken =  emailVerificationDAO.get(Integer.parseInt(emailCode));
 		
 		if(emailToken!=null) {
 			
-			
-			System.out.println("\nemail: " + emailToken.getEmail());
-			
-			
 			if(emailToken.getToken().equals(token)) {
-				
-				System.out.println("\n\n\nZgodne tokeny !!!!\n\n");
-				
+						
 				//activate Admin account
 				User user = userDAO.getByEmail(emailToken.getEmail());
 				user.setEnabled(true);
@@ -260,25 +250,13 @@ public class PageController {
 				//delete token after activation
 				emailVerificationDAO.delete(emailToken);
 				
-			} else {
-				System.out.println("\n\n\nToken nie pasuje !!!!\n\n");
-			}
-			
-			
-			//email = emailToken.getEmail();
-			
-			
-			
-			
-			
-			
+				return "redirect:/login?activationSuccess";
+				
+			} 
 			
 		}
 		
-		
-				
-
-		return "redirect:/login";
+		return "redirect:/login?activationFailure";
 
 	}
 	

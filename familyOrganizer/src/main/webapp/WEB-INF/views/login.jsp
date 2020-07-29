@@ -70,7 +70,18 @@
 					</div>
 				</c:if>
 				
+				<c:if test="${not empty activationSuccessMessage}">
+					<div class="loginAlertsWindow">
+						<div class="alert alert alert-success text-center">${activationSuccessMessage}</div>
+					</div>
+				</c:if>
 				
+				<c:if test="${not empty activationFailureMessage}">
+					<div class="loginAlertsWindow">
+						<div class="alert alert-danger text-center">${activationFailureMessage}</div>
+					</div>
+				</c:if>
+					
 				<c:if test="${not empty registrationMessage}">
 					<div class="loginAlertsWindow">
 						<div class="alert alert alert-secondary text-center">${registrationMessage}</div>
