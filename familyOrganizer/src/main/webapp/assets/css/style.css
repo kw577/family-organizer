@@ -903,6 +903,98 @@ input[type=number]:focus
 
 
 
+/*------------------------------Family Admin panel------------------------------*/
+
+
+.adminPanelWrapper {
+	
+	width: 100%;
+	
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	
+}
+
+
+
+.adminPanelHeader {
+	
+	width: 100%;
+	padding: 17px;
+	font-size: 28px;
+	font-weight: bold;
+	
+	display: flex;
+	border-bottom: 3px solid #283454;
+	
+	
+}
+
+.adminPanelHeader:hover {
+
+	background-color: #e0e0e0;
+}
+
+.adminPanelHeaderItem1 {
+	
+	width: 70%; 
+	
+}
+
+.adminPanelHeaderItem2 {
+	
+	text-align: right;
+	width: 30%; 
+	
+}
+
+
+.adminTableWrapper {
+	
+	width: 100%;
+	padding: 50px;
+	overflow: auto;
+	
+}
+
+
+table#adminPanelTable {
+	border-collapse: collapse;
+	width: 100%;
+	
+}
+
+#adminPanelTable th {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 3px solid black; 
+  color: black;
+}
+
+#adminPanelTable td {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid black;
+
+}
+
+#adminPanelTable tr:hover {background-color:#f5f5f5;}
+
+
+.adminTableFooter {
+
+	text-align: left;
+	margin-top: 20px;
+	width: 100%;
+	
+}
+
+
+
+
+
+
 
 
 

@@ -47,6 +47,9 @@
 	<link rel="stylesheet" href="${fontello}/fontello1/css/fontello.css" type="text/css"/>
 	<link rel="stylesheet" href="${fontello}/fontello2/css/fontello.css" type="text/css"/>
 	
+	<!-- Font awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+	
 </head>
 
 <body onload="start();">
@@ -143,7 +146,7 @@
 							<!-- This is available only for Admin of Family  -->
 							<security:authorize access="hasAuthority('ADMIN')">
 								<li class="nav-item active">
-									<a class="nav-link" href="#"> Admin panel <i class="icon-users"></i></a>
+									<a class="nav-link" href="${contextRoot}/manage/familyAccount"> Admin panel <i class="icon-users"></i></a>
 								</li>
 							</security:authorize>
 						
@@ -200,7 +203,10 @@
 				</c:if>	
 			
 			
-			
+				<!-- User Notes page - calendar view -->	
+				<c:if test="${familyAdminPage == true }"> 
+					<%@include file="familyAdminPanel.jsp"%>
+				</c:if>	
 			
 			
 
