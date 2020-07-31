@@ -46,7 +46,7 @@ public class GlobalController {
 					userModel.setSurname(user.getSurname());
 					userModel.setEmail(user.getEmail());
 					userModel.setRole(user.getRole());
-									
+					userModel.setFamily_id(user.getFamily_id());				
 
 					//set the userModel in the session
 					session.setAttribute("userModel", userModel);

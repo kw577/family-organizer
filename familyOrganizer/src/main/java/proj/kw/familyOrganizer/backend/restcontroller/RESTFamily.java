@@ -35,5 +35,20 @@ public class RESTFamily implements FamilyDAO {
 		}
 	}
 
+	@Override
+	public Family get(int id) {
+		
+		try {			
+			return sessionFactory
+					.getCurrentSession()
+						.get(Family.class,Integer.valueOf(id));			
+		}
+		catch(Exception ex) {		
+			ex.printStackTrace();			
+		}
+		return null;
+		
+	}
+
 
 }

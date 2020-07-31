@@ -12,7 +12,7 @@
 			<div class="adminPanelWrapper">
 										
 				<div class="adminPanelHeader">
-					<div class="adminPanelHeaderItem1">Rodzina Kowalskich</div>
+					<div class="adminPanelHeaderItem1">${family.name}</div>
 					<div class="adminPanelHeaderItem2">
 						<button type="button" class="btn btn-warning"><i class="fas fa-pen"></i></button>
 					</div>
@@ -65,7 +65,47 @@
 								<button type="button" class="btn btn-warning"><i class="fas fa-pen"></i></button>
 								<button type="button" class="btn btn-danger"><i class="fas fa-user-minus"></i></button>
 							</td>
-						</tr>		
+						</tr>	
+						
+						
+						
+						
+						
+						<c:forEach items="${familyMembers}" var="familyMember">
+							
+											
+							<tr>					
+								<td>${familyMember.name}</td>
+								<td>${familyMember.surname}</td>
+								<td>${familyMember.email}</td>
+								<td>${familyMember.role}</td>
+								<td>${familyMember.enabled}</td>
+								<td>
+									<button type="button" class="btn btn-warning"><i class="fas fa-pen"></i></button>
+									<button type="button" class="btn btn-danger"><i class="fas fa-user-minus"></i></button>
+								</td>				
+							</tr>					
+										
+						</c:forEach>
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+							
 											
 					</table>
 																				

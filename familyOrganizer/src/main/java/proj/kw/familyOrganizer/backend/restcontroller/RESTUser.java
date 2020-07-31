@@ -1,5 +1,7 @@
 package proj.kw.familyOrganizer.backend.restcontroller;
 
+import java.util.List;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +82,22 @@ public class RESTUser implements UserDAO{
 		}		
 		return false;		
 	}
+
+	
+	
+	@Override
+	public List<User> getFamilyMembers(int family_id) {
+		String query = "FROM user_account WHERE family_id = :family_id";
+		
+		return sessionFactory
+				.getCurrentSession()
+				.createQuery(query,User.class)
+				.setParameter("family_id", family_id)
+				.getResultList();
+	}
+	
+	
+		
 	
 	
 

@@ -1,5 +1,7 @@
 package proj.kw.familyOrganizer.backend.dao;
 
+import java.util.List;
+
 import proj.kw.familyOrganizer.backend.dto.User;
 
 public interface UserDAO {
@@ -15,5 +17,8 @@ public interface UserDAO {
 	
 	//update User account
 	boolean update(User user);
+	
+	//get list of family members
+	List<User> getFamilyMembers(int family_id);
 	
 } 

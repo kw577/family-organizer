@@ -12,6 +12,7 @@ public class UserModel implements Serializable {
 	private String surname;
 	private String email;
 	private String role;
+	private int family_id;
 	
 	public int getId() {
 		return id;
@@ -43,6 +44,14 @@ public class UserModel implements Serializable {
 	public void setRole(String role) {
 		this.role = role;
 	}
+		
+	public int getFamily_id() {
+		return family_id;
+	}
+	public void setFamily_id(int family_id) {
+		this.family_id = family_id;
+	}
+	
 	@Override
 	public String toString() {
 		return "UserModel [id=" + id + ", name=" + name + ", surname=" + surname + ", email=" + email + ", role=" + role
