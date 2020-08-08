@@ -3,6 +3,8 @@
     request.setCharacterEncoding("UTF-8");
 %>
 
+<%@taglib prefix="sform" uri="http://www.springframework.org/tags/form" %>
+
 <section class="adminPanelView">
 							
 	<div class="container-fluid">
@@ -14,7 +16,7 @@
 				<div class="adminPanelHeader">
 					<div class="adminPanelHeaderItem1">${family.name}</div>
 					<div class="adminPanelHeaderItem2">
-						<button type="button" class="btn btn-warning"><i class="fas fa-pen"></i></button>
+						<button type="button" class="btn btn-warning" id="editFamilyAccountButton"><i class="fas fa-pen"></i></button>
 					</div>
 				</div>
 						
@@ -89,26 +91,10 @@
 						</c:forEach>
 						
 						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-							
-											
+																
 					</table>
-																				
+							
+																			
 					<div class="adminTableFooter">
 									
 						<button type="button" class="btn btn-primary">New user <i class="fas fa-user-plus"></i></button>
@@ -122,5 +108,21 @@
 	</div>
 								
 </div>	
+
 									
 </section>
+
+
+
+
+<!-- Change family account name - form - hidden by default -->						
+<div id="editFamilyAccountForm-content" style="display:none;">
+ 	<sform:form id="editFamilyAccountForm" modelAttribute="newFamily" action="${contextRoot}/manage/familyAccount/edit/" name="editFamilyAccountForm" method="post">				
+		<div class="form-group">
+			<label for="accountName" style="font-size:12px;">Family Account Name</label>
+			<sform:input type="text" class="form-control" path="name" id="name" value="${family.name}"/>					
+			<sform:hidden path="id"/>
+		</div>
+	</sform:form>
+</div>
+

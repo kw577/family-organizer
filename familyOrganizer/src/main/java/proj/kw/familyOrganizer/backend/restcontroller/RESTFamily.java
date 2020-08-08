@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import proj.kw.familyOrganizer.backend.dao.FamilyDAO;
 import proj.kw.familyOrganizer.backend.dto.Family;
+import proj.kw.familyOrganizer.backend.dto.User;
 
 
 //Add new family account and return it's Id number
@@ -49,6 +50,26 @@ public class RESTFamily implements FamilyDAO {
 		return null;
 		
 	}
+	
+	
+	
+	@Override
+	public boolean update(Family family) {
+		try {			
+			sessionFactory
+					.getCurrentSession()
+						.update(family);
+			return true;
+		}
+		catch(Exception ex) {		
+			ex.printStackTrace();			
+		}		
+		return false;		
+	}
+	
+	
+	
+	
 
 
 }
