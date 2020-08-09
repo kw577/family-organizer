@@ -232,6 +232,10 @@
 	<!-- Bootbox -->
 	<script src="${js}/bootbox.min.js"></script>
 
+	<!-- jQuery validator -->
+	<script src="${js}/jquery.validate.js"></script>
+	
+
 	<!-- Other scripts -->
 	<script src="${js}/scripts.js"></script>
 
@@ -428,6 +432,7 @@
 		
 	</script>
 	
+		
 	
 </body>
 </html>

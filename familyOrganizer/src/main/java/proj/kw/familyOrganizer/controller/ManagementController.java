@@ -57,6 +57,8 @@ public class ManagementController {
 		Family nFamily = new Family();
 		mv.addObject("newFamily", nFamily);
 		
+		User nUser = new User();
+		mv.addObject("addUser", nUser);
 
 
 
@@ -76,7 +78,7 @@ public class ManagementController {
 	@RequestMapping(value = "familyAccount/edit/", method = RequestMethod.POST) 
 	public String changeFamilyAccountName(@ModelAttribute("newFamily") Family nFamily) { 
 		
-		System.out.println("\nZmieniono nazwe konta na: " + nFamily.getName());
+		//System.out.println("\nZmieniono nazwe konta na: " + nFamily.getName());
 		
 		UserModel usrModel = (UserModel) session.getAttribute("userModel");
 		
@@ -90,12 +92,39 @@ public class ManagementController {
 			
 		}
 		
-		
-		
-		
+			
 		return "redirect:/manage/familyAccount";
 	}
 	
+	
+	
+	
+	
+	// edit family account name
+	@RequestMapping(value = "familyAccount/addUser/", method = RequestMethod.POST) 
+	public String addNewUserByAdmin(@ModelAttribute("addUser") User nUser) { 
+		
+		System.out.println("\n\n\n##############################\nImie: " + nUser.getName());
+		System.out.println("Nazwisko: " + nUser.getSurname());
+		System.out.println("Imie: " + nUser.getEmail() + "\n##############################\n\n\n");
+		
+		/*
+		UserModel usrModel = (UserModel) session.getAttribute("userModel");
+		
+		
+		if(usrModel != null) {
+			
+			
+			nFamily.setId(usrModel.getFamily_id());
+			familyDAO.update(nFamily);
+			
+			
+		}
+		*/
+			
+		return "redirect:/manage/familyAccount";
+	
+	}
 	
 	
 	

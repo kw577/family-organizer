@@ -1,3 +1,4 @@
+//Admin Panel - edit famiily account
 $(document).ready(function() {
 	$("#editFamilyAccountButton").on("click", function(event) {
 		var modal = bootbox.dialog({
@@ -40,3 +41,51 @@ $(document).ready(function() {
 	});
 
 });
+
+
+$addNewUserForm = $("#addNewUserForm") 
+if($addNewUserForm.length) {
+	$addNewUserForm.validate({			
+			rules: {
+				name: {
+					required: true,
+					minlength: 3
+				},
+				surname: {
+					required: true,
+					minlength: 3
+				},
+				email: { 
+					required: true,
+					email: true,
+					minlength: 5					
+				}
+			},
+			messages: {					
+				name: {
+					required: 'This field can not be empty!',
+					minlength: 'Name field must cantain at least 3 characters'
+				},
+				surname: {
+					required: 'This field can not be empty!',
+					minlength: 'Surname field must cantain at least 3 characters'
+				},
+				email: {
+					required: 'This field can not be empty!',
+					minlength: 'Enter a valid email address!',
+					email: 'Enter a valid email address!'
+				}	
+										
+			},
+			errorElement : "em",
+			errorPlacement : function(error, element) {
+				error.addClass('formAlerts');
+					
+				error.insertBefore(element);
+					
+					
+			}				
+		}
+	);
+}
+
