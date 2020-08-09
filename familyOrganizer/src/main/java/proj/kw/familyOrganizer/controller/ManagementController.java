@@ -10,12 +10,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import proj.kw.familyOrganizer.backend.dao.EmailVerificationDAO;
 import proj.kw.familyOrganizer.backend.dao.FamilyDAO;
 import proj.kw.familyOrganizer.backend.dao.UserDAO;
+import proj.kw.familyOrganizer.backend.dto.EmailVerification;
 import proj.kw.familyOrganizer.backend.dto.Family;
 import proj.kw.familyOrganizer.backend.dto.User;
+import proj.kw.familyOrganizer.backend.mailSending.MailSenderService;
+import proj.kw.familyOrganizer.backend.mailSending.UserPasswordGenerator;
+import proj.kw.familyOrganizer.backend.registerHandler.RegisterPasswordEncoder;
 import proj.kw.familyOrganizer.model.UserModel;
 
 //Family admin controller
@@ -33,6 +39,16 @@ public class ManagementController {
 	
 	@Autowired 
 	private UserDAO userDAO;
+	
+	@Autowired 
+	private EmailVerificationDAO emailVerificationDAO;
+	  
+    @Autowired
+    private MailSenderService emailService;
+    
+    @Autowired
+    private RegisterPasswordEncoder passwordCoder;
+    
 
 	@RequestMapping(value = "/familyAccount", method = RequestMethod.GET)  
 	public ModelAndView showAccountSettings() {
@@ -100,28 +116,62 @@ public class ManagementController {
 	
 	
 	
-	// edit family account name
-	@RequestMapping(value = "familyAccount/addUser/", method = RequestMethod.POST) 
-	public String addNewUserByAdmin(@ModelAttribute("addUser") User nUser) { 
+	// add new user account by admin
+	@RequestMapping(value = "familyAccount/addUser", method = RequestMethod.POST) 
+	public String addNewUserByAdmin(@ModelAttribute("addUser") User nUser, HttpServletRequest request) { 
 		
-		System.out.println("\n\n\n##############################\nImie: " + nUser.getName());
-		System.out.println("Nazwisko: " + nUser.getSurname());
-		System.out.println("Imie: " + nUser.getEmail() + "\n##############################\n\n\n");
 		
-		/*
 		UserModel usrModel = (UserModel) session.getAttribute("userModel");
 		
 		
 		if(usrModel != null) {
 			
+				
+			//Check if user with this email is not in data base already
+			if(userDAO.checkEmail(nUser.getEmail())) {
+				
+				//Create email verification token
+				String token = UUID.randomUUID().toString();
+				int tokenId = emailVerificationDAO.createVerificationToken(token, nUser.getEmail());
+				
+				
+				String randomPassword = UserPasswordGenerator.generateUserPassword();
+								
+				String contextUrl = request.getRequestURL().toString().replaceAll(request.getServletPath(), "");
+				System.out.println("Context URL: " + contextUrl);
+				
+				
+				if(emailService.sendUserWelcomeMessage(nUser, tokenId, token, contextUrl, randomPassword)) {
+					
 			
-			nFamily.setId(usrModel.getFamily_id());
-			familyDAO.update(nFamily);
+					//Add Admin for family account
+					nUser.setRole("USER");
+					nUser.setEnabled(false);
+					nUser.setFamily_id(usrModel.getFamily_id());									
+					
+					nUser.setPassword(passwordCoder.codePassword(randomPassword));
+					
+					
+					
+					 userDAO.addUser(nUser);
+					
+				} else {
+					emailVerificationDAO.delete(emailVerificationDAO.get(tokenId));
+					return "redirect:/register/error?mailError";
+				}
+					
+			} else {
+				
+				//System.out.println("\nEmail already in use !!! \n");
+				return "redirect:/register/error?mailUsedAlready";
+			}
+			
 			
 			
 		}
-		*/
-			
+		
+		
+		//return "redirect:/login?registrationInfo";	
 		return "redirect:/manage/familyAccount";
 	
 	}

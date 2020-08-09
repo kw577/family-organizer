@@ -196,12 +196,12 @@ public class PageController {
 		}
 		
 		if(activationSuccess!=null) {
-			mv.addObject("activationSuccessMessage", "Email verification completed. You can now login on your Family Admin account!");
+			mv.addObject("activationSuccessMessage", "Email verification completed. You can now login on your account!");
 
 		}
 		
 		if(activationFailure!=null) {
-			mv.addObject("activationFailureMessage", "Error while trying to activate your Family Admin account. Please check your email and search for activation link.");
+			mv.addObject("activationFailureMessage", "Error while trying to activate your account. Please check your email and search for activation link.");
 
 		}
 		
@@ -242,7 +242,7 @@ public class PageController {
 			
 			if(emailToken.getToken().equals(token)) {
 						
-				//activate Admin account
+				//activate account
 				User user = userDAO.getByEmail(emailToken.getEmail());
 				user.setEnabled(true);
 				userDAO.update(user);
@@ -261,15 +261,7 @@ public class PageController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	

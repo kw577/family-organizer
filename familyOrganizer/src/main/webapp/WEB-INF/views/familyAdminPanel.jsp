@@ -120,7 +120,6 @@
 							data-target="#addNewUserModal">
 							New user <i class="fas fa-user-plus"></i>
 						</button>
-						<div></div>
 
 					</div>
 

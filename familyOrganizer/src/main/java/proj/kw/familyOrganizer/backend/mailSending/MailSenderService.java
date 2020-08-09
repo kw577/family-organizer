@@ -42,6 +42,36 @@ public class MailSenderService {
         
     	return true;
     }
+
+	
+    
+    
+    
+    public boolean sendUserWelcomeMessage(User user, int tokenId, String token, String pageUrl, String password) {
+    	
+    	//String activationLink = appContext
+    	String activationLink = pageUrl + "/register/emailVerification?emailCode=" + tokenId + "&token=" + token;
+    	  	
+    	SimpleMailMessage email = new SimpleMailMessage();
+        email.setTo(user.getEmail());
+        email.setSubject("New User Account - Family Organizer");
+        email.setText("Your account was successfully created by your Family Admin. \nYou can activate account by clicking this link: " 
+        		+ activationLink + "\nAfter that you can login to your account with this credentials: " 
+        		+ "\nlogin: " + user.getEmail() + "\npassword: " + password);
+    	
+        try {
+        	mailSender.send(email);
+        } catch (Exception ex) {
+        	
+        	System.out.println("\n\nCan not send email !!!");
+        	System.err.print(ex);
+
+        	return false;
+        }
+        
+        
+    	return true;
+	}
     
     
 	
