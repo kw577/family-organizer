@@ -76,7 +76,8 @@ public class ManagementController {
 		User nUser = new User();
 		mv.addObject("addUser", nUser);
 
-
+		User dUser = new User();
+		mv.addObject("delUser", dUser);
 
 		return mv;
 			
@@ -175,6 +176,39 @@ public class ManagementController {
 		return "redirect:/manage/familyAccount";
 	
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	// delete user's family account
+	@RequestMapping(value = "familyAccount/deleteUser/", method = RequestMethod.POST) 
+	public String deleteUserAccount(@ModelAttribute("delUser") User dUser) { 
+		
+		//System.out.println("\nZmieniono nazwe konta na: " + nFamily.getName());
+		
+		UserModel usrModel = (UserModel) session.getAttribute("userModel");
+		
+		
+		if(usrModel != null) {
+			
+			System.out.println("\n\n\n\n\n\n\nDelete account with email: " + dUser.getEmail());
+			
+			//delete only account in Admin's family - this if is probably not necessary
+			if(usrModel.getFamily_id() == userDAO.getByEmail(dUser.getEmail()).getFamily_id()) {
+			userDAO.delete(userDAO.getByEmail(dUser.getEmail()));
+			
+			}
+		
+		}
+		
+			
+		return "redirect:/manage/familyAccount";
+	}
+	
 	
 	
 	

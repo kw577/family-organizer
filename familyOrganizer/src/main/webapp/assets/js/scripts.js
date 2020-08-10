@@ -74,3 +74,44 @@ if($addNewUserForm.length) {
 	);
 }
 
+
+
+
+
+
+
+function fillDeleteUserAccountForm(email, name, surname) {
+	
+	//window.alert(email);
+	//console.log(email);
+	document.getElementById("deleteUserAccountInfo").innerHTML = name + " " + surname;
+	
+	oFormObject = document.forms['deleteUserAccountForm'];
+	oFormObject.elements["email"].value = email;
+	
+	
+	
+	
+	
+	
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

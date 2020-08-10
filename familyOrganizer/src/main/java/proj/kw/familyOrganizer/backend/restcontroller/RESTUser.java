@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import proj.kw.familyOrganizer.backend.dao.UserDAO;
+import proj.kw.familyOrganizer.backend.dto.EmailVerification;
 import proj.kw.familyOrganizer.backend.dto.User;
 
 @Transactional
@@ -87,7 +88,7 @@ public class RESTUser implements UserDAO{
 	
 	@Override
 	public List<User> getFamilyMembers(int family_id) {
-		String query = "FROM user_account WHERE family_id = :family_id";
+		String query = "FROM user_account WHERE family_id = :family_id order by role";
 		
 		return sessionFactory
 				.getCurrentSession()
@@ -99,7 +100,21 @@ public class RESTUser implements UserDAO{
 	
 		
 	
+	@Override
+	public boolean delete(User user) {
+		try {			
+			sessionFactory
+					.getCurrentSession()
+						.delete(user);
+			return true;
+		}
+		catch(Exception ex) {		
+			ex.printStackTrace();			
+		}		
+		return false;		
 	
+	
+	}
 
 
 }

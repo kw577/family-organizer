@@ -40,56 +40,6 @@
 							<th>Actions</th>
 						</tr>
 
-						<tr>
-							<td>Marek</td>
-							<td>Kowalski</td>
-							<td>marek@email.com</td>
-							<td>Admin</td>
-							<td>Enabled</td>
-							<td>
-								<button type="button" class="btn btn-warning">
-									<i class="fas fa-pen"></i>
-								</button>
-								<button type="button" class="btn btn-danger">
-									<i class="fas fa-user-minus"></i>
-								</button>
-							</td>
-						</tr>
-
-						<tr>
-							<td>Magda</td>
-							<td>Kowalska</td>
-							<td>magda@email.com</td>
-							<td>User</td>
-							<td>Enabled</td>
-							<td>
-								<button type="button" class="btn btn-warning">
-									<i class="fas fa-pen"></i>
-								</button>
-								<button type="button" class="btn btn-danger">
-									<i class="fas fa-user-minus"></i>
-								</button>
-							</td>
-						</tr>
-
-						<tr>
-							<td>Kamil</td>
-							<td>Kowalski</td>
-							<td>kamil@email.com</td>
-							<td>User</td>
-							<td>Enabled</td>
-							<td>
-								<button type="button" class="btn btn-warning">
-									<i class="fas fa-pen"></i>
-								</button>
-								<button type="button" class="btn btn-danger">
-									<i class="fas fa-user-minus"></i>
-								</button>
-							</td>
-						</tr>
-
-
-
 
 
 						<c:forEach items="${familyMembers}" var="familyMember">
@@ -102,12 +52,19 @@
 								<td>${familyMember.role}</td>
 								<td>${familyMember.enabled}</td>
 								<td>
-									<button type="button" class="btn btn-warning">
+									<button type="button" class="btn btn-warning"> 
 										<i class="fas fa-pen"></i>
 									</button>
-									<button type="button" class="btn btn-danger">
-										<i class="fas fa-user-minus"></i>
-									</button>
+									
+														
+									<c:if test="${familyMember.role == 'USER' }"> 
+										<button type="button" class="btn btn-danger" 
+										data-toggle="modal" data-target="#deleteUserAccountModal"
+										onclick="fillDeleteUserAccountForm('<c:out value="${familyMember.email}"/>', '<c:out value="${familyMember.name}"/>', '<c:out value="${familyMember.surname}"/>')"
+										>
+											<i class="fas fa-user-minus"></i>
+										</button>
+									</c:if>	
 								</td>
 							</tr>
 
@@ -229,6 +186,70 @@
 					</div>
 				</div>
 			</div>
+			
+			
+			
+			
+			
+			
+			
+			<!-- Delete user account -->
+			<div class="modal fade" id="deleteUserAccountModal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+
+						<!-- Modal Header -->
+						<div class="modal-header">
+							<h5 class="modal-title">Delete User account</h5>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+
+
+						<sform:form id="deleteUserAccountForm" modelAttribute="delUser"
+							action="${contextRoot}/manage/familyAccount/deleteUser/"
+							name="deleteUserAccountForm" method="post">
+							<!-- Modal body -->
+							<div class="modal-body">
+
+								Are you sure that you want to delete this user's account ?
+								<div id="deleteUserAccountInfo" style="font-size: 16px; margin-top: 10px;">
+								</div>
+								
+								<div class="form-group">
+									<sform:input type="hidden" placeholder="e-mail" path="email"
+										id="email" name="email" />
+								</div>
+
+								<sform:hidden path="id" />
+								<sform:hidden path="name" />
+								<sform:hidden path="surname" />
+								<sform:hidden path="role" />
+								<sform:hidden path="enabled" />
+								<sform:hidden path="family_id" />
+								<sform:hidden path="password" />
+
+							</div>
+
+							<!-- Modal footer -->
+							<div class="modal-footer">
+								<input type="submit" class="btn btn-danger"
+										value="Delete">
+								<button type="button" class="btn btn-basic"
+									data-dismiss="modal">Cancel</button>
+							</div>
+						</sform:form>
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 </section>

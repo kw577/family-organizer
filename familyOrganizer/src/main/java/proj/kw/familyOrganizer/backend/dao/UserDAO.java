@@ -21,4 +21,9 @@ public interface UserDAO {
 	//get list of family members
 	List<User> getFamilyMembers(int family_id);
 	
+	
+	//delete user account
+	boolean delete(User user);
+	
+	
 } 
