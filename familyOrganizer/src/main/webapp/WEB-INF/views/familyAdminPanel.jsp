@@ -16,11 +16,14 @@
 
 				<div class="adminPanelHeader">
 					<div class="adminPanelHeaderItem1">${family.name}</div>
-					<div class="adminPanelHeaderItem2">
-						<button type="button" class="btn btn-warning"
-							id="editFamilyAccountButton">
+					<div class="adminPanelHeaderItem2">		
+						
+						<button type="button" class="btn btn-warning" data-toggle="modal"
+							data-target="#editFamilyAccountModal">
 							<i class="fas fa-pen"></i>
 						</button>
+						
+						
 					</div>
 				</div>
 
@@ -183,24 +186,54 @@
 					</div>
 				</div>
 			</div>
+			
+			
+			
+			
+			
+			<!-- Edit family account modal -->
+			<div class="modal fade" id="editFamilyAccountModal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+
+						<!-- Modal Header -->
+						<div class="modal-header">
+							<h5 class="modal-title">Edit your Family Account</h5>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+
+
+						<sform:form id="editFamilyAccountForm" modelAttribute="newFamily"
+							action="${contextRoot}/manage/familyAccount/edit/"
+							name="editFamilyAccountForm" method="post">
+							<!-- Modal body -->
+							<div class="modal-body">
+								<div class="form-group">
+									<label style="font-size: 12px;">Family Account Name</label>
+									<sform:input type="text" class="form-control" path="name" id="name"
+										value="${family.name}" />
+								</div>
+
+								<sform:hidden path="id" />
+
+							</div>
+							
+							<!-- Modal footer -->
+							<div class="modal-footer">
+								<input type="submit" class="btn btn-primary"
+										value="Save">
+								<button type="button" class="btn btn-danger"
+									data-dismiss="modal">Close</button>
+							</div>
+						</sform:form>
+					</div>
+				</div>
+			</div>
+			
+			
 </section>
 
 
-
-
-<!-- Change family account name - form - hidden by default -->
-<div id="editFamilyAccountForm-content" style="display: none;">
-	<sform:form id="editFamilyAccountForm" modelAttribute="newFamily"
-		action="${contextRoot}/manage/familyAccount/edit/"
-		name="editFamilyAccountForm" method="post">
-		<div class="form-group">
-			<label style="font-size: 12px;">Family Account Name</label>
-			<sform:input type="text" class="form-control" path="name" id="name"
-				value="${family.name}" />
-			<sform:hidden path="id" />
-		</div>
-	</sform:form>
-</div>
 
 
 
