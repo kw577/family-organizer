@@ -55,34 +55,34 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
  
-.icon-left:before { content: '\e800'; } /* '' */
-.icon-left-open:before { content: '\e801'; color: white;} /* '' */
-.icon-cog:before { content: '\e802'; } /* '' */
-.icon-cog-alt:before { content: '\e803'; } /* '' */
-.icon-wrench:before { content: '\e804'; } /* '' */
-.icon-comment:before { content: '\e805'; } /* '' */
-.icon-users:before { content: '\e806'; font-size:22px; margin: 0;} /* '' */
-.icon-right:before { content: '\e807'; } /* '' */
-.icon-right-open:before { content: '\e808'; } /* '' */
-.icon-user:before { content: '\e809'; font-size:25px;} /* '' */
-.icon-mail:before { content: '\e80a'; } /* '' */
-.icon-book:before { content: '\e80b'; } /* '' */
-.icon-check:before { content: '\e80c'; font-size:25px;} /* '' */
-.icon-chat:before { content: '\e80d'; font-size:25px;} /* '' */
-.icon-th-list:before { content: '\e80e'; } /* '' */
-.icon-pencil:before { content: '\e80f'; } /* '' */
-.icon-edit:before { content: '\e810'; font-size:25px;} /* '' */
-.icon-list:before { content: '\e811'; color: black;} /* '' */
-.icon-logout:before { content: '\e812'; } /* '' */
-.icon-list-bullet:before { content: '\f0ca'; font-size:25px;} /* '' */
-.icon-bell-alt:before { content: '\f0f3'; font-size:22px; margin: 0;} /* '' */
-.icon-folder-open-empty:before { content: '\f115'; } /* '' */
-.icon-calendar-empty:before { content: '\f133'; font-size: 25px; margin-bottom: 5px;} /* '' */
-.icon-angle-circled-left:before { content: '\f137'; font-size:22px;} /* '' */
-.icon-angle-circled-right:before { content: '\f138'; font-size:22px;} /* '' */
-.icon-doc-inv:before { content: '\f15b'; font-size:25px;} /* '' */
-.icon-calendar-plus-o:before { content: '\f271';  font-size: 25px;} /* '' */
-.icon-calendar-check-o:before { content: '\f274'; font-size: 25px; margin-bottom: 5px;} /* '' */
-.icon-address-book:before { content: '\f2b9'; } /* '' */
-.icon-address-card-o:before { content: '\f2bc'; font-size: 25px;} /* '' */
-.icon-user-circle:before { content: '\f2bd'; font-size:22px; margin: 0;} /* '' */
+.icon-left:before { content: '\e800'; } /* 'î €' */
+.icon-left-open:before { content: '\e801'; color: white;} /* 'î �' */
+.icon-cog:before { content: '\e802'; } /* 'î ‚' */
+.icon-cog-alt:before { content: '\e803'; } /* 'î �' */
+.icon-wrench:before { content: '\e804'; } /* 'î „' */
+.icon-comment:before { content: '\e805'; } /* 'î …' */
+.icon-users:before { content: '\e806'; font-size:22px; margin: 0;} /* 'î †' */
+.icon-right:before { content: '\e807'; } /* 'î ‡' */
+.icon-right-open:before { content: '\e808'; } /* 'î �' */
+.icon-user:before { content: '\e809'; font-size:25px;} /* 'î ‰' */
+.icon-mail:before { content: '\e80a'; } /* 'î Š' */
+.icon-book:before { content: '\e80b'; } /* 'î ‹' */
+.icon-check:before { content: '\e80c'; font-size:25px;} /* 'î Ś' */
+.icon-chat:before { content: '\e80d'; font-size:25px;} /* 'î Ť' */
+.icon-th-list:before { content: '\e80e'; } /* 'î Ž' */
+.icon-pencil:before { content: '\e80f'; } /* 'î Ź' */
+.icon-edit:before { content: '\e810'; font-size:25px;} /* 'î �' */
+.icon-list:before { content: '\e811'; color: black;} /* 'î ‘' */
+.icon-logout:before { content: '\e812'; } /* 'î ’' */
+.icon-list-bullet:before { content: '\f0ca'; font-size:25px;} /* 'ď�Š' */
+.icon-bell-alt:before { content: '\f0f3'; font-size:22px; margin: 0;} /* 'ď�ł' */
+.icon-folder-open-empty:before { content: '\f115'; } /* 'ď„•' */
+.icon-calendar-empty:before { content: '\f133'; font-size: 25px; margin-bottom: 5px;} /* 'ď„ł' */
+.icon-angle-circled-left:before { content: '\f137'; font-size:22px;} /* 'ď„·' */
+.icon-angle-circled-right:before { content: '\f138'; font-size:22px;} /* 'ď„¸' */
+.icon-doc-inv:before { content: '\f15b'; font-size:25px;} /* 'ď…›' */
+.icon-calendar-plus-o:before { content: '\f271';  font-size: 25px;} /* 'ď‰±' */
+.icon-calendar-check-o:before { content: '\f274'; font-size: 25px; margin-bottom: 5px;} /* 'ď‰´' */
+.icon-address-book:before { content: '\f2b9'; } /* 'ďŠą' */
+.icon-address-card-o:before { content: '\f2bc'; font-size: 25px;} /* 'ďŠĽ' */
+.icon-user-circle:before { content: '\f2bd'; font-size:22px; margin: 0;} /* 'ďŠ˝' */

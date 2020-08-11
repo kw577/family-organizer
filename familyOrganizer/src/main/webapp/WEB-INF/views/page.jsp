@@ -96,14 +96,14 @@
 				<li class="active">
 					<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle abcde"><i class="icon-list-bullet"></i><span class="d-none d-md-inline-block ml-1">  My plans </span></a>
 					<ul class="collapse list-unstyled" id="homeSubmenu">
-						<li>
-							<a href="#" title="Add event"><i class="icon-calendar-plus-o"></i><span class="d-none d-md-inline-block ml-1">  Add event </span></a>
+						<li style="background-color:#394565;">
+							<a href="#" title="Add event">&#8227;&#32;<i class="icon-calendar-plus-o"></i><span class="d-none d-md-inline-block ml-1">  Add event </span></a>
 						</li>
-						<li>
-							<a href="#" title="Timeline"><i class="icon-clock"></i><span class="d-none d-md-inline-block ml-1">  Timeline </span></a>
+						<li style="background-color:#394565;">
+							<a href="#" title="Timeline">&#8227;&#32;<i class="icon-clock"></i><span class="d-none d-md-inline-block ml-1">  Timeline </span></a>
 						</li>
-						<li>
-							<a href="#" title="Manage events"><i class="icon-briefcase"></i><span class="d-none d-md-inline-block ml-1">  Manage events </span></a>
+						<li style="background-color:#394565;">
+							<a href="#" title="Manage events">&#8227;&#32;<i class="icon-briefcase"></i><span class="d-none d-md-inline-block ml-1">  Manage events </span></a>
 						</li>
 					</ul>
 				</li>			

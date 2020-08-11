@@ -55,7 +55,7 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
  
-.icon-home:before { content: '\e900'; font-size: 22px;} /* '' */
-.icon-clock:before { content: '\e901'; font-size: 25px;} /* '' */
-.icon-briefcase:before { content: '\e902'; font-size: 25px;} /* '' */
-.icon-tasks:before { content: '\e903'; font-size: 25px;} /* '' */
+.icon-home:before { content: '\e900'; font-size: 22px;} 
+.icon-clock:before { content: '\e901'; font-size: 25px;} 
+.icon-briefcase:before { content: '\e902'; font-size: 25px;} 
+.icon-tasks:before { content: '\e903'; font-size: 25px;} 
