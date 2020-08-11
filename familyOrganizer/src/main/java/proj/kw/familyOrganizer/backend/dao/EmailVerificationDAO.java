@@ -1,6 +1,7 @@
 package proj.kw.familyOrganizer.backend.dao;
 
 import proj.kw.familyOrganizer.backend.dto.EmailVerification;
+import proj.kw.familyOrganizer.backend.dto.User;
 
 public interface EmailVerificationDAO {
 
@@ -12,5 +13,9 @@ public interface EmailVerificationDAO {
 	
 	//delete token
 	boolean delete(EmailVerification token);
+	
+	//get user by email address
+	EmailVerification getByEmail(String email);
+	
 
 } 

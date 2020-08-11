@@ -204,6 +204,20 @@ public class ManagementController {
 			if(usrModel.getFamily_id() == userDAO.getByEmail(dUser.getEmail()).getFamily_id()) {
 			userDAO.delete(userDAO.getByEmail(dUser.getEmail()));
 			
+			
+				//Sprawdzenie czy dla tego adresu email jest niewykorzystony token weryfikacyjny email - konto nie zostalo jeszcze aktywowane
+				//Usuniecie tokenu jesli jest taki w bazie danych
+				if(emailVerificationDAO.getByEmail(dUser.getEmail()) != null) {
+					
+					emailVerificationDAO.delete(emailVerificationDAO.getByEmail(dUser.getEmail()));
+					
+					
+				}
+			
+			
+			
+			
+			
 			}
 		
 		}

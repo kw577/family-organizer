@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import proj.kw.familyOrganizer.backend.dao.EmailVerificationDAO;
 import proj.kw.familyOrganizer.backend.dto.EmailVerification;
+import proj.kw.familyOrganizer.backend.dto.User;
 
 
 @Transactional
@@ -68,6 +69,31 @@ public class RESTEmailVerification implements EmailVerificationDAO {
 	
 	
 	}
+	
+	
+	@Override
+	public EmailVerification getByEmail(String email) {
+		
+		String selectQuery = "FROM email_verification WHERE email = :email";
+		
+		try {
+			return sessionFactory.getCurrentSession()
+					.createQuery(selectQuery, EmailVerification.class)
+					.setParameter("email", email)
+					.getSingleResult();
+		}
+		catch (Exception ex) {
+
+			return null;
+			
+		}
+		
+		
+		
+	}
+	
+	
+	
 
 
 }
