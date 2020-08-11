@@ -90,10 +90,6 @@ function fillDeleteUserAccountForm(email, name, surname) {
 	oFormObject.elements["email"].value = email;
 	
 	
-	
-	
-	
-	
 
 }
 
@@ -102,13 +98,56 @@ function fillDeleteUserAccountForm(email, name, surname) {
 
 
 
+function fillModifyUserAccountForm(email, name, surname) {
+	
+	//console.log(email);
+
+	oFormObject = document.forms['modifyUserAccountForm'];
+	oFormObject.elements["email"].value = email;
+	oFormObject.elements["name"].value = name;
+	oFormObject.elements["surname"].value = surname;
+
+}
 
 
 
 
 
-
-
+$modifyUserAccountForm = $("#modifyUserAccountForm") 
+if($modifyUserAccountForm.length) {
+	$modifyUserAccountForm.validate({			
+			rules: {
+				name: {
+					required: true,
+					minlength: 3
+				},
+				surname: {
+					required: true,
+					minlength: 3
+				}
+			},
+			messages: {					
+				name: {
+					required: 'This field can not be empty!',
+					minlength: 'Name field must cantain at least 3 characters'
+				},
+				surname: {
+					required: 'This field can not be empty!',
+					minlength: 'Surname field must cantain at least 3 characters'
+				}	
+										
+			},
+			errorElement : "em",
+			errorPlacement : function(error, element) {
+				error.addClass('formAlerts');
+					
+				error.insertBefore(element);
+					
+					
+			}				
+		}
+	);
+}
 
 
 

@@ -52,10 +52,15 @@
 								<td>${familyMember.role}</td>
 								<td>${familyMember.enabled}</td>
 								<td>
-									<button type="button" class="btn btn-warning"> 
+									
+									<button type="button" class="btn btn-warning" 
+									data-toggle="modal" data-target="#modifyUserAccountModal"
+									onclick="fillModifyUserAccountForm('<c:out value="${familyMember.email}"/>', '<c:out value="${familyMember.name}"/>', '<c:out value="${familyMember.surname}"/>')"
+									>
 										<i class="fas fa-pen"></i>
 									</button>
 									
+																
 														
 									<c:if test="${familyMember.role == 'USER' }"> 
 										<button type="button" class="btn btn-danger" 
@@ -244,6 +249,70 @@
 			
 			
 			
+			
+			
+			
+			
+			<!-- Modify user account -->
+			<div class="modal fade" id="modifyUserAccountModal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+
+						<!-- Modal Header -->
+						<div class="modal-header">
+							<h5 class="modal-title">Edit User's account</h5>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+
+
+						<sform:form id="modifyUserAccountForm" modelAttribute="modUser"
+							action="${contextRoot}/manage/familyAccount/modifyUser/"
+							name="modifyUserAccountForm" method="post">
+							<!-- Modal body -->
+							<div class="modal-body">
+
+								
+								<div style="font-size: 16px; margin-top: 10px;">
+									Here you can edit user account:
+								</div>
+								
+								
+								<div class="form-group">
+									<label style="font-size: 12px;">User's name</label>
+									<sform:input type="text" path="name"
+										id="name" name="name" />
+								</div>
+								<div class="form-group">
+									<label style="font-size: 12px;">User's surname</label>
+									<sform:input type="text" path="surname"
+										id="surname" name="surname" />
+								</div>
+								
+								
+								<div class="form-group">
+									<sform:input type="hidden" placeholder="e-mail" path="email"
+										id="email" name="email" />
+								</div>
+
+								<sform:hidden path="id" />
+								<sform:hidden path="role" />
+								<sform:hidden path="enabled" />
+								<sform:hidden path="family_id" />
+								<sform:hidden path="password" />
+
+							</div>
+
+							<!-- Modal footer -->
+							<div class="modal-footer">
+								<input type="submit" class="btn btn-primary"
+										value="Save">
+								<button type="button" class="btn btn-basic"
+									data-dismiss="modal">Cancel</button>
+							</div>
+						</sform:form>
+					</div>
+				</div>
+			</div>
 			
 			
 			
