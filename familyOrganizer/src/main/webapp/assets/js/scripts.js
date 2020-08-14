@@ -152,5 +152,60 @@ if($modifyUserAccountForm.length) {
 
 
 
+// Formularz tworzenia nowego wydarzenia - datepicker
+$( function() {
+    $( "#start_date" ).datepicker({
+    	dateFormat: 'yy-mm-dd',
+    	defaultDate: 0,
+    	firstDay: 0, //sobota jako poczatek tygodnia w kalendarzu
+    	minDate: 0, //nie mozna wybrac wczesniejszej daty niz dzisiejsza
+    	showButtonPanel: false,
+    	changeMonth: true,
+    	changeYear: true
+    	
+    });
+   
+  } );
+
+
+
+$( function() {
+    $( "#end_date" ).datepicker({
+    	dateFormat: 'yy-mm-dd',
+    	defaultDate: 0,
+    	firstDay: 0, //sobota jako poczatek tygodnia w kalendarzu
+    	minDate: 0, //nie mozna wybrac wczesniejszej daty niz dzisiejsza
+    	showButtonPanel: false
+    	//changeMonth: true,
+    	//changeYear: true
+    	
+    });
+   
+  } );
+
+
+
+
+/* Time picker ver 1
+$('#start_time').timepicker({
+    timeFormat: 'HH:mm',
+    interval: 15,
+    minTime: '00:00',
+    maxTime: '23:30',
+    defaultTime: '11',
+    startTime: '00:00',
+    dynamic: false,
+    dropdown: true,
+    scrollbar: true
+});
+*/
+
+//timepicker ver 2
+$('#start_time').timepicker();
+
+$('#end_time').timepicker();
+
+
+
 
 

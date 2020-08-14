@@ -50,6 +50,17 @@
 	<!-- Font awesome -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 	
+	<!--Datepicker: Mozliwe style do wyboru: base black-tie blitzer cupertino dark-hive dot-luv eggplant excite-bike flick hot-sneaks humanity le-frog mint-choc overcast pepper-grinder redmond smoothness south-street start sunny swanky-purse trontastic ui-darkness ui-lightness vader-->
+	<!-- pliki css dostepne pod adresem: https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css -->
+	<link href="${css}/jquery-ui.css" rel="stylesheet" type="text/css">
+	
+	<!-- Jquery timepicker -->
+	<link href="${css}/jquery.timepicker.min.css" rel="stylesheet" type="text/css">
+	
+	<!-- Jquery timepicker ver 2 -->
+	<link href="${css}/timepicker.css" rel="stylesheet" type="text/css">
+		
+	
 	
 </head>
 
@@ -97,7 +108,7 @@
 					<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle abcde"><i class="icon-list-bullet"></i><span class="d-none d-md-inline-block ml-1">  My plans </span></a>
 					<ul class="collapse list-unstyled" id="homeSubmenu">
 						<li style="background-color:#394565;">
-							<a href="#" title="Add event">&#8227;&#32;<i class="icon-calendar-plus-o"></i><span class="d-none d-md-inline-block ml-1">  Add event </span></a>
+							<a href="${contextRoot}/createNewEvent" title="Add event">&#8227;&#32;<i class="icon-calendar-plus-o"></i><span class="d-none d-md-inline-block ml-1">  Add event </span></a>
 						</li>
 						<li style="background-color:#394565;">
 							<a href="#" title="Timeline">&#8227;&#32;<i class="icon-clock"></i><span class="d-none d-md-inline-block ml-1">  Timeline </span></a>
@@ -204,10 +215,17 @@
 				</c:if>	
 			
 			
-				<!-- User Notes page - calendar view -->	
+				<!-- Family Admin page -->	
 				<c:if test="${familyAdminPage == true }"> 
 					<%@include file="familyAdminPanel.jsp"%>
 				</c:if>	
+				
+				
+				<!-- Family Admin page -->	
+				<c:if test="${isAddNewEventPage == true }"> 
+					<%@include file="createNewEvent.jsp"%>
+				</c:if>	
+				
 			
 			
 
@@ -232,6 +250,20 @@
 	<!-- Bootbox -->
 	<script src="${js}/bootbox.min.js"></script>
 
+
+	<!-- jQuery -->
+	<script src="${js}/jquery-1.12.4.js"></script>
+
+	<!-- jQuery -->
+	<script src="${js}/jquery-ui.js"></script>
+
+	<!-- jQuery Timepicker -->
+	<script src="${js}/jquery.timepicker.min.js"></script>
+
+	<!-- jQuery Timepicker ver 2 -->
+	<script src="${js}/timepicker.js"></script>
+
+
 	<!-- jQuery validator -->
 	<script src="${js}/jquery.validate.js"></script>
 	
@@ -245,7 +277,7 @@
 		window.userRole = '${userModel.role}';
 	</script>
 	
-	
+		
 	<script>
 
 		
@@ -432,7 +464,8 @@
 		
 	</script>
 	
-		
+	
+	
 	
 </body>
 </html>

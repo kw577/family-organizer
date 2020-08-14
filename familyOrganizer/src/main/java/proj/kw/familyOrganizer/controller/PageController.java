@@ -264,6 +264,31 @@ public class PageController {
 
 	
 	
+	//add new event page
+	@RequestMapping(value = { "/createNewEvent" })
+	public ModelAndView addNewEventPage() {
+
+		ModelAndView mv = new ModelAndView("page");
+
+		mv.addObject("title", "Add new Event");
+		mv.addObject("isAddNewEventPage", true);
+						
+			
+		return mv;
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }
