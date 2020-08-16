@@ -1,9 +1,12 @@
 package proj.kw.familyOrganizer.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,18 +20,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import proj.kw.familyOrganizer.backend.dao.EmailVerificationDAO;
+import proj.kw.familyOrganizer.backend.dao.EventDAO;
 import proj.kw.familyOrganizer.backend.dao.FamilyDAO;
 import proj.kw.familyOrganizer.backend.dao.NotesDAO;
 import proj.kw.familyOrganizer.backend.dao.UserDAO;
 import proj.kw.familyOrganizer.backend.dto.EmailVerification;
+import proj.kw.familyOrganizer.backend.dto.Event;
 import proj.kw.familyOrganizer.backend.dto.Family;
 import proj.kw.familyOrganizer.backend.dto.User;
 import proj.kw.familyOrganizer.backend.mailSending.MailSenderService;
 import proj.kw.familyOrganizer.backend.registerHandler.RegisterPasswordEncoder;
+import proj.kw.familyOrganizer.model.EventModel;
+import proj.kw.familyOrganizer.model.UserModel;
 
 @Controller
 public class PageController {
 	
+	@Autowired
+	private HttpSession session;
 
 	@Autowired 
 	private NotesDAO notesDAO;
@@ -38,6 +47,9 @@ public class PageController {
 	
 	@Autowired 
 	private FamilyDAO familyDAO;
+	
+	@Autowired 
+	private EventDAO eventDAO;
 	
 	@Autowired 
 	private EmailVerificationDAO emailVerificationDAO;
@@ -273,6 +285,11 @@ public class PageController {
 		mv.addObject("title", "Add new Event");
 		mv.addObject("isAddNewEventPage", true);
 						
+		
+		EventModel eventModel = new EventModel();
+		mv.addObject("newEvent", eventModel);
+		
+		
 			
 		return mv;
 
@@ -282,7 +299,50 @@ public class PageController {
 	
 	
 	
-	
+	// create new event
+	@RequestMapping(value = "/addNewEvent", method = RequestMethod.POST) 
+	public String addNewEvent(@ModelAttribute("newEvent") EventModel eventModel) { 
+		
+				
+		UserModel usrModel = (UserModel) session.getAttribute("userModel");
+		
+		
+		if(usrModel != null) {
+			
+			
+			Event newEvent = new Event();
+			
+			newEvent.setFamily_id(usrModel.getFamily_id());
+			newEvent.setOwner_id(usrModel.getId());
+			newEvent.setTitle(eventModel.getTitle());
+			
+			String start_date = eventModel.getStart_day() + " " + eventModel.getStart_time();
+			System.out.println("\n\n######################\nstart_date: " + start_date);
+			String end_date = eventModel.getEnd_day() + " " + eventModel.getEnd_time();
+			System.out.println("\nend_date: " + end_date);
+			
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+			LocalDateTime start_date_object = LocalDateTime.parse(start_date, formatter);
+			LocalDateTime end_date_object = LocalDateTime.parse(end_date, formatter);
+			
+			newEvent.setStart_date(start_date_object);
+			newEvent.setEnd_date(end_date_object);
+
+			newEvent.setDescription(eventModel.getDescription());
+			newEvent.setLocalization(eventModel.getLocalization());
+			
+			
+			//add new event to database
+			eventDAO.addEvent(newEvent);
+			
+			
+		}
+		
+		
+		
+		
+		return "redirect:/home";
+	}
 	
 	
 	

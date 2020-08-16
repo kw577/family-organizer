@@ -154,7 +154,7 @@ if($modifyUserAccountForm.length) {
 
 // Formularz tworzenia nowego wydarzenia - datepicker
 $( function() {
-    $( "#start_date" ).datepicker({
+    $( "#start_day" ).datepicker({
     	dateFormat: 'yy-mm-dd',
     	defaultDate: 0,
     	firstDay: 0, //sobota jako poczatek tygodnia w kalendarzu
@@ -170,7 +170,7 @@ $( function() {
 
 
 $( function() {
-    $( "#end_date" ).datepicker({
+    $( "#end_day" ).datepicker({
     	dateFormat: 'yy-mm-dd',
     	defaultDate: 0,
     	firstDay: 0, //sobota jako poczatek tygodnia w kalendarzu
