@@ -114,7 +114,7 @@
 							<a href="#" title="Timeline">&#8227;&#32;<i class="icon-clock"></i><span class="d-none d-md-inline-block ml-1">  Timeline </span></a>
 						</li>
 						<li style="background-color:#394565;">
-							<a href="#" title="Manage events">&#8227;&#32;<i class="icon-briefcase"></i><span class="d-none d-md-inline-block ml-1">  Manage events </span></a>
+							<a href="${contextRoot}/eventsControlPanel" title="Manage events">&#8227;&#32;<i class="icon-briefcase"></i><span class="d-none d-md-inline-block ml-1">  Manage events </span></a>
 						</li>
 					</ul>
 				</li>			
@@ -226,10 +226,12 @@
 					<%@include file="createNewEvent.jsp"%>
 				</c:if>	
 				
+				<!-- Events Control page -->	
+				<c:if test="${isEventsControlPanel == true }"> 
+					<%@include file="eventsControlPanel.jsp"%>
+				</c:if>	
 			
-			
-
-			
+					
 			</main>
 			
 		</div>	

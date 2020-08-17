@@ -1063,6 +1063,128 @@ div.ui-datepicker{
 
 
 
+/*------------------------------Events Control panel------------------------------*/
+
+
+.eventsPanelWrapper {
+	
+	width: 100%;
+	
+	margin-left: auto;
+	margin-right: auto;
+	
+	padding: 20px;
+	
+}
+
+
+.eventsPanelHeader {
+	
+	margin-top: 20px;
+	font-size: 20px;
+	
+}
+
+
+.eventsPanelBody {
+	
+	width: 100%;
+	margin-top: 25px;
+	overflow: auto;
+	
+}
+
+
+.singleEventView {
+	
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 35px;
+	border: 1px solid #d9d9d9;
+	border-radius: 5px;
+	background-color: white;
+	
+
+	-webkit-box-shadow: 0px 0px 10px 0px rgba(222,222,222,1);
+	-moz-box-shadow: 0px 0px 10px 0px rgba(222,222,222,1);
+	box-shadow: 0px 0px 10px 0px rgba(222,222,222,1);
+	
+	width: 900px;
+	
+	
+}
+
+
+.eventViewHeader {
+	
+	width: 100%;
+	padding: 10px;
+	font-size: 17px;
+	font-weight: bold;
+	line-height: 37px;
+	
+	display: flex;
+	border-bottom: 1px solid #d9d9d9;
+	background-color: #e0e0e0;
+	padding-left: 25px;
+}
+
+
+
+
+
+
+.eventViewHeaderItem1 {
+	
+	width: 70%; 
+	
+}
+
+.eventViewHeaderItem2 {
+	
+	text-align: right;
+	width: 30%; 
+	
+}
+
+
+.eventViewBody {
+	
+	width: 100%;
+	display: flex;
+
+}
+
+
+.eventViewBodyItem1 {
+	
+	width: 22%; 
+	border-right: 1px solid #898989;
+	
+}
+
+.eventViewBodyItem2 {
+	
+	
+	width: 78%; 
+	text-align: justify;
+	font-size: 15px;
+	padding: 10px;
+	
+}
+
+.eventViewDescription {
+	
+	padding: 10px;
+	font-size: 16px;
+}
+
+
+
+
+
+
+
 
 
 

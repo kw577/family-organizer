@@ -351,6 +351,23 @@ public class PageController {
 	
 	
 	
+	//add new event page
+	@RequestMapping(value = { "/eventsControlPanel" })
+	public ModelAndView eventsControlPanel() {
+
+		ModelAndView mv = new ModelAndView("page");
+
+		mv.addObject("title", "Events Control Panel");
+		mv.addObject("isEventsControlPanel", true);
+						
+					
+		return mv;
+
+	}
+	
+	
+	
+	
 	
 	
 	
