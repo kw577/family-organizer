@@ -333,7 +333,11 @@ public class PageController {
 			
 			
 			//add new event to database
-			eventDAO.addEvent(newEvent);
+			if (end_date_object.isAfter(start_date_object)) {
+				eventDAO.addEvent(newEvent);
+			}
+			
+			
 			
 			
 		}

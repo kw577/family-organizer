@@ -208,4 +208,124 @@ $('#end_time').timepicker();
 
 
 
+$addNewEventForm = $("#addNewEventForm") 
+if($addNewEventForm.length) {
+	
+	$.validator.addMethod('dateAfter', function (value, element, params) {
+        // if start date is valid, validate it as well
+		var start_time = $("#start_time").val();
+        var end_time = $('#end_time').val();
+		
+        if(start_time != ""){
+        	
+        	var start_date = new Date($(params).val() + " " + start_time);
+        	
+        }
+        
+        if(end_time != ""){
+        	
+        	var end_date = new Date(value + " " + end_time);
+        	
+        }
+		
+        var start = $(params);
+
+        return this.optional(element) || this.optional(start[0]) || end_date > start_date;
+
+    }, 'Must be after corresponding start date');
+	
+	
+	$addNewEventForm.validate({			
+			rules: {
+				title: {
+					required: true,
+					minlength: 3
+				},
+				start_day: {
+					required: true
+				},
+				start_time: {
+					required: true
+				},
+				end_day: {
+					required: true,
+					dateAfter: '#start_day'
+				},
+				end_time: {
+					required: true
+				},
+				description: {
+					required: true,
+					minlength: 3
+				},
+				localization: {
+					required: true,
+					minlength: 3
+				},
+				
+			},
+			messages: {					
+				title: {
+					required: 'This field can not be empty!',
+					minlength: 'This field must cantain at least 3 characters'
+				},
+				start_day: {
+					required: 'This field can not be empty!',
+				},
+				start_time: {
+					required: 'This field can not be empty!',
+				},
+				end_day: {
+					required: 'This field can not be empty!',
+				},
+				end_time: {
+					required: 'This field can not be empty!',
+				},
+				description: {
+					required: 'This field can not be empty!',
+					minlength: 'This field must cantain at least 3 characters'
+				},
+				localization: {
+					required: 'This field can not be empty!',
+					minlength: 'This field must cantain at least 3 characters'
+				}
+										
+			},
+			errorElement : "em",
+			errorPlacement : function(error, element) {
+				error.addClass('formAlerts');
+					
+				error.insertBefore(element);
+					
+					
+			}				
+		}
+	);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -78,7 +78,7 @@
 
 					<div class="createEventFormFooter">
 						<input type="submit" class="btn btn-primary" value="Save">
-						<a href="${contextRoot}/home"><button class="btn btn-danger">Cancel</button></a>
+						<a href="${contextRoot}/createNewEvent"><button type="button" class="btn btn-danger">Cancel</button></a>
 					</div>
 								
 
