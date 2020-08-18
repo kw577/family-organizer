@@ -84,7 +84,19 @@ public class RESTEvent implements EventDAO {
 	
 	
 	
-	
+	@Override
+	public boolean update(Event event) {
+		try {			
+			sessionFactory
+					.getCurrentSession()
+						.update(event);
+			return true;
+		}
+		catch(Exception ex) {		
+			ex.printStackTrace();			
+		}		
+		return false;		
+	}
 	
 	
 	

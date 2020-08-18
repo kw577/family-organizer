@@ -324,9 +324,67 @@ function fillDeleteEventForm(id, owner_id, title) {
 
 
 
+function fillModifyEventForm(id, owner_id, title, description, localization) {
+
+
+	oFormObject = document.forms['modifyEventForm'];
+	
+	oFormObject.elements["id"].value = id;
+	oFormObject.elements["owner_id"].value = owner_id;
+	
+	oFormObject.elements["title"].value = title;
+	oFormObject.elements["description"].value = description;
+	oFormObject.elements["localization"].value = localization;
+
+
+}
 
 
 
+
+$modifyEventForm = $("#modifyEventForm") 
+if($modifyEventForm.length) {
+	$modifyEventForm.validate({			
+			rules: {
+				title: {
+					required: true,
+					minlength: 3
+				},
+				description: {
+					required: true,
+					minlength: 3
+				},
+				localization: {
+					required: true,
+					minlength: 3
+				}
+			},
+			messages: {					
+				title: {
+					required: 'This field can not be empty!',
+					minlength: 'This field must cantain at least 3 characters'
+				},
+				description: {
+					required: 'This field can not be empty!',
+					minlength: 'This field must cantain at least 3 characters'
+				},
+				localization: {
+					required: 'This field can not be empty!',
+					minlength: 'This field must cantain at least 3 characters'
+				}	
+										
+			},
+			errorElement : "em",
+			errorPlacement : function(error, element) {
+				error.addClass('formAlerts');
+					
+				error.insertBefore(element);
+					
+					
+			}				
+		}
+	);
+}
 
 
 

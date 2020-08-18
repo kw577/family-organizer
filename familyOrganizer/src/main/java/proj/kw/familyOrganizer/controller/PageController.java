@@ -351,7 +351,7 @@ public class PageController {
 	
 	
 	
-	//add new event page
+	
 	@RequestMapping(value = { "/eventsControlPanel" })
 	public ModelAndView eventsControlPanel() {
 
@@ -372,6 +372,9 @@ public class PageController {
 			mv.addObject("delEvent", dEvent);
 		
 		
+			Event mEvent = new Event();
+			mv.addObject("modEvent", mEvent);
+			
 		
 		}
 		
@@ -400,9 +403,6 @@ public class PageController {
 
 
 		if(usrModel != null) {
-
-			
-			
 			
 
 			//delete only events only created by user - this if is probably not necessary
@@ -421,7 +421,37 @@ public class PageController {
 	
 	
 	
+	// edit event
+	@RequestMapping(value = "/modifyEvent", method = RequestMethod.POST) 
+	public String modifyEvent(@ModelAttribute("modEvent") Event mEvent) { 
+
+		
+		UserModel usrModel = (UserModel) session.getAttribute("userModel");
+
+
+		if(usrModel != null) {
+			
+
+			//modify only events only created by user - this if is probably not necessary
+			if(usrModel.getId() == mEvent.getOwner_id()) {
+				
+				
+				Event event = eventDAO.getEventById(mEvent.getId());
+				
+				event.setTitle(mEvent.getTitle());
+				event.setDescription(mEvent.getDescription());
+				event.setLocalization(mEvent.getLocalization());
+				
+				eventDAO.update(event);
+				
+
+			}
+
+		}
 	
+
+		return "redirect:/eventsControlPanel";
+	}
 	
 	
 	

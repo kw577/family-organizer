@@ -22,4 +22,8 @@ public interface EventDAO {
 	//get event by id
 	Event getEventById(int id);
 	
+	//update event
+	boolean update(Event event);
+	
+	
 }
