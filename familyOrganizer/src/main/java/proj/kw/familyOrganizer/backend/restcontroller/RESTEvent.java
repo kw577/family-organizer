@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import proj.kw.familyOrganizer.backend.dao.EventDAO;
 import proj.kw.familyOrganizer.backend.dto.Event;
+import proj.kw.familyOrganizer.backend.dto.User;
 
 
 @Transactional
@@ -31,6 +32,20 @@ public class RESTEvent implements EventDAO {
 		
 	}
 
+	
+	
+	@Override
+	public List<Event> getUserEvents(int owner_id) {
+		String query = "FROM event WHERE owner_id = :owner_id AND end_date >= now() order by start_date";
+		
+		return sessionFactory
+				.getCurrentSession()
+				.createQuery(query, Event.class)
+				.setParameter("owner_id", owner_id)
+				.getResultList();
+	}
+	
+	
 
 
 }

@@ -359,7 +359,15 @@ public class PageController {
 
 		mv.addObject("title", "Events Control Panel");
 		mv.addObject("isEventsControlPanel", true);
-						
+		
+		
+		UserModel usrModel = (UserModel) session.getAttribute("userModel");
+				
+		if(usrModel != null) {
+		
+			mv.addObject("userEventsList", eventDAO.getUserEvents(usrModel.getId()));
+		
+		}
 					
 		return mv;
 
