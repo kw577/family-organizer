@@ -367,11 +367,66 @@ public class PageController {
 		
 			mv.addObject("userEventsList", eventDAO.getUserEvents(usrModel.getId()));
 		
+		
+			Event dEvent = new Event();
+			mv.addObject("delEvent", dEvent);
+		
+		
+		
 		}
+		
 					
 		return mv;
 
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	// delete event
+	@RequestMapping(value = "/deleteEvent", method = RequestMethod.POST) 
+	public String deleteEvent(@ModelAttribute("delEvent") Event dEvent) { 
+
+		
+		//System.out.println("\n\n\n###################################\nDelete event witd id: " + dEvent.getId());
+		//System.out.println("Owner id: " + dEvent.getOwner_id());
+		
+		
+		UserModel usrModel = (UserModel) session.getAttribute("userModel");
+
+
+		if(usrModel != null) {
+
+			
+			
+			
+
+			//delete only events only created by user - this if is probably not necessary
+			if(usrModel.getId() == dEvent.getOwner_id()) {
+				
+				
+				eventDAO.delete(eventDAO.getEventById(dEvent.getId()));
+
+			}
+
+		}
+	
+
+		return "redirect:/eventsControlPanel";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

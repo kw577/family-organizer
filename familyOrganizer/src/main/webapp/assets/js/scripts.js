@@ -307,7 +307,18 @@ if($addNewEventForm.length) {
 
 
 
+function fillDeleteEventForm(id, owner_id, title) {
 
+	//window.alert(email);
+	//console.log(email);
+	document.getElementById("deleteEventInfo").innerHTML = title;
+
+	oFormObject = document.forms['deleteEventForm'];
+	oFormObject.elements["id"].value = id;
+	oFormObject.elements["owner_id"].value = owner_id;
+
+
+}
 
 
 

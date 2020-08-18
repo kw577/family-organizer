@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import proj.kw.familyOrganizer.backend.dao.EventDAO;
+import proj.kw.familyOrganizer.backend.dto.EmailVerification;
 import proj.kw.familyOrganizer.backend.dto.Event;
 import proj.kw.familyOrganizer.backend.dto.User;
 
@@ -44,6 +45,47 @@ public class RESTEvent implements EventDAO {
 				.setParameter("owner_id", owner_id)
 				.getResultList();
 	}
+	
+	
+	
+	
+	@Override
+	public boolean delete(Event event) {
+		try {			
+			sessionFactory
+					.getCurrentSession()
+						.delete(event);
+			return true;
+		}
+		catch(Exception ex) {		
+			ex.printStackTrace();			
+		}		
+		return false;		
+
+
+	}
+	
+		
+	
+	
+	@Override
+	public Event getEventById(int id) {
+		
+		try {			
+			return sessionFactory
+					.getCurrentSession()
+						.get(Event.class,Integer.valueOf(id));			
+		}
+		catch(Exception ex) {		
+			ex.printStackTrace();			
+		}
+		return null;
+	}
+	
+	
+	
+	
+	
 	
 	
 
