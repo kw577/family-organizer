@@ -231,6 +231,14 @@
 				<c:if test="${isEventsControlPanel == true }"> 
 					<%@include file="eventsControlPanel.jsp"%>
 				</c:if>	
+				
+				
+				<!-- View event page -->	
+				<c:if test="${viewEventPage == true }"> 
+					<%@include file="viewEvent.jsp"%>
+				</c:if>	
+				
+				
 			
 					
 			</main>

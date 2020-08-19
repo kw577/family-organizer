@@ -457,7 +457,23 @@ public class PageController {
 	
 	
 	
-	
+	//strona podgladu wydarzenia
+	@RequestMapping(value = { "/viewEvent" })
+	public ModelAndView viewEventPage() {
+
+		ModelAndView mv = new ModelAndView("page");
+
+		mv.addObject("title", "View Event");
+		mv.addObject("viewEventPage", true);
+		
+		
+		//Test
+		//mv.addObject("notesList", notesDAO.list());
+		
+		return mv;
+
+	}
+
 	
 	
 	

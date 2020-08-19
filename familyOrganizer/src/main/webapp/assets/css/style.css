@@ -1181,6 +1181,313 @@ div.ui-datepicker{
 
 
 
+/*------------------------------Event detailed view------------------------------*/
+
+
+.eventDetailViewWrapper {
+
+	width: 100%;
+
+	margin-left: auto;
+	margin-right: auto;
+
+}
+
+
+
+.eventDetailViewHeader {
+
+	width: 100%;
+	padding: 15px;
+	margin-top: 10px;
+	font-size: 24px;
+	font-weight: bold;
+	display: flex;
+	
+
+}
+
+
+.eventDetailViewHeaderItem1 {
+
+	width: 70%; 
+
+}
+
+.eventDetailViewHeaderItem2 {
+
+	text-align: right;
+	width: 30%; 
+
+}
+
+
+
+.eventDetailViewBody {
+
+	width: 100%;
+	margin-top: 15px;
+
+}
+
+
+
+.eventDetailViewCard {
+
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-bottom: 35px;
+	border: 1px solid #d9d9d9;
+	border-radius: 5px;
+	background-color: white;
+
+
+	-webkit-box-shadow: 0px 0px 10px 0px rgba(222,222,222,1);
+	-moz-box-shadow: 0px 0px 10px 0px rgba(222,222,222,1);
+	box-shadow: 0px 0px 10px 0px rgba(222,222,222,1);
+
+
+}
+
+
+.eventDetailCardHeader {
+
+	width: 100%;
+	padding: 10px;
+	font-size: 17px;
+	font-weight: bold;
+	line-height: 37px;
+
+	display: flex;
+	border-bottom: 1px solid #d9d9d9;
+	background-color: #e0e0e0;
+	padding-left: 25px;
+	
+}
+
+
+.eventDetailCardHeaderItem1 {
+
+	width: 65%; 
+
+}
+
+.eventDetailCardHeaderItem2 {
+
+	text-align: right;
+	width: 35%; 
+
+}
+
+
+.eventDetailCardBody {
+
+	width: 100%;
+
+}
+
+.eventDetailCardBasic {
+	
+	width: 100%;
+	padding: 10px;
+}
+
+
+
+.eventDetailCardInfo {
+
+	padding: 10px;
+	font-size: 16px;
+}
+
+
+.eventDetailCardParticipants {
+	
+	width: 100%;
+	display: flex;
+	padding: 10px;
+	font-size: 16px;
+	border-top: 1px solid #c0c0c0;
+	border-bottom: 1px solid #c0c0c0;
+
+	
+}
+
+.eventDetailCardParticipantsItem1 {
+	
+	width: 80%;
+	padding-left: 10px;
+	line-height: 40px;
+	
+}
+
+
+.eventDetailCardParticipantsItem2 {
+	
+	width: 80%;
+	text-align: right;
+	
+}
+
+.eventDetailCardDescription {
+	
+	padding: 20px;
+	text-align: justify;
+	border-bottom: 1px solid #c0c0c0;
+	
+}
+
+
+
+.eventDetailCardChat { 
+	
+	width: 100%;
+	padding:20px;
+	
+} 
+
+
+
+.chat_header {
+	
+	font-weight: bold;
+	margin-bottom: 10px;
+	
+}
+
+.chat_body {
+	
+	width: 100%;
+	height: 500px; 
+
+	overflow-x: hidden; 
+	overflow-y: auto; 
+	text-align:justify; 
+	
+}
+
+
+
+.chat_myComment {
+	
+	width: 100%;
+	display: flex;
+		
+}
+
+.chat_myComment_help {
+	
+	width: 10%
+	
+	
+}
+
+.chat_myComment_cnt {
+	
+
+	width: 90%;
+ 
+	
+}
+
+
+.chat_myComment_box {
+	
+	display: inline-block;
+	float: right;
+	margin: 10px;
+	
+}
+
+.chat_myComment_header {
+	
+	font-size: 12px;
+	padding: 5px;
+	color: #898989;
+	
+}
+
+.chat_myComment_body {
+	
+	font-size: 14px;
+	padding: 10px;
+	background-color: #d5e0e6;
+	border-radius: 10px; 
+	
+}
+
+
+
+
+
+.chat_otherComments {
+	
+	width: 100%;
+	display: flex;
+		
+}
+
+.chat_otherComments_help {
+	
+	width: 10%
+	
+	
+}
+
+.chat_otherComments_cnt {
+	
+
+	width: 90%;
+ 
+	
+}
+
+
+.chat_otherComments_box {
+	
+	display: inline-block;
+	margin: 10px;
+	
+}
+
+.chat_otherComments_header {
+	
+	font-size: 12px;
+	padding: 5px;
+	color: #898989;
+	
+}
+
+.chat_otherComments_body {
+	
+	font-size: 14px;
+	padding: 10px;
+	background-color: #f3f5c7;
+	border-radius: 10px; 
+	
+}
+
+
+
+.chat_footer {
+	
+	width: 100%;
+	padding-top: 20px;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
