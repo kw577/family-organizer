@@ -390,7 +390,12 @@ if($modifyEventForm.length) {
 
 
 
+function fillAddNewInvitationForm(event_id) {
+	
+	oFormObject = document.forms['addNewInvitationForm'];
+	oFormObject.elements["event_id"].value = event_id;
 
+}
 
 
 

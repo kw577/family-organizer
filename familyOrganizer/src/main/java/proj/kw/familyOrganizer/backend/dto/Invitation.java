@@ -9,7 +9,8 @@ import javax.persistence.Id;
 @Entity(name = "invitation")
 public class Invitation {
 
-
+	//Uwaga !!! dodac Delete On Cascade do kluczy obcych w bazie danych dla tej encji
+	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private int id;

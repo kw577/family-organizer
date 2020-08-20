@@ -31,6 +31,7 @@ import proj.kw.familyOrganizer.backend.dao.UserDAO;
 import proj.kw.familyOrganizer.backend.dto.EmailVerification;
 import proj.kw.familyOrganizer.backend.dto.Event;
 import proj.kw.familyOrganizer.backend.dto.Family;
+import proj.kw.familyOrganizer.backend.dto.Invitation;
 import proj.kw.familyOrganizer.backend.dto.User;
 import proj.kw.familyOrganizer.backend.mailSending.MailSenderService;
 import proj.kw.familyOrganizer.backend.registerHandler.RegisterPasswordEncoder;
@@ -499,34 +500,90 @@ public class PageController {
 				if(usrModel.getId() == event.getOwner_id() || invitationDAO.isInvited(usrModel.getId(), eventId)) {
 						
 					mv.addObject("viewEvent", event);
-						
-						
+							
+					
 					//List of invited people
 					List<User> peopleInvited = new ArrayList<User>();
 					//List of not invited people
 					List<User> peopleNotInvited = new ArrayList<User>();
 					
-						
-						
+									
 				}
-				
-				
+					
 			}
 
-	
-			
-			
-			
-			
 			
 		}
-	
-			
+		
+		//Invitations
+		Invitation nInvitation = new Invitation();
+		mv.addObject("newInvitation", nInvitation);
+		
 		
 		return mv;
 
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// new Invitation
+	@RequestMapping(value = "/addNewInvitation", method = RequestMethod.POST) 
+	public String createNewInvitation(@ModelAttribute("newInvitation") Invitation nInvitation) { 
+
+	
+		System.out.println("\n\n\n######################\nInvitation for event id: " + nInvitation.getEvent_id());
+		System.out.println("user id: " + nInvitation.getUser_id() + "\n#########################\n\n\n");
+		
+		
+		
+		UserModel usrModel = (UserModel) session.getAttribute("userModel");
+
+
+		if(usrModel != null) {
+
+
+
+		}
+
+
+
+		return "redirect:/viewEvent/" + nInvitation.getEvent_id() + "/detailView";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

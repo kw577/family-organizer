@@ -35,18 +35,25 @@
 
 								<div class="eventDetailCardHeaderItem1">${viewEvent.title}</div>
 								<div class="eventDetailCardHeaderItem2">
-
-									<button type="button" class="btn btn-warning"
-										title="Edit event">
-										<i class="fas fa-pen"></i>
-									</button>
-
-
-									<button type="button" class="btn btn-danger"
-										title="Delete event">
-										<i class="fas fa-trash-alt"></i>
-
-									</button>
+									
+												
+									<c:if test="${viewEvent.owner_id == userModel.id }"> 
+										<button type="button" class="btn btn-warning"
+											title="Edit event">
+											<i class="fas fa-pen"></i>
+										</button>
+	
+	
+										<button type="button" class="btn btn-danger"
+											title="Delete event">
+											<i class="fas fa-trash-alt"></i>
+	
+										</button>
+									</c:if>	
+									
+									
+									
+	
 
 								</div>
 
@@ -87,13 +94,20 @@
 									</div>
 
 									<div class="eventDetailCardParticipantsItem2">
-
-
-										<button type="button" class="btn btn-warning"
-											title="Edit participant list">
-											<i class="fas fa-user-plus"></i>
-										</button>
-
+										
+										<c:if test="${viewEvent.owner_id == userModel.id }"> 
+										
+										
+											<button type="button" class="btn btn-warning" title="Add participant"
+											data-toggle="modal" data-target="#addNewInvitationModal"
+											onclick="fillAddNewInvitationForm('<c:out value="${viewEvent.id}"/>')"
+											>
+												<i class="fas fa-user-plus"></i>
+											</button>
+							
+														
+										</c:if>	
+										
 									</div>
 
 								</div>
@@ -287,6 +301,90 @@
 		</div>
 
 	</div>
+
+
+
+
+
+
+
+
+
+
+
+	<!-- Add new invitation -->
+	<div class="modal fade" id="addNewInvitationModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h5 class="modal-title">Add new people to this event</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+
+				<sform:form id="addNewInvitationForm" modelAttribute="newInvitation"
+					action="${contextRoot}/addNewInvitation/"
+					name="addNewInvitationForm" method="post">
+	
+					<!-- Modal body -->
+					<div class="modal-body">
+
+
+						<div style="font-size: 16px; margin-top: 10px;">
+							Here you can choose who you want to invite:
+						</div>
+
+						<div class="form-group">
+							<label style="font-size: 12px;">Select User</label>
+							<sform:input type="text" path="user_id"
+								id="user_id" name="user_id" />
+						</div>
+				
+				
+						<div class="form-group">
+							<sform:input type="hidden" path="event_id"
+								id="event_id" name="event_id"/>
+						</div>
+
+						<sform:hidden path="id" />
+						<sform:hidden path="seen" />
+				
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<input type="submit" class="btn btn-primary"
+								value="Save">
+						<button type="button" class="btn btn-basic"
+							data-dismiss="modal">Cancel</button>
+					</div>
+				</sform:form>
+			</div>
+		</div>
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
