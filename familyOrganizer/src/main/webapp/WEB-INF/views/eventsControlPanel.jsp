@@ -32,7 +32,9 @@
 
 									<button type="button" class="btn btn-info">
 
-										<i class="fas fa-info-circle"></i>
+										<a href="${contextRoot}/viewEvent/${userEvent.id}/detailView" title="View details">
+											<i class="fas fa-info-circle"></i>
+										</a>
 
 									</button>
 			

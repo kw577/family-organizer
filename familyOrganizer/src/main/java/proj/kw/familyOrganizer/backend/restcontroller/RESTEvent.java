@@ -84,6 +84,22 @@ public class RESTEvent implements EventDAO {
 	
 	
 	
+	
+	@Override
+	public Event getEventByIdAndOwner(int id, int owner_id) {
+		String query = "FROM event WHERE id = :id AND owner_id = :owner_id";
+		
+		return sessionFactory
+				.getCurrentSession()
+				.createQuery(query, Event.class)
+				.setParameter("id", id)
+				.setParameter("owner_id", owner_id)
+				.getSingleResult();
+	}
+	
+	
+	
+	
 	@Override
 	public boolean update(Event event) {
 		try {			

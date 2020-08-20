@@ -14,6 +14,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -458,17 +459,35 @@ public class PageController {
 	
 	
 	//strona podgladu wydarzenia
-	@RequestMapping(value = { "/viewEvent" })
-	public ModelAndView viewEventPage() {
+	@RequestMapping(value = { "/viewEvent/{id}/detailView" })
+	public ModelAndView viewEventPage(@PathVariable("id") String id) {
 
 		ModelAndView mv = new ModelAndView("page");
 
 		mv.addObject("title", "View Event");
 		mv.addObject("viewEventPage", true);
+					
+				
+		try {
+			int eventId = Integer.parseInt(id);
+			
+			//check if event can be shown
+			UserModel usrModel = (UserModel) session.getAttribute("userModel");
+
+			System.out.println("\nKonwersja zakonczona");
+			if(usrModel != null) {
+			
+				mv.addObject("viewEvent", eventDAO.getEventByIdAndOwner(eventId, usrModel.getId()));
+				
+			}
+			
+			
+		} catch(Exception ex) {
+			
+			System.err.print(ex);
+			
+		}
 		
-		
-		//Test
-		//mv.addObject("notesList", notesDAO.list());
 		
 		return mv;
 

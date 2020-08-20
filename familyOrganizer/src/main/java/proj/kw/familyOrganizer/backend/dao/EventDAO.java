@@ -22,6 +22,9 @@ public interface EventDAO {
 	//get event by id
 	Event getEventById(int id);
 	
+	//get event by id and owner
+	Event getEventByIdAndOwner(int id, int owner_id);
+	
 	//update event
 	boolean update(Event event);
 	
