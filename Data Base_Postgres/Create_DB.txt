@@ -44,3 +44,42 @@ CREATE TABLE event (
 );
 
 
+
+CREATE TABLE invitation (
+	id 		serial PRIMARY KEY,
+	seen		BOOLEAN NOT NULL,
+	user_id		int references user_account(id) ON DELETE CASCADE,
+	event_id	int references event(id) ON DELETE CASCADE
+
+);
+
+
+//Wersja alternatywna
+CREATE TABLE invitation (
+	id 		serial PRIMARY KEY,
+	seen		BOOLEAN NOT NULL,
+	user_id		int,
+	event_id	int,
+
+	CONSTRAINT fk1_invitation FOREIGN KEY(user_id)REFERENCES user_account(id) ON DELETE CASCADE,
+	CONSTRAINT fk2_invitation FOREIGN KEY(event_id)REFERENCES event(id) ON DELETE CASCADE
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

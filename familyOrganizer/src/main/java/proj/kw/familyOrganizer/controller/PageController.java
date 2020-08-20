@@ -2,6 +2,8 @@ package proj.kw.familyOrganizer.controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -23,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import proj.kw.familyOrganizer.backend.dao.EmailVerificationDAO;
 import proj.kw.familyOrganizer.backend.dao.EventDAO;
 import proj.kw.familyOrganizer.backend.dao.FamilyDAO;
+import proj.kw.familyOrganizer.backend.dao.InvitationDAO;
 import proj.kw.familyOrganizer.backend.dao.NotesDAO;
 import proj.kw.familyOrganizer.backend.dao.UserDAO;
 import proj.kw.familyOrganizer.backend.dto.EmailVerification;
@@ -51,6 +54,9 @@ public class PageController {
 	
 	@Autowired 
 	private EventDAO eventDAO;
+	
+	@Autowired
+	private InvitationDAO invitationDAO;
 	
 	@Autowired 
 	private EmailVerificationDAO emailVerificationDAO;
@@ -467,27 +473,55 @@ public class PageController {
 		mv.addObject("title", "View Event");
 		mv.addObject("viewEventPage", true);
 					
-				
+		int eventId = -1;
+		boolean dataFormatCorrect = true;
+		
 		try {
-			int eventId = Integer.parseInt(id);
-			
-			//check if event can be shown
-			UserModel usrModel = (UserModel) session.getAttribute("userModel");
-
-			System.out.println("\nKonwersja zakonczona");
-			if(usrModel != null) {
-			
-				mv.addObject("viewEvent", eventDAO.getEventByIdAndOwner(eventId, usrModel.getId()));
-				
-			}
-			
+			eventId = Integer.parseInt(id);
 			
 		} catch(Exception ex) {
-			
+				
 			System.err.print(ex);
+			System.out.println("\n\n\nData fromat in not correct !!!");
+			dataFormatCorrect = false;
+		}
+			
+			
+		UserModel usrModel = (UserModel) session.getAttribute("userModel");
+
+		if(usrModel != null && dataFormatCorrect) {
+			
+			Event event = eventDAO.getEventById(eventId);
+			
+			if(event != null) {
+				
+				//Wydarzenie mo¿e zobaczyæ jego w³aœciciel lub zaproszone osoby
+				if(usrModel.getId() == event.getOwner_id() || invitationDAO.isInvited(usrModel.getId(), eventId)) {
+						
+					mv.addObject("viewEvent", event);
+						
+						
+					//List of invited people
+					List<User> peopleInvited = new ArrayList<User>();
+					//List of not invited people
+					List<User> peopleNotInvited = new ArrayList<User>();
+					
+						
+						
+				}
+				
+				
+			}
+
+	
+			
+			
+			
+			
 			
 		}
-		
+	
+			
 		
 		return mv;
 
