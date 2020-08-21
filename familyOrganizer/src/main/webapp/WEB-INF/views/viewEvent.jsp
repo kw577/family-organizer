@@ -276,22 +276,39 @@
 
 
 									<div class="chat_footer">
-										<form>
-											<div class="form-group">
-												<label for="exampleFormControlTextarea1">Write your
-													comment:</label>
-												<textarea class="form-control"
-													id="exampleFormControlTextarea1" maxlength="2500"
-													placeholder="Enter your comment..."></textarea>
+			
+					
+										<sform:form id="addNewCommentForm" modelAttribute="newComment"
+											action="${contextRoot}/addComment/"
+											name="addNewCommentForm" method="post">
+						
+						
+											<div class="form-group">			
+													<label for="description" style="font-size: 14px;">
+														Write your comment:
+													</label> 
+													<sform:textarea type="text" class="form-control" placeholder="Enter your comment..." 
+														path="description" id="description" name="description" maxlength="2500"/>
 											</div>
-											<button type="submit" class="btn btn-primary">Submit</button>
-										</form>
+						
+						
+												<div class="form-group">
+													<sform:input type="hidden" path="event_id"
+														id="event_id" name="event_id" value="${viewEvent.id}"/>
+												</div>
+						
+												<sform:hidden path="id" />
+												<sform:hidden path="owner_id" />
+												<sform:hidden path="date_posted" />
+												
+						
+												<input type="submit" class="btn btn-primary"
+														value="Submit">
+												
+										</sform:form>
+																		
+																	
 									</div>
-
-
-
-
-
 
 
 								</div>
@@ -300,9 +317,6 @@
 							</div>
 
 						</div>
-
-
-
 
 
 					</c:if>

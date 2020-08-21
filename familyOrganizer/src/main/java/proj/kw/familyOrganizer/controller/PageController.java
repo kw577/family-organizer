@@ -22,12 +22,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import proj.kw.familyOrganizer.backend.dao.CommentDAO;
 import proj.kw.familyOrganizer.backend.dao.EmailVerificationDAO;
 import proj.kw.familyOrganizer.backend.dao.EventDAO;
 import proj.kw.familyOrganizer.backend.dao.FamilyDAO;
 import proj.kw.familyOrganizer.backend.dao.InvitationDAO;
 import proj.kw.familyOrganizer.backend.dao.NotesDAO;
 import proj.kw.familyOrganizer.backend.dao.UserDAO;
+import proj.kw.familyOrganizer.backend.dto.Comment;
 import proj.kw.familyOrganizer.backend.dto.EmailVerification;
 import proj.kw.familyOrganizer.backend.dto.Event;
 import proj.kw.familyOrganizer.backend.dto.Family;
@@ -58,6 +60,9 @@ public class PageController {
 	
 	@Autowired
 	private InvitationDAO invitationDAO;
+	
+	@Autowired
+	private CommentDAO commentDAO;
 	
 	@Autowired 
 	private EmailVerificationDAO emailVerificationDAO;
@@ -575,6 +580,10 @@ public class PageController {
 		Invitation dInvitation = new Invitation();
 		mv.addObject("delInvitation", dInvitation);
 		
+		//Comment
+		Comment nComment = new Comment();
+		mv.addObject("newComment", nComment);
+		
 		
 		return mv;
 
@@ -651,7 +660,42 @@ public class PageController {
 	
 	
 	
+	// new comment
+	@RequestMapping(value = "/addComment", method = RequestMethod.POST) 
+	public String addNewComment(@ModelAttribute("newComment") Comment nComment) { 
+
 	
+		//System.out.println("\n\n\n######################\nComment for event id: " + nComment.getEvent_id());
+		//System.out.println("comment: " + nComment.getDescription() + "\n#########################\n\n\n");
+		
+		
+		
+		UserModel usrModel = (UserModel) session.getAttribute("userModel");
+
+
+		if(usrModel != null) {
+
+			
+			if(usrModel.getId() == eventDAO.getEventById(nComment.getEvent_id()).getOwner_id() || invitationDAO.isInvited(usrModel.getId(), nComment.getEvent_id())) {
+				
+				Comment comment = new Comment();
+				comment.setOwner_id(usrModel.getId());
+				comment.setEvent_id(nComment.getEvent_id());
+				comment.setDescription(nComment.getDescription());		
+				comment.setDate_posted(LocalDateTime.now());
+				
+						
+				commentDAO.addComment(comment);
+				
+				
+			}
+
+		}
+
+
+
+		return "redirect:/viewEvent/" + nComment.getEvent_id() + "/detailView";
+	}
 	
 	
 	
