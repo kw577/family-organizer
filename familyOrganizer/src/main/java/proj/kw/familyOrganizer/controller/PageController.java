@@ -507,6 +507,59 @@ public class PageController {
 					//List of not invited people
 					List<User> peopleNotInvited = new ArrayList<User>();
 					
+					
+					List<User> familyMembers = userDAO.getFamilyMembers(usrModel.getFamily_id());
+					List<Invitation> invitationList = invitationDAO.getEventParticipants(eventId);
+					ArrayList<Integer> invitationsId = new ArrayList<Integer>();
+					
+					User eventOwner = new User();
+					
+					
+					for (Invitation invitation : invitationList) {
+						invitationsId.add(invitation.getUser_id());
+						
+					}
+					
+					
+					/*
+					System.out.println("\n\n\n##########################\nInvitation list:");
+					for (Integer test : invitationsId) {
+						System.out.println(" " + test);
+						
+					}
+					*/
+					for (User familyMember : familyMembers) {
+						if(familyMember.getId() == event.getOwner_id()) {
+							eventOwner = familyMember;
+						}
+						else if (invitationsId.contains(familyMember.getId())) {
+							peopleInvited.add(familyMember);
+						} else {
+							peopleNotInvited.add(familyMember);
+						}
+						
+					}
+					
+					
+					
+					System.out.println("\n\n\n##########################\nPeople invited:");
+					for (User test : peopleInvited) {
+						System.out.println(" " + test.getName() + " " + test.getSurname());
+						
+					}
+					
+					System.out.println("\n\n\n##########################\nPeople not invited:");
+					for (User test : peopleNotInvited) {
+						System.out.println(" " + test.getName() + " " + test.getSurname());
+						
+					}
+					
+					
+					mv.addObject("eventOwner", eventOwner);
+					mv.addObject("peopleInvited", peopleInvited);
+					mv.addObject("peopleNotInvited", peopleNotInvited);
+					
+					
 									
 				}
 					
@@ -538,8 +591,8 @@ public class PageController {
 	public String createNewInvitation(@ModelAttribute("newInvitation") Invitation nInvitation) { 
 
 	
-		System.out.println("\n\n\n######################\nInvitation for event id: " + nInvitation.getEvent_id());
-		System.out.println("user id: " + nInvitation.getUser_id() + "\n#########################\n\n\n");
+		//System.out.println("\n\n\n######################\nInvitation for event id: " + nInvitation.getEvent_id());
+		//System.out.println("user id: " + nInvitation.getUser_id() + "\n#########################\n\n\n");
 		
 		
 		
@@ -548,7 +601,9 @@ public class PageController {
 
 		if(usrModel != null) {
 
-
+			if(usrModel.getId() == eventDAO.getEventById(nInvitation.getEvent_id()).getOwner_id()) {
+				invitationDAO.addInvitation(nInvitation);
+			}
 
 		}
 

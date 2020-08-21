@@ -30,14 +30,12 @@
 								<div class="eventViewHeaderItem1">${userEvent.title}</div>
 								<div class="eventViewHeaderItem2">
 
-									<button type="button" class="btn btn-info">
 
-										<a href="${contextRoot}/viewEvent/${userEvent.id}/detailView" title="View details">
-											<i class="fas fa-info-circle"></i>
-										</a>
-
-									</button>
-			
+									<a href="${contextRoot}/viewEvent/${userEvent.id}/detailView" title="View details">
+										<button type="button" class="btn btn-info">
+												<i class="fas fa-info-circle"></i>	
+										</button>
+									</a>
 									
 									<button type="button" class="btn btn-warning" 
 									data-toggle="modal" data-target="#modifyEventModal"

@@ -89,23 +89,26 @@
 
 									<div class="eventDetailCardParticipantsItem1">
 										<span><i class="fas fa-users fa-lg"
-											title="Participants"></i></span>&#09;Jan Nowak, Adam Nowak, Beata
-										Nowak
+											title="Participants"></i></span>&#09;${eventOwner.name} ${eventOwner.surname}
+											<c:forEach items="${peopleInvited}" var="personInvited">
+												&#44;&#09;${personInvited.name} ${personInvited.surname}
+											</c:forEach>
+											
 									</div>
 
 									<div class="eventDetailCardParticipantsItem2">
 										
 										<c:if test="${viewEvent.owner_id == userModel.id }"> 
 										
-										
-											<button type="button" class="btn btn-warning" title="Add participant"
-											data-toggle="modal" data-target="#addNewInvitationModal"
-											onclick="fillAddNewInvitationForm('<c:out value="${viewEvent.id}"/>')"
-											>
-												<i class="fas fa-user-plus"></i>
-											</button>
+											<c:if test="${not empty peopleNotInvited}">
+												<button type="button" class="btn btn-warning" title="Add participant"
+												data-toggle="modal" data-target="#addNewInvitationModal"
+												onclick="fillAddNewInvitationForm('<c:out value="${viewEvent.id}"/>')"
+												>
+													<i class="fas fa-user-plus"></i>
+												</button>
 							
-														
+											</c:if>				
 										</c:if>	
 										
 									</div>
@@ -336,11 +339,24 @@
 							Here you can choose who you want to invite:
 						</div>
 
+						
 						<div class="form-group">
 							<label style="font-size: 12px;">Select User</label>
-							<sform:input type="text" path="user_id"
-								id="user_id" name="user_id" />
+							<sform:select class="form-control" id="user_id" name="user_id" path="user_id">
+							    <c:forEach var="personNotInvited" items="${peopleNotInvited}">
+							        <sform:option value="${personNotInvited.id}"><c:out value="${personNotInvited.name} ${personNotInvited.surname}"/></sform:option>
+							    </c:forEach>
+							</sform:select>
 						</div>
+						
+						
+						
+						
+
+						
+						
+						
+						
 				
 				
 						<div class="form-group">

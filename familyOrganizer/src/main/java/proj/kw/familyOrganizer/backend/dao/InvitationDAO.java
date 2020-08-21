@@ -16,6 +16,7 @@ public interface InvitationDAO {
 	//check if user is Invited
 	boolean isInvited(int user_id, int event_id);
 		
-	
+	// add new invitation
+	boolean addInvitation(Invitation invitation);
 	
 }

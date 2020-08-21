@@ -71,5 +71,19 @@ public class RESTInvitation implements InvitationDAO {
 	
 	
 	
+	@Override
+	public boolean addInvitation(Invitation invitation) {
+		try {			
+			sessionFactory.getCurrentSession().persist(invitation);			
+			return true;
+		}
+		catch(Exception ex) {
+			return false;
+		}
+		
+	}
+	
+	
+	
 
 }
