@@ -85,5 +85,40 @@ public class RESTInvitation implements InvitationDAO {
 	
 	
 	
+	
+	
+	@Override
+	public boolean delete(Invitation invitation) {
+		try {			
+			sessionFactory
+					.getCurrentSession()
+						.delete(invitation);
+			return true;
+		}
+		catch(Exception ex) {		
+			ex.printStackTrace();			
+		}		
+		return false;		
+
+
+	}
+	
+	
+	
+	
+	@Override
+	public Invitation getByEventIdAndOwner(int event_id, int user_id) {
+		String query = "FROM invitation WHERE event_id = :event_id AND user_id = :user_id";
+		
+		return sessionFactory
+				.getCurrentSession()
+				.createQuery(query, Invitation.class)
+				.setParameter("event_id", event_id)
+				.setParameter("user_id", user_id)
+				.getSingleResult();
+	}
+	
+	
+	
 
 }

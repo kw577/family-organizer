@@ -400,6 +400,11 @@ function fillAddNewInvitationForm(event_id) {
 
 
 
+function fillDeleteInvitationForm(event_id) {
+	
+	oFormObject = document.forms['deleteInvitationForm'];
+	oFormObject.elements["event_id"].value = event_id;
 
+}
 
 

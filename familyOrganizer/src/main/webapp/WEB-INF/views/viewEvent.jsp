@@ -108,7 +108,20 @@
 													<i class="fas fa-user-plus"></i>
 												</button>
 							
-											</c:if>				
+											</c:if>		
+											
+											
+											<c:if test="${not empty peopleInvited}">
+												<button type="button" class="btn btn-danger" title="Cancel invitation"
+												data-toggle="modal" data-target="#deleteInvitationModal"
+												onclick="fillDeleteInvitationForm('<c:out value="${viewEvent.id}"/>')"
+												>
+													<i class="fas fa-user-minus"></i>
+												</button>
+							
+											</c:if>	
+											
+													
 										</c:if>	
 										
 									</div>
@@ -335,7 +348,7 @@
 					<div class="modal-body">
 
 
-						<div style="font-size: 16px; margin-top: 10px;">
+						<div style="font-size: 16px; margin-bottom: 10px;">
 							Here you can choose who you want to invite:
 						</div>
 
@@ -349,14 +362,7 @@
 							</sform:select>
 						</div>
 						
-						
-						
-						
-
-						
-						
-						
-						
+					
 				
 				
 						<div class="form-group">
@@ -379,15 +385,72 @@
 				</sform:form>
 			</div>
 		</div>
+	</div>
+
+
+
+
+
+
+
+	<!-- Delete invitation -->
+	<div class="modal fade" id="deleteInvitationModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h5 class="modal-title">Choose invitation to be cancelled</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+
+				<sform:form id="deleteInvitationForm" modelAttribute="delInvitation"
+					action="${contextRoot}/deleteInvitation/"
+					name="deleteInvitationForm" method="post">
+	
+					<!-- Modal body -->
+					<div class="modal-body">
+
+
+						<div style="font-size: 16px; margin-bottom: 10px;">
+							Here you can choose which invitation will be cancelled:
+						</div>
+
+						
+						<div class="form-group">
+							<label style="font-size: 12px;">Select User</label>
+							<sform:select class="form-control" id="user_id" name="user_id" path="user_id">
+							    <c:forEach var="personInvited" items="${peopleInvited}">
+							        <sform:option value="${personInvited.id}"><c:out value="${personInvited.name} ${personInvited.surname}"/></sform:option>
+							    </c:forEach>
+							</sform:select>
+						</div>
+						
+					
+				
+				
+						<div class="form-group">
+							<sform:input type="hidden" path="event_id"
+								id="event_id" name="event_id"/>
+						</div>
+
+						<sform:hidden path="id" />
+						<sform:hidden path="seen" />
+				
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<input type="submit" class="btn btn-primary"
+								value="Save">
+						<button type="button" class="btn btn-basic"
+							data-dismiss="modal">Cancel</button>
+					</div>
+				</sform:form>
 			</div>
-
-
-
-
-
-
-
-
+		</div>
+	</div>
 
 
 

@@ -19,4 +19,14 @@ public interface InvitationDAO {
 	// add new invitation
 	boolean addInvitation(Invitation invitation);
 	
+	//delete invitation
+	boolean delete(Invitation invitation);
+	
+	
+	//get invitation by owner and event_id
+	Invitation getByEventIdAndOwner(int event_id, int user_id);
+	
+	
+	
+	
 }

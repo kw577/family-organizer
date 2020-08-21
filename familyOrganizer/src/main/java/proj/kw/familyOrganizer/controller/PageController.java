@@ -572,6 +572,9 @@ public class PageController {
 		Invitation nInvitation = new Invitation();
 		mv.addObject("newInvitation", nInvitation);
 		
+		Invitation dInvitation = new Invitation();
+		mv.addObject("delInvitation", dInvitation);
+		
 		
 		return mv;
 
@@ -617,7 +620,30 @@ public class PageController {
 	
 	
 	
-	
+	// delete invitation
+	@RequestMapping(value = "/deleteInvitation", method = RequestMethod.POST) 
+	public String deleteInvitation(@ModelAttribute("delInvitation") Invitation dInvitation) { 
+
+
+		System.out.println("\n\n\n###################################\nDelete invitation for user witd id: " + dInvitation.getUser_id());
+		System.out.println("Event id: " + dInvitation.getEvent_id());
+
+
+		UserModel usrModel = (UserModel) session.getAttribute("userModel");
+
+
+		if(usrModel != null) {
+
+
+			if(usrModel.getId() == eventDAO.getEventById(dInvitation.getEvent_id()).getOwner_id()) {
+				invitationDAO.delete(invitationDAO.getByEventIdAndOwner(dInvitation.getEvent_id(), dInvitation.getUser_id()));
+			}
+
+		}
+
+
+		return "redirect:/viewEvent/" + dInvitation.getEvent_id() + "/detailView";
+	}
 	
 	
 	
