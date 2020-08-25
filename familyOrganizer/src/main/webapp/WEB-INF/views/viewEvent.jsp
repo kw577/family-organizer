@@ -140,133 +140,62 @@
 									<div class="chat_body">
 
 
-										<div class="chat_myComment">
-											<div class="chat_myComment_help"></div>
-											<div class="chat_myComment_cnt">
-
-												<div class="chat_myComment_box">
-													<div class="chat_myComment_header">
-														Jan Nowak </br> 22.08.2020 godz. 10:45
+										<c:forEach items="${listOfComments}" var="eventComment">
+										
+											<c:if test="${eventComment.owner_id == userModel.id }">
+										
+												<div class="chat_myComment">
+													<div class="chat_myComment_help"></div>
+													<div class="chat_myComment_cnt">
+										
+														<div class="chat_myComment_box">
+															<div class="chat_myComment_header">
+																${eventComment.owner} </br> ${eventComment.date_posted}
+															</div>
+										
+															<div class="chat_myComment_body">
+																${eventComment.description}
+															</div>
+										
+														</div>
+										
 													</div>
-
-													<div class="chat_myComment_body">
-														Test test txcvzxv xvxz xvxcv x cv xzcvxcz test 1 </br>
-														sdfsfadsfdsfas dsfsdfsadfasdf sdfasdfdsf sdf sdfsadfsd
-														fsdfas
-
-													</div>
-
 												</div>
-
-											</div>
-										</div>
-
-
-
-										<div class="chat_myComment">
-											<div class="chat_myComment_help"></div>
-											<div class="chat_myComment_cnt">
-
-												<div class="chat_myComment_box">
-													<div class="chat_myComment_header">
-														Jan Nowak </br> 23.08.2020 godz. 11:45
+										
+											</c:if>	
+											
+											
+											
+											<c:if test="${eventComment.owner_id != userModel.id }">
+										
+												<div class="chat_otherComments">
+		
+													<div class="chat_otherComments_cnt">
+		
+														<div class="chat_otherComments_box">
+															<div class="chat_otherComments_header">
+																${eventComment.owner} </br> ${eventComment.date_posted}
+															</div>
+		
+															<div class="chat_otherComments_body">
+																${eventComment.description}
+		
+		
+															</div>
+		
+														</div>
+		
 													</div>
-
-													<div class="chat_myComment_body">
-														dasfdfasadsfdfafddf </br> fasfdsfsdfdsf sdfsdafds sdfda fads
-														fdfd dfsdaf adsf fddfasdfdsf saddsadsdSDs sdfasfdsf
-														dfasfdfghgfhfhhfd fasfdsfsdfdsf sdfsdafds sdfda fads fdfd
-														dfsdaf adsf fddfasdfdsf saddsadsdSDs sdfasfdsf
-														dfasfdfghgfhfhhfd fasfdsfsdfdsf sdfsdafds sdfda fads fdfd
-														dfsdaf adsf fddfasdfdsf saddsadsdSDs sdfasfdsf
-														dfasfdfghgfhfhhfd fasfdsfsdfdsf sdfsdafds sdfda fads fdfd
-														dfsdaf adsf fddfasdfdsf saddsadsdSDs sdfasfdsf
-														dfasfdfghgfhfhhfd
-
-													</div>
-
+													<div class="chat_otherComments_help"></div>
 												</div>
-
-											</div>
-										</div>
-
-
-
-
-
-
-
-
-
-
-
-										<div class="chat_otherComments">
-
-											<div class="chat_otherComments_cnt">
-
-												<div class="chat_otherComments_box">
-													<div class="chat_otherComments_header">
-														Adam Nowak </br> 23.08.2020 godz. 11:45
-													</div>
-
-													<div class="chat_otherComments_body">
-														dasfdfasadsfdfafddf fdfadsfsf</br> fasfdsfsdfdsf sdfsdafds
-														sdfda fads fdfd dfsdaf adsf fddfasdfdsf saddsadsdSDs
-														sdfasfdsf dfasfdfghgfhfhhfd
-
-
-													</div>
-
-												</div>
-
-											</div>
-											<div class="chat_otherComments_help"></div>
-										</div>
-
-
-
-										<div class="chat_otherComments">
-
-											<div class="chat_otherComments_cnt">
-
-												<div class="chat_otherComments_box">
-													<div class="chat_otherComments_header">
-														Adam Nowak </br> 23.08.2020 godz. 11:45
-													</div>
-
-													<div class="chat_otherComments_body">
-														dasfdfasadsfdfafddf fdfadsfsf</br> fasfdsfsdfdsf sdfsdafds
-														sdfda fads fdfd dfsdaf adsf fddfasdfdsf saddsadsdSDs
-														sdfasfdsf dfasfdfghgfhfhhfd dfgfdgsdfg ffhfggh dfgs
-														fasfdsfsdfdsf sdfsdafds sdfda fads fdfd dfsdaf adsf
-														fddfasdfdsf saddsadsdSDs sdfasfdsf dfasfdfghgfhfhhfd
-														dfgfdgsdfg ffhfggh dfgs fasfdsfsdfdsf sdfsdafds sdfda fads
-														fdfd dfsdaf adsf fddfasdfdsf saddsadsdSDs sdfasfdsf
-														dfasfdfghgfhfhhfd dfgfdgsdfg ffhfggh dfgs
-
-
-													</div>
-
-												</div>
-
-											</div>
-											<div class="chat_otherComments_help"></div>
-										</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+										
+											</c:if>	
+											
+											
+											
+											
+										
+										</c:forEach>
 
 
 

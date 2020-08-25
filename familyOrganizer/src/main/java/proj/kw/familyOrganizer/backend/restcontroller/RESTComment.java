@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import proj.kw.familyOrganizer.backend.dao.CommentDAO;
 import proj.kw.familyOrganizer.backend.dto.Comment;
+import proj.kw.familyOrganizer.backend.dto.Event;
 
 
 
@@ -33,7 +34,16 @@ public class RESTComment implements CommentDAO {
 	}
 
 	
-	
+	@Override
+	public List<Comment> getCommentsList(int event_id) {
+		String query = "FROM comment WHERE event_id = :event_id order by date_posted";
+		
+		return sessionFactory
+				.getCurrentSession()
+				.createQuery(query, Comment.class)
+				.setParameter("event_id", event_id)
+				.getResultList();
+	}
 	
 	
 

@@ -3,6 +3,7 @@ package proj.kw.familyOrganizer.controller;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,6 +38,7 @@ import proj.kw.familyOrganizer.backend.dto.Invitation;
 import proj.kw.familyOrganizer.backend.dto.User;
 import proj.kw.familyOrganizer.backend.mailSending.MailSenderService;
 import proj.kw.familyOrganizer.backend.registerHandler.RegisterPasswordEncoder;
+import proj.kw.familyOrganizer.model.CommentModel;
 import proj.kw.familyOrganizer.model.EventModel;
 import proj.kw.familyOrganizer.model.UserModel;
 
@@ -546,7 +548,7 @@ public class PageController {
 					}
 					
 					
-					
+					/*
 					System.out.println("\n\n\n##########################\nPeople invited:");
 					for (User test : peopleInvited) {
 						System.out.println(" " + test.getName() + " " + test.getSurname());
@@ -558,14 +560,55 @@ public class PageController {
 						System.out.println(" " + test.getName() + " " + test.getSurname());
 						
 					}
-					
+					*/
 					
 					mv.addObject("eventOwner", eventOwner);
 					mv.addObject("peopleInvited", peopleInvited);
 					mv.addObject("peopleNotInvited", peopleNotInvited);
 					
 					
-									
+					//Add list of comments
+					
+					List<Comment> eventComments = commentDAO.getCommentsList(eventId);
+					
+					List<CommentModel> eventCommentsEdited = new ArrayList<CommentModel>();
+					
+					//System.out.println("Ilosc komentarzy: " + eventComments.size());
+					HashMap<Integer, String> eventsCommentsHelper = new HashMap<Integer, String>();
+					
+					for (User familyMember : familyMembers) {
+						eventsCommentsHelper.put(familyMember.getId(), familyMember.getName() + " " + familyMember.getSurname());
+					}
+					
+					//System.out.println(eventsCommentsHelper);
+					//System.out.println("\n\nTest: " + eventsCommentsHelper.get(39));
+					
+					for (Comment eventComment : eventComments) {
+						
+						eventCommentsEdited.add(new CommentModel(
+								eventComment.getOwner_id(),
+								eventsCommentsHelper.get(eventComment.getOwner_id()), 
+								eventComment.getDate_posted().toString(), 
+								eventComment.getDescription()));
+						
+					}
+					
+					
+					
+					/*
+					for (CommentModel test : eventCommentsEdited) {
+						System.out.println("\n" + test.getDate_posted() + " " + test.getOwner());
+						
+					}
+					*/
+					
+					
+					mv.addObject("listOfComments", eventCommentsEdited);
+					
+					
+					
+					
+					
 				}
 					
 			}

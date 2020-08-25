@@ -175,9 +175,9 @@ $( function() {
     	defaultDate: 0,
     	firstDay: 0, //sobota jako poczatek tygodnia w kalendarzu
     	minDate: 0, //nie mozna wybrac wczesniejszej daty niz dzisiejsza
-    	showButtonPanel: false
-    	//changeMonth: true,
-    	//changeYear: true
+    	showButtonPanel: false,
+    	changeMonth: true,
+    	changeYear: true
     	
     });
    
