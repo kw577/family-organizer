@@ -631,6 +631,9 @@ public class PageController {
 		Event dEvent = new Event();
 		mv.addObject("deleteEvent", dEvent);
 		
+		Event mEvent = new Event();
+		mv.addObject("modifyEvent", mEvent);
+		
 		
 		return mv;
 
@@ -798,7 +801,37 @@ public class PageController {
 	
 	
 	
-	
+	// edit event via event detail page
+	@RequestMapping(value = "/viewEvent/modifyEvent", method = RequestMethod.POST) 
+	public String modifyEvent2(@ModelAttribute("modifyEvent") Event mEvent) { 
+
+
+		UserModel usrModel = (UserModel) session.getAttribute("userModel");
+
+
+		if(usrModel != null) {
+
+
+			//modify only events only created by user - this if is probably not necessary
+			if(usrModel.getId() == mEvent.getOwner_id()) {
+
+
+				Event event = eventDAO.getEventById(mEvent.getId());
+
+				event.setTitle(mEvent.getTitle());
+				event.setDescription(mEvent.getDescription());
+				event.setLocalization(mEvent.getLocalization());
+
+				eventDAO.update(event);
+
+
+			}
+
+		}
+
+
+		return "redirect:/viewEvent/" + mEvent.getId() + "/detailView";
+	}
 	
 	
 	
