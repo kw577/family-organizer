@@ -408,3 +408,20 @@ function fillDeleteInvitationForm(event_id) {
 }
 
 
+
+
+function fillDeleteEventForm1(id, owner_id, title) {
+
+	//window.alert(email);
+	//console.log(email);
+	document.getElementById("deleteEventInfo1").innerHTML = title;
+
+	oFormObject = document.forms['deleteEventForm1'];
+	oFormObject.elements["id"].value = id;
+	oFormObject.elements["owner_id"].value = owner_id;
+
+
+}
+
+
+

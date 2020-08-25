@@ -42,13 +42,18 @@
 											title="Edit event">
 											<i class="fas fa-pen"></i>
 										</button>
-	
-	
-										<button type="button" class="btn btn-danger"
-											title="Delete event">
+								
+										
+										<button type="button" class="btn btn-danger" title="Delete event"
+										data-toggle="modal" data-target="#deleteEventModal1"
+										onclick="fillDeleteEventForm1('<c:out value="${viewEvent.id}"/>', '<c:out value="${viewEvent.owner_id}"/>', '<c:out value="${viewEvent.title}"/>')"
+										>
 											<i class="fas fa-trash-alt"></i>
-	
 										</button>
+										
+										
+										
+										
 									</c:if>	
 									
 									
@@ -399,7 +404,58 @@
 
 
 
+	<!-- Delete event -->
+	<div class="modal fade" id="deleteEventModal1">
+		<div class="modal-dialog">
+			<div class="modal-content">
 
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h5 class="modal-title">Delete Event</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+
+				<sform:form id="deleteEventForm1" modelAttribute="deleteEvent"
+					action="${contextRoot}/viewEvent/deleteEvent"
+					name="deleteEventForm1" method="post">
+					<!-- Modal body -->
+					<div class="modal-body">
+
+						Are you sure that you want to delete this event ?
+						<div id="deleteEventInfo1" style="font-size: 16px; margin-top: 10px;">
+						</div>
+
+						<div class="form-group">
+							<sform:input type="hidden" placeholder="id" path="id"
+								id="id" name="id" />
+						</div>
+
+						<div class="form-group">
+							<sform:input type="hidden" placeholder="owner_id" path="owner_id"
+								id="owner_id" name="owner_id" />
+						</div>
+
+						<sform:hidden path="family_id" />
+						<sform:hidden path="title" />
+						<sform:hidden path="start_date" />
+						<sform:hidden path="end_date" />
+						<sform:hidden path="localization" />
+						<sform:hidden path="description" />
+
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<input type="submit" class="btn btn-danger"
+								value="Delete">
+						<button type="button" class="btn btn-basic"
+							data-dismiss="modal">Cancel</button>
+					</div>
+				</sform:form>
+			</div>
+		</div>
+	</div>
 
 
 

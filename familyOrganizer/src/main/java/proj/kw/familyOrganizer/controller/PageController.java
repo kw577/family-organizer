@@ -585,10 +585,11 @@ public class PageController {
 					
 					for (Comment eventComment : eventComments) {
 						
+											
 						eventCommentsEdited.add(new CommentModel(
 								eventComment.getOwner_id(),
 								eventsCommentsHelper.get(eventComment.getOwner_id()), 
-								eventComment.getDate_posted().toString(), 
+								eventComment.getDate_posted().toString().replaceAll("T", " ").substring(0, 16), 
 								eventComment.getDescription()));
 						
 					}
@@ -626,6 +627,9 @@ public class PageController {
 		//Comment
 		Comment nComment = new Comment();
 		mv.addObject("newComment", nComment);
+		
+		Event dEvent = new Event();
+		mv.addObject("deleteEvent", dEvent);
 		
 		
 		return mv;
@@ -739,6 +743,59 @@ public class PageController {
 
 		return "redirect:/viewEvent/" + nComment.getEvent_id() + "/detailView";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// delete event via event detail page
+	@RequestMapping(value = "/viewEvent/deleteEvent", method = RequestMethod.POST) 
+	public String deleteEvent2(@ModelAttribute("deleteEvent") Event dEvent) { 
+
+	
+		UserModel usrModel = (UserModel) session.getAttribute("userModel");
+
+		if(usrModel != null) {
+
+			//delete only events only created by user - this if is probably not necessary
+			if(usrModel.getId() == dEvent.getOwner_id()) {
+
+				eventDAO.delete(eventDAO.getEventById(dEvent.getId()));
+
+			}
+
+		}
+
+		return "redirect:/home";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
