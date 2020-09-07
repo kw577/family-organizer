@@ -150,109 +150,25 @@
 								
 								<div class="eventDetailCardAttachements">
 								
-									<div class="attachements_header">Attachements:</div>
+									<div class="attachements_header">Attachments:</div>
 
 									<div class="attachements_body">
 
 										<div class="row">
-											<div class="col-sm-6 col-md-3 col-xl-2" data-toggle="modal" data-target="#viewAttachementModal" style="margin-bottom: 15px;">
-												<div class="attachement_cnt">
-													<div class="attachement_content" style='height: 100%; width: 100%;'>
-														<img src="${images}/logo_mini.png" style='height: 100%; width: 100%; object-fit: contain'>
-													</div>
-													
-												</div>										
-											</div>
-											
-											
-											
-											
-											
-											<div class="col-sm-6 col-md-3 col-xl-2" data-toggle="modal" data-target="#viewAttachementModal" style="margin-bottom: 15px;">
-												<div class="attachement_cnt">
-													<div class="attachement_content" style='height: 100%; width: 100%;'>
-														<img src="${images}/logo_mini.png" style='height: 100%; width: 100%; object-fit: contain'>
-													</div>
-													
-												</div>										
-											</div>
-											<div class="col-sm-6 col-md-3 col-xl-2" data-toggle="modal" data-target="#viewAttachementModal" style="margin-bottom: 15px;">
-												<div class="attachement_cnt">
-													<div class="attachement_content" style='height: 100%; width: 100%;'>
-														<img src="${images}/logo_mini.png" style='height: 100%; width: 100%; object-fit: contain'>
-													</div>
-													
-												</div>										
-											</div>
-											<div class="col-sm-6 col-md-3 col-xl-2" data-toggle="modal" data-target="#viewAttachementModal" style="margin-bottom: 15px;">
-												<div class="attachement_cnt">
-													<div class="attachement_content" style='height: 100%; width: 100%;'>
-														<img src="${images}/logo_mini.png" style='height: 100%; width: 100%; object-fit: contain'>
-													</div>
-													
-												</div>										
-											</div>												
-											<div class="col-sm-6 col-md-3 col-xl-2" data-toggle="modal" data-target="#viewAttachementModal" style="margin-bottom: 15px;">
-												<div class="attachement_cnt">
-													<div class="attachement_content" style='height: 100%; width: 100%;'>
-														<img src="${images}/logo_mini.png" style='height: 100%; width: 100%; object-fit: contain'>
-													</div>
-													
-												</div>										
-											</div>											
-											<div class="col-sm-6 col-md-3 col-xl-2" data-toggle="modal" data-target="#viewAttachementModal" style="margin-bottom: 15px;">
-												<div class="attachement_cnt">
-													<div class="attachement_content" style='height: 100%; width: 100%;'>
-														<img src="${images}/logo_white.png" style='height: 100%; width: 100%; object-fit: contain'>
-													</div>
-													
-												</div>										
-											</div>		
-											<div class="col-sm-6 col-md-3 col-xl-2" data-toggle="modal" data-target="#viewAttachementModal" style="margin-bottom: 15px;">
-												<div class="attachement_cnt">
-													<div class="attachement_content" style='height: 100%; width: 100%;'>
-														<img src="${images}/logo_mini.png" style='height: 100%; width: 100%; object-fit: contain'>
-													</div>
-													
-												</div>										
-											</div>
-											<div class="col-sm-6 col-md-3 col-xl-2" data-toggle="modal" data-target="#viewAttachementModal" style="margin-bottom: 15px;">
-												<div class="attachement_cnt">
-													<div class="attachement_content" style='height: 100%; width: 100%;'>
-														<img src="${images}/logo_mini.png" style='height: 100%; width: 100%; object-fit: contain'>
-													</div>
-													
-												</div>										
-											</div>											
-											<div class="col-sm-6 col-md-3 col-xl-2" data-toggle="modal" data-target="#viewAttachementModal" style="margin-bottom: 15px;">
-												<div class="attachement_cnt">
-													<div class="attachement_content" style='height: 100%; width: 100%;'>
-														<img src="${images}/logo_white.png" style='height: 100%; width: 100%; object-fit: contain'>
-													</div>
-													
-												</div>										
-											</div>											
-											<div class="col-sm-6 col-md-3 col-xl-2" data-toggle="modal" data-target="#viewAttachementModal" style="margin-bottom: 15px;">
-												<div class="attachement_cnt">
-													<div class="attachement_content" style='height: 100%; width: 100%;'>
-														<img src="${images}/logo_mini.png" style='height: 100%; width: 100%; object-fit: contain'>
-													</div>
-													
-												</div>										
-											</div>											
-											<div class="col-sm-6 col-md-3 col-xl-2" data-toggle="modal" data-target="#viewAttachementModal" style="margin-bottom: 15px;">
-												<div class="attachement_cnt">
-													<div class="attachement_content" style='height: 100%; width: 100%;'>
-														<img src="${images}/logo_mini.png" style='height: 100%; width: 100%; object-fit: contain'>
-													</div>
-													
-												</div>										
-											</div>											
-											
-											
-											
-											
-																						
+										
+										
+											<c:forEach items="${listOfAttachments}" var="eventAttachment">
+												<div class="col-sm-6 col-md-3 col-xl-2" data-toggle="modal" data-target="#viewAttachementModal" 
+												style="margin-bottom: 25px;" onclick="fillViewAttachementModal('<c:out value="${contextRoot}"/>', '<c:out value="${eventAttachment.owner}"/>', '<c:out value="${eventAttachment.date_posted}"/>', '<c:out value="${eventAttachment.code}"/>')">
+													<div class="attachement_cnt">
+														<div class="attachement_content" style='height: 100%; width: 100%;'>
+															<img src="${contextRoot}/resources/images/${eventAttachment.code}.jpg" style='height: 100%; width: 100%; object-fit: contain'>	
+														</div>
+													</div>										
+												</div>
+											</c:forEach>
+										
+																							
 											
 										</div>
 
@@ -262,7 +178,37 @@
 
 									<div class="attachements_footer">
 			
-										Choose file to be added:
+										<sform:form id="addNewAttachmentForm" modelAttribute="newAttachment"
+											action="${contextRoot}/addAttachment/"
+											enctype="multipart/form-data"
+											name="addNewAttachmentForm" method="post">
+									
+						
+											<div class="form-row align-items-center">
+											    <div class="col-auto">
+													<sform:input type="file" path="file" id="file" name="file" class="form-control" 
+													accept=".jpg,.jpeg,.png" required="required"/>
+											    </div>
+											   
+												<div class="form-group">
+													<sform:input type="hidden" path="event_id"
+														id="event_id" name="event_id" value="${viewEvent.id}"/>
+												</div>
+												
+																	
+												<sform:hidden path="id" />
+												<sform:hidden path="owner_id" />
+												<sform:hidden path="date_posted" />
+												<sform:hidden path="code" />
+												   
+											   
+											    <div class="col-auto">
+											      	<input type="submit" class="btn btn-primary" value="Submit">
+											    </div>
+											</div>
+															
+												
+										</sform:form>
 																	
 																	
 									</div>
@@ -687,21 +633,12 @@
 
 				<!-- Modal Header -->
 				<div class="modal-header">
-					<div class="modal-title" style="font-size: 14px;">
-						<span><i class="fas fa-user fa-lg"></i></span> Jan Nowak &#32;
-						<span><i class="fas fa-clock fa-lg"></i></span> 20.08.2020 godz. 15:30
-					</div>
-					
-				
+					<div class="modal-title" style="font-size: 14px;" id="viewAttachmentTitle"></div>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 
 				<!-- Modal body -->
-				<div class="modal-body">
-
-					<img src="${images}/logo_white.png" style='height: 100%; width: 100%; object-fit: contain'>
-
-				</div>
+				<div class="modal-body" id="viewAttachmentContent"></div>
 			
 			</div>
 		</div>

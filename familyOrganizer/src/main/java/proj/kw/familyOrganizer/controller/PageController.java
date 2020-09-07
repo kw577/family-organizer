@@ -1,7 +1,10 @@
 package proj.kw.familyOrganizer.controller;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import proj.kw.familyOrganizer.backend.dao.AttachmentDAO;
 import proj.kw.familyOrganizer.backend.dao.CommentDAO;
 import proj.kw.familyOrganizer.backend.dao.EmailVerificationDAO;
 import proj.kw.familyOrganizer.backend.dao.EventDAO;
@@ -30,6 +34,7 @@ import proj.kw.familyOrganizer.backend.dao.FamilyDAO;
 import proj.kw.familyOrganizer.backend.dao.InvitationDAO;
 import proj.kw.familyOrganizer.backend.dao.NotesDAO;
 import proj.kw.familyOrganizer.backend.dao.UserDAO;
+import proj.kw.familyOrganizer.backend.dto.Attachment;
 import proj.kw.familyOrganizer.backend.dto.Comment;
 import proj.kw.familyOrganizer.backend.dto.EmailVerification;
 import proj.kw.familyOrganizer.backend.dto.Event;
@@ -38,9 +43,11 @@ import proj.kw.familyOrganizer.backend.dto.Invitation;
 import proj.kw.familyOrganizer.backend.dto.User;
 import proj.kw.familyOrganizer.backend.mailSending.MailSenderService;
 import proj.kw.familyOrganizer.backend.registerHandler.RegisterPasswordEncoder;
+import proj.kw.familyOrganizer.model.AttachmentModel;
 import proj.kw.familyOrganizer.model.CommentModel;
 import proj.kw.familyOrganizer.model.EventModel;
 import proj.kw.familyOrganizer.model.UserModel;
+import proj.kw.familyOrganizer.tools.FileUploader;
 
 @Controller
 public class PageController {
@@ -65,6 +72,9 @@ public class PageController {
 	
 	@Autowired
 	private CommentDAO commentDAO;
+	
+	@Autowired
+	private AttachmentDAO attachmentDAO;
 	
 	@Autowired 
 	private EmailVerificationDAO emailVerificationDAO;
@@ -609,6 +619,24 @@ public class PageController {
 					
 					
 					
+					//add list of attachments
+					List<Attachment> eventAttachments = attachmentDAO.getAttachmentsList(eventId);	
+					List<AttachmentModel> eventAttachmentsEdited = new ArrayList<AttachmentModel>();
+					
+					for (Attachment eventAttachment : eventAttachments) {
+						
+											
+						eventAttachmentsEdited.add(new AttachmentModel(
+						eventAttachment.getOwner_id(),
+						eventsCommentsHelper.get(eventAttachment.getOwner_id()), 
+						eventAttachment.getDate_posted().toString().replaceAll("T", " ").substring(0, 16), 
+						eventAttachment.getCode()));
+						
+					}
+					
+										
+					mv.addObject("listOfAttachments", eventAttachmentsEdited);
+					
 					
 				}
 					
@@ -633,6 +661,10 @@ public class PageController {
 		
 		Event mEvent = new Event();
 		mv.addObject("modifyEvent", mEvent);
+		
+		Attachment nAttachment = new Attachment();
+		mv.addObject("newAttachment", nAttachment);
+		
 		
 		
 		return mv;
@@ -840,7 +872,55 @@ public class PageController {
 	
 	
 	
+	// new attachment
+	@RequestMapping(value = "/addAttachment", method = RequestMethod.POST) 
+	public String addNewAttachment(@ModelAttribute("newAttachment") Attachment nAttachment, HttpServletRequest request) { 
+
 	
+		
+		UserModel usrModel = (UserModel) session.getAttribute("userModel");
+
+
+		if(usrModel != null) {
+			
+			
+			if(usrModel.getId() == eventDAO.getEventById(nAttachment.getEvent_id()).getOwner_id() || invitationDAO.isInvited(usrModel.getId(), nAttachment.getEvent_id())) {
+				
+				
+				
+				LocalDateTime now = LocalDateTime.now();
+				Instant instant = now.atZone(ZoneId.systemDefault()).toInstant();	
+				long timeInMillis = instant.toEpochMilli();
+						
+				String code = nAttachment.getEvent_id() + "_" + usrModel.getId() + "_" + timeInMillis;	
+				
+				if(!nAttachment.getFile().getOriginalFilename().equals("")) {
+					
+					if(FileUploader.uploadFile(request, nAttachment.getFile(), code)) {
+						
+						Attachment attachment = new Attachment();				
+						
+						attachment.setEvent_id(nAttachment.getEvent_id());
+						attachment.setOwner_id(usrModel.getId());
+						attachment.setDate_posted(now);
+						attachment.setCode(code);
+					
+											
+						attachmentDAO.addAttachment(attachment);
+						
+						
+					}
+				}
+				
+				
+			}
+
+		}
+
+
+
+		return "redirect:/viewEvent/" + nAttachment.getEvent_id() + "/detailView";
+	}
 	
 	
 	

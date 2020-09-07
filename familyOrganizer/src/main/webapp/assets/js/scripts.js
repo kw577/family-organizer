@@ -491,3 +491,28 @@ if($modifyEventForm1.length) {
 
 
 
+
+
+
+function fillViewAttachementModal(hostname, owner, date_posted, code) {
+
+
+	htmlCode1 = '<span><i class="fas fa-user fa-lg"></i></span>' + owner + '&#32;<span><i class="fas fa-clock fa-lg"></i></span>' + date_posted;		
+	document.getElementById("viewAttachmentTitle").innerHTML = htmlCode1;
+
+	htmlCode2 = '<img src="' + hostname + '/resources/images/' + code + '.jpg" style="height: 100%; width: 100%; object-fit: contain">';
+	document.getElementById("viewAttachmentContent").innerHTML = htmlCode2;
+	
+
+}
+
+
+
+
+
+
+
+
+
+
+
