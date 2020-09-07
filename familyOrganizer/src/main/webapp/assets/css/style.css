@@ -1479,14 +1479,63 @@ div.ui-datepicker{
 
 
 
+/*------------------------------Event detailed view - attachements------------------------------*/
+
+
+.eventDetailCardAttachements { 
+	
+	width: 100%;
+	padding:20px;
+	border-bottom: 1px solid #c0c0c0;
+	
+} 
+
+
+.attachements_header {
+	
+	font-weight: bold;
+	margin-bottom: 10px;
+	
+}
+
+.attachements_body {
+	
+	width: 100%;
+	height: 170px; 
+
+	overflow-x: hidden; 
+	overflow-y: auto; 
+	text-align:justify; 
+	
+}
+
+
+.attachement_cnt {
+	
+	width: 100%;
+	height: 100%;
+	border: 1px solid #c0c0c0;
+	#background-color: blue; 
+	
+}
+
+
+.attachement_content {
+	
+	width: 100%;
+	height: 100%;
+	#background-color: blue; 
+	
+}
 
 
 
-
-
-
-
-
+.testtesttest12345 {
+	
+	width: 50px;
+	height: 170px; 
+	background-color: blue;
+}
 
 
 

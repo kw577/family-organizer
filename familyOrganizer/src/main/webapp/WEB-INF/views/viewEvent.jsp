@@ -140,6 +140,144 @@
 									<span style="font-weight: bold;">Description:</span></br> 
 									${viewEvent.description}
 								</div>
+								
+								
+								
+					
+								
+								
+								
+								
+								<div class="eventDetailCardAttachements">
+								
+									<div class="attachements_header">Attachements:</div>
+
+									<div class="attachements_body">
+
+										<div class="row">
+											<div class="col-sm-6 col-md-3 col-xl-2" data-toggle="modal" data-target="#viewAttachementModal" style="margin-bottom: 15px;">
+												<div class="attachement_cnt">
+													<div class="attachement_content" style='height: 100%; width: 100%;'>
+														<img src="${images}/logo_mini.png" style='height: 100%; width: 100%; object-fit: contain'>
+													</div>
+													
+												</div>										
+											</div>
+											
+											
+											
+											
+											
+											<div class="col-sm-6 col-md-3 col-xl-2" data-toggle="modal" data-target="#viewAttachementModal" style="margin-bottom: 15px;">
+												<div class="attachement_cnt">
+													<div class="attachement_content" style='height: 100%; width: 100%;'>
+														<img src="${images}/logo_mini.png" style='height: 100%; width: 100%; object-fit: contain'>
+													</div>
+													
+												</div>										
+											</div>
+											<div class="col-sm-6 col-md-3 col-xl-2" data-toggle="modal" data-target="#viewAttachementModal" style="margin-bottom: 15px;">
+												<div class="attachement_cnt">
+													<div class="attachement_content" style='height: 100%; width: 100%;'>
+														<img src="${images}/logo_mini.png" style='height: 100%; width: 100%; object-fit: contain'>
+													</div>
+													
+												</div>										
+											</div>
+											<div class="col-sm-6 col-md-3 col-xl-2" data-toggle="modal" data-target="#viewAttachementModal" style="margin-bottom: 15px;">
+												<div class="attachement_cnt">
+													<div class="attachement_content" style='height: 100%; width: 100%;'>
+														<img src="${images}/logo_mini.png" style='height: 100%; width: 100%; object-fit: contain'>
+													</div>
+													
+												</div>										
+											</div>												
+											<div class="col-sm-6 col-md-3 col-xl-2" data-toggle="modal" data-target="#viewAttachementModal" style="margin-bottom: 15px;">
+												<div class="attachement_cnt">
+													<div class="attachement_content" style='height: 100%; width: 100%;'>
+														<img src="${images}/logo_mini.png" style='height: 100%; width: 100%; object-fit: contain'>
+													</div>
+													
+												</div>										
+											</div>											
+											<div class="col-sm-6 col-md-3 col-xl-2" data-toggle="modal" data-target="#viewAttachementModal" style="margin-bottom: 15px;">
+												<div class="attachement_cnt">
+													<div class="attachement_content" style='height: 100%; width: 100%;'>
+														<img src="${images}/logo_white.png" style='height: 100%; width: 100%; object-fit: contain'>
+													</div>
+													
+												</div>										
+											</div>		
+											<div class="col-sm-6 col-md-3 col-xl-2" data-toggle="modal" data-target="#viewAttachementModal" style="margin-bottom: 15px;">
+												<div class="attachement_cnt">
+													<div class="attachement_content" style='height: 100%; width: 100%;'>
+														<img src="${images}/logo_mini.png" style='height: 100%; width: 100%; object-fit: contain'>
+													</div>
+													
+												</div>										
+											</div>
+											<div class="col-sm-6 col-md-3 col-xl-2" data-toggle="modal" data-target="#viewAttachementModal" style="margin-bottom: 15px;">
+												<div class="attachement_cnt">
+													<div class="attachement_content" style='height: 100%; width: 100%;'>
+														<img src="${images}/logo_mini.png" style='height: 100%; width: 100%; object-fit: contain'>
+													</div>
+													
+												</div>										
+											</div>											
+											<div class="col-sm-6 col-md-3 col-xl-2" data-toggle="modal" data-target="#viewAttachementModal" style="margin-bottom: 15px;">
+												<div class="attachement_cnt">
+													<div class="attachement_content" style='height: 100%; width: 100%;'>
+														<img src="${images}/logo_white.png" style='height: 100%; width: 100%; object-fit: contain'>
+													</div>
+													
+												</div>										
+											</div>											
+											<div class="col-sm-6 col-md-3 col-xl-2" data-toggle="modal" data-target="#viewAttachementModal" style="margin-bottom: 15px;">
+												<div class="attachement_cnt">
+													<div class="attachement_content" style='height: 100%; width: 100%;'>
+														<img src="${images}/logo_mini.png" style='height: 100%; width: 100%; object-fit: contain'>
+													</div>
+													
+												</div>										
+											</div>											
+											<div class="col-sm-6 col-md-3 col-xl-2" data-toggle="modal" data-target="#viewAttachementModal" style="margin-bottom: 15px;">
+												<div class="attachement_cnt">
+													<div class="attachement_content" style='height: 100%; width: 100%;'>
+														<img src="${images}/logo_mini.png" style='height: 100%; width: 100%; object-fit: contain'>
+													</div>
+													
+												</div>										
+											</div>											
+											
+											
+											
+											
+																						
+											
+										</div>
+
+									</div>
+
+
+
+									<div class="attachements_footer">
+			
+										Choose file to be added:
+																	
+																	
+									</div>
+
+
+								</div>
+								
+								
+								
+								
+								
+							
+								
+								
+								
 
 
 								<div class="eventDetailCardChat">
@@ -539,6 +677,35 @@
 	</div>
 
 
+
+
+
+
+	<div class="modal fade" id="viewAttachementModal">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<div class="modal-title" style="font-size: 14px;">
+						<span><i class="fas fa-user fa-lg"></i></span> Jan Nowak &#32;
+						<span><i class="fas fa-clock fa-lg"></i></span> 20.08.2020 godz. 15:30
+					</div>
+					
+				
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+
+					<img src="${images}/logo_white.png" style='height: 100%; width: 100%; object-fit: contain'>
+
+				</div>
+			
+			</div>
+		</div>
+	</div>
 
 
 
