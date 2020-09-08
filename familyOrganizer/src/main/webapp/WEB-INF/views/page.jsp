@@ -243,11 +243,14 @@
 				<c:if test="${isTimelinePage == true }"> 
 					<%@include file="timeline.jsp"%>
 				</c:if>	
+								
+				
+				<!-- Timeline page -->	
+				<c:if test="${isSearchEventPage == true }"> 
+					<%@include file="searchEvent.jsp"%>
+				</c:if>
 				
 				
-				
-				
-			
 					
 			</main>
 			

@@ -1036,6 +1036,75 @@ public class PageController {
 	
 	
 	
+	// edit event via event detail page
+	@RequestMapping(value = "/searchEvent") 
+	public ModelAndView searchEventByKeyword(@RequestParam("searchPhrase") String searchPhrase) { 
+
+		ModelAndView mv = new ModelAndView("page");
+		
+		mv.addObject("title", "Search Event Page");
+		mv.addObject("isSearchEventPage", true);
+		
+		//System.out.println("\n\n\nKeyword: " + searchPhrase + "\n\n\n\n");
+		
+		UserModel usrModel = (UserModel) session.getAttribute("userModel");
+
+
+		if(usrModel != null) {
+			
+			
+			
+			List<Event> allEventsList = eventDAO.searchEventsWithKeyword(usrModel.getFamily_id(), searchPhrase);
+			List<Event> finalEventsList = new ArrayList<Event>();	
+			List<Invitation> userInvitationsList = invitationDAO.getUserInvitations(usrModel.getId());
+					
+			ArrayList<Integer> eventsWithInvitation = new ArrayList<Integer>();	
+			
+			for (Invitation invitation : userInvitationsList) {
+				eventsWithInvitation.add(invitation.getEvent_id());
+				
+			}
+			
+	
+			for (Event nextEvent : allEventsList) {
+				if(nextEvent.getOwner_id() == usrModel.getId() || eventsWithInvitation.contains(nextEvent.getId())) {
+					finalEventsList.add(nextEvent);
+				}
+					
+			}
+			
+			
+					
+			mv.addObject("listOfUserEvents", finalEventsList);
+			
+			
+			
+			
+			Event dEvent = new Event();
+			mv.addObject("delEvent", dEvent);
+			
+			
+			Event mEvent = new Event();
+			mv.addObject("modEvent", mEvent);
+
+		}
+
+
+		return mv;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

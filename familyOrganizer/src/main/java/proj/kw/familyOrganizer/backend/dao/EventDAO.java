@@ -30,5 +30,8 @@ public interface EventDAO {
 	//update event
 	boolean update(Event event);
 	
+	//get list of events started by certain user
+	List<Event> searchEventsWithKeyword(int family_id, String keyword);
+	
 	
 }

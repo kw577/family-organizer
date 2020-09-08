@@ -7,6 +7,7 @@
 <%@taglib prefix="sform" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
+
 <section class="eventsPanelView">
 
 	<div class="container-fluid">
@@ -18,19 +19,24 @@
 				<div class="eventsPanelHeader">
 				
 					<div class="searchFormCnt">
-						<form>
+						
+						<form id="searchEventByPhraseForm"
+							action="<spring:url value="searchEvent"/>">
 							<div class="input-group mb-3">
-								<input type="text" class="form-control" placeholder="Search an event by keyword" id="searchPhrase">
+								<input type="text" class="form-control" id="searchPhrase" name="searchPhrase" value="${param.searchPhrase}" 
+									placeholder="Search an event by keyword" pattern=".{3,}" required title="3 characters minimum">
 								<div class="input-group-append">
 									<button type="submit" class="btn btn-secondary"><i class="fas fa-search"></i></button>
 								</div>
 							</div>
-						</form> 
+						</form>
+											
+						
 					</div> 
 				</div>
 				
 				<div class="timelineHeader">
-					Here are your upcoming events:
+					Your upcoming events:
 				</div>
 				
 				<div class="eventsPanelBody">

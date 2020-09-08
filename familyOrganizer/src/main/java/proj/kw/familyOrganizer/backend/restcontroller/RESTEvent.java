@@ -134,6 +134,26 @@ public class RESTEvent implements EventDAO {
 	
 	
 	
+	@Override
+	public List<Event> searchEventsWithKeyword(int family_id, String searchPhrase) {
+
+				
+		String query = "FROM event WHERE family_id = :family_id AND (LOWER(title) LIKE LOWER(:searchPhrase) "
+				+ "OR LOWER(description) LIKE LOWER(:searchPhrase) OR LOWER(localization) LIKE LOWER(:searchPhrase)) order by start_date";
+		return sessionFactory
+				.getCurrentSession()
+					.createQuery(query,Event.class)
+						.setParameter("family_id", family_id)
+						.setParameter("searchPhrase", "%"+searchPhrase+"%")
+							.getResultList();
+		
+	}
+	
+	
+	
+	
+	
+	
 	
 
 
