@@ -1102,6 +1102,86 @@ public class PageController {
 	
 	
 	
+	//strona podgladu podstawowego wydarzenia
+	@RequestMapping(value = { "/viewEvent/{id}/basicView" })
+	public ModelAndView eventBasicView(@PathVariable("id") String id) {
+
+		ModelAndView mv = new ModelAndView("page");
+
+		mv.addObject("title", "Event Basic View");
+		mv.addObject("eventBasicViewPage", true);
+					
+		int eventId = -1;
+		boolean dataFormatCorrect = true;
+		
+		try {
+			eventId = Integer.parseInt(id);
+			
+		} catch(Exception ex) {
+				
+			System.err.print(ex);
+			System.out.println("\n\n\nData fromat in not correct !!!");
+			dataFormatCorrect = false;
+		}
+			
+			
+		UserModel usrModel = (UserModel) session.getAttribute("userModel");
+
+		if(usrModel != null && dataFormatCorrect) {
+			
+			Event event = eventDAO.getEventById(eventId);
+			
+			if(event != null) {
+				
+				//Wydarzenie moga zobaczyc wszyscy uzytkownicy konta rodzinnego
+				if(usrModel.getFamily_id() == event.getFamily_id()) {
+						
+					mv.addObject("viewEvent", event);
+					
+					if(usrModel.getId() == event.getOwner_id() || invitationDAO.isInvited(usrModel.getId(), eventId)) {
+						mv.addObject("viewButtonActive", true);					
+					} else {
+						mv.addObject("viewButtonActive", false);
+					}
+					
+						
+					
+		
+					
+					
+				}
+					
+			}
+
+			
+		}
+		
+
+		
+		Event dEvent = new Event();
+		mv.addObject("delEvent", dEvent);
+		
+		Event mEvent = new Event();
+		mv.addObject("modEvent", mEvent);
+		
+		
+		
+		return mv;
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

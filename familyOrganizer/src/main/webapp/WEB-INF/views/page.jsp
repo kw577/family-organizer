@@ -245,10 +245,18 @@
 				</c:if>	
 								
 				
-				<!-- Timeline page -->	
+				<!-- Search results page -->	
 				<c:if test="${isSearchEventPage == true }"> 
 					<%@include file="searchEvent.jsp"%>
 				</c:if>
+				
+				
+				<!-- Event basic view -->	
+				<c:if test="${eventBasicViewPage == true }"> 
+					<%@include file="eventViewBasic.jsp"%>
+				</c:if>
+				
+				
 				
 				
 					
