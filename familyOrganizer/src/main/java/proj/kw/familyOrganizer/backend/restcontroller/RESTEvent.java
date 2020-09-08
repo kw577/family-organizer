@@ -116,6 +116,25 @@ public class RESTEvent implements EventDAO {
 	
 	
 	
+	
+	
+	
+	@Override
+	public List<Event> getEventsByFamily(int family_id) {
+		String query = "FROM event WHERE family_id = :family_id AND end_date >= now() order by start_date";
+		
+		return sessionFactory
+				.getCurrentSession()
+				.createQuery(query, Event.class)
+				.setParameter("family_id", family_id)
+				.getResultList();
+	}
+	
+	
+	
+	
+	
+	
 
 
 }

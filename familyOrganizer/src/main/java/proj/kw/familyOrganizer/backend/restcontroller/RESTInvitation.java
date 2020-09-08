@@ -120,5 +120,18 @@ public class RESTInvitation implements InvitationDAO {
 	
 	
 	
+	@Override
+	public List<Invitation> getUserInvitations(int user_id) {
+		String query = "FROM invitation WHERE user_id = :user_id";
+		
+		return sessionFactory
+				.getCurrentSession()
+				.createQuery(query,Invitation.class)
+				.setParameter("user_id", user_id)
+				.getResultList();
+	}
+	
+	
+	
 
 }

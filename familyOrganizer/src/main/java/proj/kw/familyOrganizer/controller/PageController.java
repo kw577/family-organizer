@@ -825,14 +825,6 @@ public class PageController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
 	// edit event via event detail page
 	@RequestMapping(value = "/viewEvent/modifyEvent", method = RequestMethod.POST) 
 	public String modifyEvent2(@ModelAttribute("modifyEvent") Event mEvent) { 
@@ -867,6 +859,65 @@ public class PageController {
 	
 	
 	
+	
+	// delete event via timeline page
+	@RequestMapping(value = "/timeline/deleteEvent", method = RequestMethod.POST) 
+	public String deleteEvent3(@ModelAttribute("deleteEvent") Event dEvent) { 
+
+	
+		UserModel usrModel = (UserModel) session.getAttribute("userModel");
+
+		if(usrModel != null) {
+
+			//delete only events only created by user - this if is probably not necessary
+			if(usrModel.getId() == dEvent.getOwner_id()) {
+
+				eventDAO.delete(eventDAO.getEventById(dEvent.getId()));
+
+			}
+
+		}
+
+		return "redirect:/timeline/";
+	}
+	
+	
+	
+	
+	
+	
+	
+	// edit event via event detail page
+	@RequestMapping(value = "/timeline/modifyEvent", method = RequestMethod.POST) 
+	public String modifyEvent3(@ModelAttribute("modifyEvent") Event mEvent) { 
+
+
+		UserModel usrModel = (UserModel) session.getAttribute("userModel");
+
+
+		if(usrModel != null) {
+
+
+			//modify only events only created by user - this if is probably not necessary
+			if(usrModel.getId() == mEvent.getOwner_id()) {
+
+
+				Event event = eventDAO.getEventById(mEvent.getId());
+
+				event.setTitle(mEvent.getTitle());
+				event.setDescription(mEvent.getDescription());
+				event.setLocalization(mEvent.getLocalization());
+
+				eventDAO.update(event);
+
+
+			}
+
+		}
+
+
+		return "redirect:/timeline";
+	}
 	
 	
 	
@@ -921,6 +972,69 @@ public class PageController {
 
 		return "redirect:/viewEvent/" + nAttachment.getEvent_id() + "/detailView";
 	}
+	
+	
+	
+	
+	
+	@RequestMapping(value = { "/timeline" })
+	public ModelAndView timelinePage() {
+
+		ModelAndView mv = new ModelAndView("page");
+
+		mv.addObject("title", "Timeline Page");
+		mv.addObject("isTimelinePage", true);
+		
+		
+		UserModel usrModel = (UserModel) session.getAttribute("userModel");
+				
+		if(usrModel != null) {
+		
+			
+			
+			List<Event> allEventsList = eventDAO.getEventsByFamily(usrModel.getFamily_id());
+			List<Event> finalEventsList = new ArrayList<Event>();	
+			List<Invitation> userInvitationsList = invitationDAO.getUserInvitations(usrModel.getId());
+					
+			ArrayList<Integer> eventsWithInvitation = new ArrayList<Integer>();	
+			
+			for (Invitation invitation : userInvitationsList) {
+				eventsWithInvitation.add(invitation.getEvent_id());
+				
+			}
+			
+	
+			for (Event nextEvent : allEventsList) {
+				if(nextEvent.getOwner_id() == usrModel.getId() || eventsWithInvitation.contains(nextEvent.getId())) {
+					finalEventsList.add(nextEvent);
+				}
+					
+			}
+			
+			
+					
+			mv.addObject("listOfUserEvents", finalEventsList);
+			
+				
+				
+			Event dEvent = new Event();
+			mv.addObject("delEvent", dEvent);
+			
+			
+			Event mEvent = new Event();
+			mv.addObject("modEvent", mEvent);
+			
+		
+		}
+		
+					
+		return mv;
+
+	}
+	
+	
+	
+	
 	
 	
 	

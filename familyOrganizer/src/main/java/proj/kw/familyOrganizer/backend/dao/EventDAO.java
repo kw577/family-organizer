@@ -15,6 +15,8 @@ public interface EventDAO {
 	//get list of events started by certain user
 	List<Event> getUserEvents(int owner_id);
 	
+	//get list of events for certain family
+	List<Event> getEventsByFamily(int family_id);
 	
 	//delete event
 	boolean delete(Event event);

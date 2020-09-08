@@ -112,7 +112,7 @@
 							<a href="${contextRoot}/createNewEvent" title="Add event">&#8227;&#32;<i class="icon-calendar-plus-o"></i><span class="d-none d-md-inline-block ml-1">  Add event </span></a>
 						</li>
 						<li style="background-color:#394565;">
-							<a href="#" title="Timeline">&#8227;&#32;<i class="icon-clock"></i><span class="d-none d-md-inline-block ml-1">  Timeline </span></a>
+							<a href="${contextRoot}/timeline" title="Timeline">&#8227;&#32;<i class="icon-clock"></i><span class="d-none d-md-inline-block ml-1">  Timeline </span></a>
 						</li>
 						<li style="background-color:#394565;">
 							<a href="${contextRoot}/eventsControlPanel" title="Manage events">&#8227;&#32;<i class="icon-briefcase"></i><span class="d-none d-md-inline-block ml-1">  Manage events </span></a>
@@ -237,6 +237,14 @@
 				<c:if test="${viewEventPage == true }"> 
 					<%@include file="viewEvent.jsp"%>
 				</c:if>	
+				
+				
+				<!-- Timeline page -->	
+				<c:if test="${isTimelinePage == true }"> 
+					<%@include file="timeline.jsp"%>
+				</c:if>	
+				
+				
 				
 				
 			

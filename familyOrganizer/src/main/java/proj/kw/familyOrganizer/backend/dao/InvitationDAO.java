@@ -26,7 +26,8 @@ public interface InvitationDAO {
 	//get invitation by owner and event_id
 	Invitation getByEventIdAndOwner(int event_id, int user_id);
 	
-	
+	//get all invitations for selected user
+	List<Invitation> getUserInvitations(int user_id);
 	
 	
 }
