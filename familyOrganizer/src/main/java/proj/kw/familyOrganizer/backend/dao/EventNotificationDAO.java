@@ -12,4 +12,6 @@ public interface EventNotificationDAO {
 	
 	EventNotification getNotificationForEvent(int event_id);
 	
+	//delete event
+	boolean delete(EventNotification notification);
 }

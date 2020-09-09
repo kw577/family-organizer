@@ -316,4 +316,37 @@ public class ManagementController {
 	
 	
 	
+	// modify user's account
+	@RequestMapping(value = "/delNotification/", method = RequestMethod.POST) 
+	public String delNotification(@ModelAttribute("delNotification") EventNotification dNotification) { 
+		
+		System.out.println("\n\n\nNotyfikacja do usuniecia: " + dNotification.getEvent_id());
+		//System.out.println("\nOpis: " + nNotification.getDescription());
+		
+		
+		UserModel usrModel = (UserModel) session.getAttribute("userModel");
+		
+		
+		if(usrModel != null) {
+			
+			
+			if(!eventNotificationDAO.checkEventForNotification(dNotification.getEvent_id())) {
+				
+					
+				eventNotificationDAO.delete(eventNotificationDAO.getNotificationForEvent(dNotification.getEvent_id()));
+			}
+			
+		
+		}
+		
+		
+			
+		return "redirect:/viewEvent/" + dNotification.getEvent_id() + "/basicView";
+	}
+	
+	
+	
+	
+	
+	
 }

@@ -125,71 +125,66 @@
 						</div>
 						
 						
-						
-						<div class="eventNotificationBox">
-						
-							<div class="eventNotificationHeader bg-info">
-								<div class="eventViewHeaderItem1">Event notification</div>
-								<div class="eventViewHeaderItem2">
-									<c:if test="${empty eventNotification}">
-										<button type="button" class="btn btn-secondary"
-											data-toggle="modal" data-target="#addEventNotificationModal">
-											Add <i class="fas fa-plus"></i>
-										</button>			
-									</c:if>	
+						<security:authorize access="hasAuthority('ADMIN')">
+							<div class="eventNotificationBox">
+							
+								<div class="eventNotificationHeader bg-info">
+									<div class="eventViewHeaderItem1">Event notification</div>
+									<div class="eventViewHeaderItem2">
+										<c:if test="${empty eventNotification}">
+											<button type="button" class="btn btn-secondary"
+												data-toggle="modal" data-target="#addEventNotificationModal">
+												Add <i class="fas fa-plus"></i>
+											</button>			
+										</c:if>	
+									</div>
 								</div>
-							</div>
-							
-							<div class="eventNotificationBody">
-								<c:if test="${not empty eventNotification}">
-									<table id="eventNotificationTable">
-										<tr>
-											<td style="font-size:40px;">
-												<c:if test="${eventNotification.type == 1}">
-													<i class="far fa-thumbs-up text-success" style="font-size:40px;"></i>
-												</c:if>
-												<c:if test="${eventNotification.type == 2}">
-													<i class="far fa-thumbs-down text-danger" style="font-size:40px;"></i>
-												</c:if>
-											 	<c:if test="${eventNotification.type == 3}">
-													<i class="fas fa-exclamation-circle text-warning" style="font-size:40px;"></i>
-												</c:if>
-											 	<c:if test="${eventNotification.type == 4}">
-													<i class="far fa-calendar-times text-warning" style="font-size:40px;"></i>
-												</c:if>
-											 	<c:if test="${eventNotification.type == 5}">
-													<i class="far fa-comment-dots text-info" style="font-size:40px;"></i>
-												</c:if>
+								
+								<div class="eventNotificationBody">
+									<c:if test="${not empty eventNotification}">
+										<table id="eventNotificationTable">
+											<tr>
+												<td style="font-size:40px;">
+													<c:if test="${eventNotification.type == 1}">
+														<i class="far fa-thumbs-up text-success" style="font-size:40px;"></i>
+													</c:if>
+													<c:if test="${eventNotification.type == 2}">
+														<i class="far fa-thumbs-down text-danger" style="font-size:40px;"></i>
+													</c:if>
+												 	<c:if test="${eventNotification.type == 3}">
+														<i class="fas fa-exclamation-circle text-warning" style="font-size:40px;"></i>
+													</c:if>
+												 	<c:if test="${eventNotification.type == 4}">
+														<i class="far fa-calendar-times text-warning" style="font-size:40px;"></i>
+													</c:if>
+												 	<c:if test="${eventNotification.type == 5}">
+														<i class="far fa-comment-dots text-info" style="font-size:40px;"></i>
+													</c:if>
+												
+												</td>
+												<td>Jan Nowak</td>
+												<td>10.09.2020</td>
+												<td>${eventNotification.description}</td>
+												<td style="max-width:40px;">
+																												
 											
-											</td>
-											<td>Jan Nowak</td>
-											<td>10.09.2020</td>
-											<td>${eventNotification.description}</td>
-											<td style="min-width:110px;">
-												
-												<button type="button" class="btn btn-warning">
-													<i class="fas fa-pen"></i>
-												</button>
-												
+													<button type="button" class="btn btn-danger"
+														data-toggle="modal" data-target="#deleteEventNotificationModal">
+														<i class="fas fa-trash-alt"></i>
+													</button>
+													
+												</td>
+											</tr>
+										</table>
+									</c:if>
+								
+											
 																			
-																	
-										
-												<button type="button" class="btn btn-danger">
-													<i class="fas fa-trash-alt"></i>
-												</button>
-												
-											</td>
-										</tr>
-									</table>
-								</c:if>
-							
-										
-																		
-							
-							
-							</div>		
-						</div>
-						
+								
+								
+								</div>		
+							</div>
+						</security:authorize>
 						
 						
 					</c:if>
@@ -221,7 +216,7 @@
 
 
 				<sform:form id="deleteEventForm" modelAttribute="delEvent"
-					action="${contextRoot}/timeline/deleteEvent" name="deleteEventForm"
+					action="${contextRoot}/eventBasicView/deleteEvent" name="deleteEventForm"
 					method="post">
 					<!-- Modal body -->
 					<div class="modal-body">
@@ -276,7 +271,7 @@
 
 
 				<sform:form id="modifyEventForm" modelAttribute="modEvent"
-					action="${contextRoot}/timeline/modifyEvent/"
+					action="${contextRoot}/eventBasicView/modifyEvent/"
 					name="modifyEventForm" method="post">
 					<!-- Modal body -->
 					<div class="modal-body">
@@ -408,6 +403,55 @@
 
 
 
+
+
+	<!-- Delete event notification -->
+	<div class="modal fade" id="deleteEventNotificationModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h5 class="modal-title">Delete event notification:</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+
+				<sform:form id="deleteEventNotificationForm" modelAttribute="delNotification"
+					action="${contextRoot}/manage/delNotification/" name="deleteEventNotificationForm"
+					method="post">
+					<!-- Modal body -->
+					<div class="modal-body">
+						
+						<div style"font-size: 12px;">Are you sure you want to delete notification for this event ?</div>
+						<div style"font-size: 10px;">${viewEvent.title}</div>
+		
+
+						<div class="form-group">
+							<sform:input type="hidden" path="event_id"
+							id="event_id" name="event_id" value="${viewEvent.id}"/>
+						</div>
+
+
+
+						<sform:hidden path="id" />
+						<sform:hidden path="type" />
+						<sform:hidden path="owner_id" />
+						<sform:hidden path="family_id" />
+						<sform:hidden path="date_posted" />
+						<sform:hidden path="description" />
+
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<input type="submit" class="btn btn-danger" value="Delete">
+						<button type="button" class="btn btn-basic" data-dismiss="modal">Cancel</button>
+					</div>
+				</sform:form>
+			</div>
+		</div>
+	</div>
 
 
 

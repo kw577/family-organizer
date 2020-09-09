@@ -890,6 +890,30 @@ public class PageController {
 	
 	
 	
+	// delete event via timeline page
+	@RequestMapping(value = "/eventBasicView/deleteEvent", method = RequestMethod.POST) 
+	public String deleteEvent4(@ModelAttribute("delEvent") Event dEvent) { 
+
+	
+		UserModel usrModel = (UserModel) session.getAttribute("userModel");
+
+		if(usrModel != null) {
+
+			//delete only events only created by user - this if is probably not necessary
+			if(usrModel.getId() == dEvent.getOwner_id()) {
+
+				eventDAO.delete(eventDAO.getEventById(dEvent.getId()));
+
+			}
+
+		}
+
+		return "redirect:/home/";
+	}
+	
+	
+	
+	
 	
 	
 	// edit event via event detail page
@@ -925,7 +949,37 @@ public class PageController {
 	}
 	
 	
-	
+	// edit event via event basic view page
+	@RequestMapping(value = "/eventBasicView/modifyEvent", method = RequestMethod.POST) 
+	public String modifyEvent4(@ModelAttribute("modEvent") Event mEvent) { 
+
+
+		UserModel usrModel = (UserModel) session.getAttribute("userModel");
+
+
+		if(usrModel != null) {
+
+
+			//modify only events only created by user - this if is probably not necessary
+			if(usrModel.getId() == mEvent.getOwner_id()) {
+
+
+				Event event = eventDAO.getEventById(mEvent.getId());
+
+				event.setTitle(mEvent.getTitle());
+				event.setDescription(mEvent.getDescription());
+				event.setLocalization(mEvent.getLocalization());
+
+				eventDAO.update(event);
+
+
+			}
+
+		}
+		
+
+		return "redirect:/viewEvent/" + mEvent.getId() + "/basicView";
+	}
 	
 	
 	// new attachment
@@ -1172,6 +1226,9 @@ public class PageController {
 		
 		EventNotification nNotification = new EventNotification();
 		mv.addObject("newNotification", nNotification);
+		
+		EventNotification dNotification = new EventNotification();
+		mv.addObject("delNotification", dNotification);
 		
 		return mv;
 

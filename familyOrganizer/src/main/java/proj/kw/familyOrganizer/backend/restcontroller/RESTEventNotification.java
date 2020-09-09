@@ -76,6 +76,24 @@ public class RESTEventNotification implements EventNotificationDAO {
 	}
 	
 	
+	
+	@Override
+	public boolean delete(EventNotification notification) {
+		try {			
+			sessionFactory
+					.getCurrentSession()
+						.delete(notification);
+			return true;
+		}
+		catch(Exception ex) {		
+			ex.printStackTrace();			
+		}		
+		return false;		
+
+
+	}
+	
+	
 		
 	
 	
