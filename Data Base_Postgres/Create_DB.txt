@@ -78,6 +78,30 @@ CREATE TABLE comment (
 
 
 
+CREATE TABLE attachment (
+	id 		serial PRIMARY KEY,
+	event_id	int references event(id) ON DELETE CASCADE,
+	owner_id	int references user_account(id) ON DELETE CASCADE,
+	date_posted	TIMESTAMP, 
+	code		VARCHAR (50) NOT NULL
+
+);
+
+
+CREATE TABLE event_notification (
+	id 		serial PRIMARY KEY,
+	type		int,
+	event_id	int references event(id) ON DELETE CASCADE,
+	owner_id	int references user_account(id) ON DELETE CASCADE,
+	family_id	int references family(id) ON DELETE CASCADE,
+	date_posted	TIMESTAMP, 
+	description	VARCHAR (500) NOT NULL
+
+);
+
+
+
+
 
 
 

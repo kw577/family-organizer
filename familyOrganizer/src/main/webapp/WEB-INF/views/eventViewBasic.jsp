@@ -37,7 +37,29 @@
 						<div class="singleEventView">
 							<div class="eventViewHeader">
 
-								<div class="eventViewHeaderItem1">${viewEvent.title}</div>
+								<div class="eventViewHeaderItem1">
+									${viewEvent.title}
+						
+									
+									<c:if test="${not empty eventNotification}">
+										<c:if test="${eventNotification.type == 1}">
+											<i class="far fa-thumbs-up text-success" style="font-size:23px;" title="${eventNotification.description}"></i>
+										</c:if>
+										<c:if test="${eventNotification.type == 2}">
+											<i class="far fa-thumbs-down text-danger" style="font-size:23px;" title="${eventNotification.description}"></i>
+										</c:if>
+									 	<c:if test="${eventNotification.type == 3}">
+											<i class="fas fa-exclamation-circle text-warning" style="font-size:23px;" title="${eventNotification.description}"></i>
+										</c:if>
+									 	<c:if test="${eventNotification.type == 4}">
+											<i class="far fa-calendar-times text-warning" style="font-size:23px;" title="${eventNotification.description}"></i>
+										</c:if>
+									 	<c:if test="${eventNotification.type == 5}">
+											<i class="far fa-comment-dots text-info" style="font-size:23px;" title="${eventNotification.description}"></i>
+										</c:if>
+									 	
+									</c:if>
+								</div>
 								<div class="eventViewHeaderItem2">
 
 
@@ -101,6 +123,75 @@
 							</div>
 
 						</div>
+						
+						
+						
+						<div class="eventNotificationBox">
+						
+							<div class="eventNotificationHeader bg-info">
+								<div class="eventViewHeaderItem1">Event notification</div>
+								<div class="eventViewHeaderItem2">
+									<c:if test="${empty eventNotification}">
+										<button type="button" class="btn btn-secondary"
+											data-toggle="modal" data-target="#addEventNotificationModal">
+											Add <i class="fas fa-plus"></i>
+										</button>			
+									</c:if>	
+								</div>
+							</div>
+							
+							<div class="eventNotificationBody">
+								<c:if test="${not empty eventNotification}">
+									<table id="eventNotificationTable">
+										<tr>
+											<td style="font-size:40px;">
+												<c:if test="${eventNotification.type == 1}">
+													<i class="far fa-thumbs-up text-success" style="font-size:40px;"></i>
+												</c:if>
+												<c:if test="${eventNotification.type == 2}">
+													<i class="far fa-thumbs-down text-danger" style="font-size:40px;"></i>
+												</c:if>
+											 	<c:if test="${eventNotification.type == 3}">
+													<i class="fas fa-exclamation-circle text-warning" style="font-size:40px;"></i>
+												</c:if>
+											 	<c:if test="${eventNotification.type == 4}">
+													<i class="far fa-calendar-times text-warning" style="font-size:40px;"></i>
+												</c:if>
+											 	<c:if test="${eventNotification.type == 5}">
+													<i class="far fa-comment-dots text-info" style="font-size:40px;"></i>
+												</c:if>
+											
+											</td>
+											<td>Jan Nowak</td>
+											<td>10.09.2020</td>
+											<td>${eventNotification.description}</td>
+											<td style="min-width:110px;">
+												
+												<button type="button" class="btn btn-warning">
+													<i class="fas fa-pen"></i>
+												</button>
+												
+																			
+																	
+										
+												<button type="button" class="btn btn-danger">
+													<i class="fas fa-trash-alt"></i>
+												</button>
+												
+											</td>
+										</tr>
+									</table>
+								</c:if>
+							
+										
+																		
+							
+							
+							</div>		
+						</div>
+						
+						
+						
 					</c:if>
 
 
@@ -243,6 +334,91 @@
 			</div>
 		</div>
 	</div>
+
+
+
+
+
+
+	<!-- Add event notification -->
+	<div class="modal fade" id="addEventNotificationModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h5 class="modal-title">Add notification to this event:</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+
+				<sform:form id="addEventNotificationForm" modelAttribute="newNotification"
+					action="${contextRoot}/manage/addNotification/" name="addEventNotificationForm"
+					method="post">
+					<!-- Modal body -->
+					<div class="modal-body">
+
+
+						<div class="form-group">
+							<label style="font-size: 12px;">Notification type:</label>
+							<sform:select class="form-control" id="type" name="type" path="type">
+								<sform:option value="1">Permission</sform:option>
+								<sform:option value="2">Refusal</sform:option>
+								<sform:option value="3">High Priority</sform:option>
+								<sform:option value="4">Conflict other event</sform:option>
+								<sform:option value="5">Information</sform:option>
+							</sform:select>
+						</div>
+
+
+
+						<div class="form-group">			
+								<label for="description" style="font-size: 12px;">
+									Description:
+								</label> 
+								<sform:textarea type="text" class="form-control" placeholder="Enter your comment..." 
+									path="description" id="description" name="description" maxlength="490"/>
+						</div>
+
+
+						<div class="form-group">
+							<sform:input type="hidden" path="event_id"
+							id="event_id" name="event_id" value="${viewEvent.id}"/>
+						</div>
+
+
+
+						<sform:hidden path="id" />
+						<sform:hidden path="owner_id" />
+						<sform:hidden path="family_id" />
+						<sform:hidden path="date_posted" />
+				
+
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<input type="submit" class="btn btn-primary" value="Save">
+						<button type="button" class="btn btn-basic" data-dismiss="modal">Cancel</button>
+					</div>
+				</sform:form>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

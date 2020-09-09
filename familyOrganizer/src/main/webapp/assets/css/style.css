@@ -1561,6 +1561,101 @@ div.ui-datepicker{
 
 
 
+
+
+
+
+
+
+
+
+/*------------------------------Pomocnicze------------------------------*/
+
+
+.eventNotificationBox {
+	
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 70px;
+	border: 1px solid #d9d9d9;
+	#border-radius: 5px;
+	background-color: white;
+	
+
+	-webkit-box-shadow: 0px 0px 10px 0px rgba(222,222,222,1);
+	-moz-box-shadow: 0px 0px 10px 0px rgba(222,222,222,1);
+	box-shadow: 0px 0px 10px 0px rgba(222,222,222,1);
+	
+	width: 900px;
+	
+	
+}
+
+
+.eventNotificationHeader {
+	
+	width: 100%;
+	padding: 10px;
+	font-size: 17px;
+	font-weight: bold;
+	line-height: 37px;
+	
+	display: flex;
+	#border-bottom: 1px solid #d9d9d9;
+	color: white;
+	#background-color: #ababab;
+	padding-left: 25px;
+}
+
+
+
+.eventNotificationBody {
+	
+	width: 100%;
+	display: flex;
+
+}
+
+
+.eventNotificationHeaderItem1 {
+	
+	width: 70%; 
+	
+}
+
+.eventNotificationHeaderItem2 {
+	
+	text-align: right;
+	width: 30%; 
+	
+}
+
+
+
+
+
+table#eventNotificationTable {
+	border-collapse: collapse;
+	width: 100%;
+	
+}
+
+
+#eventNotificationTable td {
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #ababab;
+
+}
+
+
+
+
+/*------------------------------Pomocnicze------------------------------*/
+
+
+
+
 .testtesttest12345 {
 	
 	width: 50px;
@@ -1572,15 +1667,6 @@ div.ui-datepicker{
 
 
 
-
-
-
-
-
-
-
-
-/*------------------------------Pomocnicze------------------------------*/
 
 .test
 {

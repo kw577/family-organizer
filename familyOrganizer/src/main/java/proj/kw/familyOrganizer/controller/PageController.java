@@ -30,6 +30,7 @@ import proj.kw.familyOrganizer.backend.dao.AttachmentDAO;
 import proj.kw.familyOrganizer.backend.dao.CommentDAO;
 import proj.kw.familyOrganizer.backend.dao.EmailVerificationDAO;
 import proj.kw.familyOrganizer.backend.dao.EventDAO;
+import proj.kw.familyOrganizer.backend.dao.EventNotificationDAO;
 import proj.kw.familyOrganizer.backend.dao.FamilyDAO;
 import proj.kw.familyOrganizer.backend.dao.InvitationDAO;
 import proj.kw.familyOrganizer.backend.dao.NotesDAO;
@@ -38,6 +39,7 @@ import proj.kw.familyOrganizer.backend.dto.Attachment;
 import proj.kw.familyOrganizer.backend.dto.Comment;
 import proj.kw.familyOrganizer.backend.dto.EmailVerification;
 import proj.kw.familyOrganizer.backend.dto.Event;
+import proj.kw.familyOrganizer.backend.dto.EventNotification;
 import proj.kw.familyOrganizer.backend.dto.Family;
 import proj.kw.familyOrganizer.backend.dto.Invitation;
 import proj.kw.familyOrganizer.backend.dto.User;
@@ -75,6 +77,9 @@ public class PageController {
 	
 	@Autowired
 	private AttachmentDAO attachmentDAO;
+	
+	@Autowired
+	private EventNotificationDAO eventNotificationDAO;
 	
 	@Autowired 
 	private EmailVerificationDAO emailVerificationDAO;
@@ -1137,6 +1142,7 @@ public class PageController {
 				if(usrModel.getFamily_id() == event.getFamily_id()) {
 						
 					mv.addObject("viewEvent", event);
+					mv.addObject("eventNotification", eventNotificationDAO.getNotificationForEvent(eventId));
 					
 					if(usrModel.getId() == event.getOwner_id() || invitationDAO.isInvited(usrModel.getId(), eventId)) {
 						mv.addObject("viewButtonActive", true);					
@@ -1164,7 +1170,8 @@ public class PageController {
 		Event mEvent = new Event();
 		mv.addObject("modEvent", mEvent);
 		
-		
+		EventNotification nNotification = new EventNotification();
+		mv.addObject("newNotification", nNotification);
 		
 		return mv;
 

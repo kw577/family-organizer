@@ -1,5 +1,6 @@
 package proj.kw.familyOrganizer.controller;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import proj.kw.familyOrganizer.backend.dao.EmailVerificationDAO;
+import proj.kw.familyOrganizer.backend.dao.EventNotificationDAO;
 import proj.kw.familyOrganizer.backend.dao.FamilyDAO;
 import proj.kw.familyOrganizer.backend.dao.UserDAO;
 import proj.kw.familyOrganizer.backend.dto.EmailVerification;
+import proj.kw.familyOrganizer.backend.dto.EventNotification;
 import proj.kw.familyOrganizer.backend.dto.Family;
 import proj.kw.familyOrganizer.backend.dto.User;
 import proj.kw.familyOrganizer.backend.mailSending.MailSenderService;
@@ -39,6 +42,11 @@ public class ManagementController {
 	
 	@Autowired 
 	private UserDAO userDAO;
+	
+	
+	@Autowired 
+	private EventNotificationDAO eventNotificationDAO;
+	
 	
 	@Autowired 
 	private EmailVerificationDAO emailVerificationDAO;
@@ -269,6 +277,38 @@ public class ManagementController {
 	
 	
 	
+	
+	
+	
+	// modify user's account
+	@RequestMapping(value = "/addNotification/", method = RequestMethod.POST) 
+	public String addNotification(@ModelAttribute("newNotification") EventNotification nNotification) { 
+		
+		//System.out.println("\n\n\nTyp notyfikacji: " + nNotification.getType());
+		//System.out.println("\nOpis: " + nNotification.getDescription());
+		
+		
+		UserModel usrModel = (UserModel) session.getAttribute("userModel");
+		
+		
+		if(usrModel != null) {
+			
+			
+			if(eventNotificationDAO.checkEventForNotification(nNotification.getEvent_id())) {
+				
+				nNotification.setOwner_id(usrModel.getId());
+				nNotification.setFamily_id(usrModel.getFamily_id());
+				nNotification.setDate_posted(LocalDateTime.now());
+				
+				eventNotificationDAO.addNotification(nNotification);
+			}
+		
+		}
+		
+		
+			
+		return "redirect:/viewEvent/" + nNotification.getEvent_id() + "/basicView";
+	}
 	
 	
 	
