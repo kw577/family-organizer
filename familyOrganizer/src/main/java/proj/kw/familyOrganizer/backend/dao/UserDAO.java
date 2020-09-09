@@ -25,5 +25,7 @@ public interface UserDAO {
 	//delete user account
 	boolean delete(User user);
 	
+	//get user by id
+	User getUserById(int id);
 	
 } 

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import proj.kw.familyOrganizer.backend.dao.UserDAO;
 import proj.kw.familyOrganizer.backend.dto.EmailVerification;
+import proj.kw.familyOrganizer.backend.dto.Event;
 import proj.kw.familyOrganizer.backend.dto.User;
 
 @Transactional
@@ -115,6 +116,22 @@ public class RESTUser implements UserDAO{
 	
 	
 	}
+	
+	
+	@Override
+	public User getUserById(int id) {
+		
+		try {			
+			return sessionFactory
+					.getCurrentSession()
+						.get(User.class,Integer.valueOf(id));			
+		}
+		catch(Exception ex) {		
+			ex.printStackTrace();			
+		}
+		return null;
+	}
+	
 
 
 }

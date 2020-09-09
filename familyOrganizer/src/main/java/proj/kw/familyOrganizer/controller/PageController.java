@@ -48,6 +48,7 @@ import proj.kw.familyOrganizer.backend.registerHandler.RegisterPasswordEncoder;
 import proj.kw.familyOrganizer.model.AttachmentModel;
 import proj.kw.familyOrganizer.model.CommentModel;
 import proj.kw.familyOrganizer.model.EventModel;
+import proj.kw.familyOrganizer.model.EventNotificationModel;
 import proj.kw.familyOrganizer.model.UserModel;
 import proj.kw.familyOrganizer.tools.FileUploader;
 
