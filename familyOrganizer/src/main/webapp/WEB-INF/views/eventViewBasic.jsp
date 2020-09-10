@@ -43,19 +43,19 @@
 									
 									<c:if test="${not empty eventNotification}">
 										<c:if test="${eventNotification.type == 1}">
-											<i class="far fa-thumbs-up text-success" style="font-size:23px;" title="${eventNotification.description}"></i>
+											<i class="far fa-thumbs-up text-success" style="font-size:23px;" title="${notificationOwner}: ${eventNotification.description}"></i>
 										</c:if>
 										<c:if test="${eventNotification.type == 2}">
-											<i class="far fa-thumbs-down text-danger" style="font-size:23px;" title="${eventNotification.description}"></i>
+											<i class="far fa-thumbs-down text-danger" style="font-size:23px;" title="${notificationOwner}: ${eventNotification.description}"></i>
 										</c:if>
 									 	<c:if test="${eventNotification.type == 3}">
-											<i class="fas fa-exclamation-circle text-warning" style="font-size:23px;" title="${eventNotification.description}"></i>
+											<i class="fas fa-exclamation-circle text-warning" style="font-size:23px;" title="${notificationOwner}: ${eventNotification.description}"></i>
 										</c:if>
 									 	<c:if test="${eventNotification.type == 4}">
-											<i class="far fa-calendar-times text-warning" style="font-size:23px;" title="${eventNotification.description}"></i>
+											<i class="far fa-calendar-times text-warning" style="font-size:23px;" title="${notificationOwner}: ${eventNotification.description}"></i>
 										</c:if>
 									 	<c:if test="${eventNotification.type == 5}">
-											<i class="far fa-comment-dots text-info" style="font-size:23px;" title="${eventNotification.description}"></i>
+											<i class="far fa-comment-dots text-info" style="font-size:23px;" title="${notificationOwner}: ${eventNotification.description}"></i>
 										</c:if>
 									 	
 									</c:if>
@@ -162,8 +162,8 @@
 													</c:if>
 												
 												</td>
-												<td>Jan Nowak</td>
-												<td>10.09.2020</td>
+												<td>${notificationOwner}</td>
+												<td>${notificationDate}</td>
 												<td>${eventNotification.description}</td>
 												<td style="max-width:40px;">
 																												

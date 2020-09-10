@@ -66,7 +66,8 @@ public class RESTEventNotification implements EventNotificationDAO {
 					.getSingleResult();			
 		}
 		catch(Exception ex) {		
-			ex.printStackTrace();			
+			//ex.printStackTrace();
+			System.out.println("\nNo notification found for event");
 		}
 		return null;
 		

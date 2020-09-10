@@ -33,7 +33,29 @@
 						<div class="eventDetailViewCard">
 							<div class="eventDetailCardHeader">
 
-								<div class="eventDetailCardHeaderItem1">${viewEvent.title}</div>
+								<div class="eventDetailCardHeaderItem1">
+									${viewEvent.title}
+																		
+									<c:if test="${not empty eventNotification}">
+										<c:if test="${eventNotification.type == 1}">
+											<i class="far fa-thumbs-up text-success" style="font-size:23px;" title="${notificationOwner}: ${eventNotification.description}"></i>
+										</c:if>
+										<c:if test="${eventNotification.type == 2}">
+											<i class="far fa-thumbs-down text-danger" style="font-size:23px;" title="${notificationOwner}: ${eventNotification.description}"></i>
+										</c:if>
+									 	<c:if test="${eventNotification.type == 3}">
+											<i class="fas fa-exclamation-circle text-warning" style="font-size:23px;" title="${notificationOwner}: ${eventNotification.description}"></i>
+										</c:if>
+									 	<c:if test="${eventNotification.type == 4}">
+											<i class="far fa-calendar-times text-warning" style="font-size:23px;" title="${notificationOwner}: ${eventNotification.description}"></i>
+										</c:if>
+									 	<c:if test="${eventNotification.type == 5}">
+											<i class="far fa-comment-dots text-info" style="font-size:23px;" title="${notificationOwner}: ${eventNotification.description}"></i>
+										</c:if>
+									 	
+									</c:if>
+									
+								</div>
 								<div class="eventDetailCardHeaderItem2">
 									
 												

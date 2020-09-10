@@ -395,10 +395,29 @@ public class PageController {
 		UserModel usrModel = (UserModel) session.getAttribute("userModel");
 				
 		if(usrModel != null) {
+			
+			List<Event> userEventsFinalList = eventDAO.getUserEvents(usrModel.getId());
+			
+			mv.addObject("userEventsList", userEventsFinalList);
 		
-			mv.addObject("userEventsList", eventDAO.getUserEvents(usrModel.getId()));
-		
-		
+			
+			//Event notifications
+			List<EventNotification> finalNotificationsList = new ArrayList<EventNotification>();
+			
+			
+			for (Event tempEvent : userEventsFinalList) {
+				
+				finalNotificationsList.add(eventNotificationDAO.getNotificationForEvent(tempEvent.getId()));
+				
+			}
+			
+			
+			mv.addObject("listOfEventNotifications", finalNotificationsList);
+			
+			//
+			
+					
+			
 			Event dEvent = new Event();
 			mv.addObject("delEvent", dEvent);
 		
@@ -642,6 +661,21 @@ public class PageController {
 					
 										
 					mv.addObject("listOfAttachments", eventAttachmentsEdited);
+					
+					
+					
+					//Admin notification
+					EventNotification evNotification = eventNotificationDAO.getNotificationForEvent(eventId);
+					
+					mv.addObject("eventNotification", evNotification);
+					
+					
+					if(evNotification != null) {
+						User evNotificationOwner = userDAO.getUserById(evNotification.getOwner_id());
+						mv.addObject("notificationOwner", evNotificationOwner.getName() + " " + evNotificationOwner.getSurname());
+						mv.addObject("notificationDate", evNotification.getDate_posted().toString().replaceAll("T", " ").substring(0, 16));
+						
+					}
 					
 					
 				}
@@ -1075,7 +1109,24 @@ public class PageController {
 					
 			mv.addObject("listOfUserEvents", finalEventsList);
 			
+			
+			
+			//Event notifications
+			List<EventNotification> finalNotificationsList = new ArrayList<EventNotification>();
+			
+			
+			for (Event tempEvent : finalEventsList) {
 				
+				finalNotificationsList.add(eventNotificationDAO.getNotificationForEvent(tempEvent.getId()));
+				
+			}
+			
+			
+			mv.addObject("listOfEventNotifications", finalNotificationsList);
+			
+			
+			
+			//
 				
 			Event dEvent = new Event();
 			mv.addObject("delEvent", dEvent);
@@ -1197,7 +1248,19 @@ public class PageController {
 				if(usrModel.getFamily_id() == event.getFamily_id()) {
 						
 					mv.addObject("viewEvent", event);
-					mv.addObject("eventNotification", eventNotificationDAO.getNotificationForEvent(eventId));
+					EventNotification evNotification = eventNotificationDAO.getNotificationForEvent(eventId);
+															
+					mv.addObject("eventNotification", evNotification);
+					
+					
+					if(evNotification != null) {
+						User evNotificationOwner = userDAO.getUserById(evNotification.getOwner_id());
+						mv.addObject("notificationOwner", evNotificationOwner.getName() + " " + evNotificationOwner.getSurname());
+						mv.addObject("notificationDate", evNotification.getDate_posted().toString().replaceAll("T", " ").substring(0, 16));
+						
+					}
+					
+					
 					
 					if(usrModel.getId() == event.getOwner_id() || invitationDAO.isInvited(usrModel.getId(), eventId)) {
 						mv.addObject("viewButtonActive", true);					
