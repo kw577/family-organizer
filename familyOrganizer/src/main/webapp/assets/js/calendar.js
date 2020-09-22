@@ -236,7 +236,7 @@ class CalendarWeek {
 				{
 					
 					hourCode = this.checkHourCode(j);
-					insertHTMLcode += '<div class="calendarDayHour" onclick="selectedByUser(this)" id="' + dateCode + hourCode + '">' + hourCode + '_0000' + '</div>';
+					insertHTMLcode += '<div class="calendarDayHour" onclick="selectedByUser(this)" id="' + dateCode + hourCode + '"></div>';
 			
 				}
 			
@@ -499,7 +499,7 @@ class CalendarDay {
 			{
 						
 				hourCode = this.checkHourCode(j);
-				insertHTMLcode += '<div class="calendarDayHour" onclick="selectedByUser(this)" id="' + dateCode + hourCode + '">' + hourCode +'</div>';
+				insertHTMLcode += '<div class="calendarDayHour" onclick="selectedByUser(this)" id="' + dateCode + hourCode + '"></div>';
 			
 			}
 			
@@ -745,7 +745,7 @@ class CalendarMonth {
 						{
 							
 							hourCode = this.checkHourCode(j);
-							insertHTMLcode += '<div class="calendarDayTileHour" onclick="selectedByUser(this)" id="' + dateCode + hourCode + '">' + hourCode +'</div>';
+							insertHTMLcode += '<div class="calendarDayTileHour" onclick="selectedByUser(this)" id="' + dateCode + hourCode + '"></div>';
 					
 						}
 						
@@ -839,7 +839,7 @@ var newDiv = null;
 
 
 //oznaczenia np utworzonych przez uzytkownika wydarzen i.t.p
-function addCalendarEvents (calendarView) 
+function addCalendarEvents (calendarView, viewType) 
 {
 	// TEST !!!!!!!!!!!!!!!!!!!!!!		
 	//Mark current day in weekly view
@@ -848,8 +848,543 @@ function addCalendarEvents (calendarView)
 		document.getElementById(searchedId).classList.add('calendarMarkToday');
 	
 	
+	if(viewType == "D") {
+	
+		
+		console.log("Day view");
+		
+		var choosenDay = calendarView.selectedDay;
+		
+		//console.log("Load events for day: " + choosenDay);
+		
+		//Test
+		var jsonUrl = window.contextRoot + '/json/data/calendarDayView/getEvents?year=' 
+						+ choosenDay.getFullYear() + '&month=' 
+						+ choosenDay.getMonth() + '&day=' + choosenDay.getDate();
+		
+		
+		console.log(jsonUrl);
+		
+		
+		$.getJSON(jsonUrl, function(data){ 
+		      $.each(data, function(key, value){
+		   
+		    	 console.log("#################################"); 
+		    	 console.log("Checking event with id: " + value.id);
+		    	 var color_code = colorHashCode(value.owner_id);
+		    	 
+		    	 		    	  
+		    	 var startDivId =  findDivIdForDate(value.start_date.year, 
+		    			 							value.start_date.monthValue - 1, 
+		    			 							value.start_date.dayOfMonth, 
+		    			 							value.start_date.hour, 
+		    			 							value.start_date.minute);
+		    	  
+		    	 var endDivId =  findDivIdForDate(value.end_date.year, 
+							value.end_date.monthValue - 1, 
+							value.end_date.dayOfMonth, 
+							value.end_date.hour, 
+							value.end_date.minute); 
+		    	 
+		    	 
+		    	 console.log("Start div: " + startDivId);
+		    	 console.log("End div: " + endDivId);
+		    	 
+		    	 
+		    	 //check is another event already added in some of tiles booked for this event
+		    	 var maxDivCount = -1;
+		    	 var tempValue = -1;
+		    	 
+		    	 var checkDivWithId = startDivId;
+		    	 var checkDiv;
+		    	 
+		    	 do {
+		    		 
+		    		 checkDiv = document.getElementById(checkDivWithId);
+		    		 //console.log("Checking div: " + checkDivWithId);
+		    		 
+		    		 if(checkDiv){
+		    			 tempValue =  document.getElementById(checkDivWithId).childElementCount;
+		    			 //console.log("tempValue: " + tempValue);
+		    			 if(tempValue > maxDivCount){
+		    				 maxDivCount = tempValue;
+		    				 //console.log("maxDivCount: " + maxDivCount);
+		    			 }
+		    			 		    			 
+		    		 }
+		    		 
+		    		 checkDivWithId = findPreviousDiv(checkDivWithId);
+		    		 
+		    		 
+		    	 }
+		    	 while (checkDiv!=null && tempValue != 0);
+		    	 
+		    	 
+		    	 
+		    	 var firstDivFromArea = findNextDiv(checkDivWithId);
+		    	 
+		    	 console.log("firstDivFromArea: " + firstDivFromArea);
+		    	 console.log("maxDivCount: " + maxDivCount);
+		    	 
+		    	 
+		    	 
+		    	 //---------------------------------------------------------------------
+		    	 
+		    	 checkDivWithId = endDivId;
+
+		    	 do {
+		    		 
+		    		 checkDiv = document.getElementById(checkDivWithId);
+		    		 //console.log("Checking div: " + checkDivWithId);
+		    		 
+		    		 if(checkDiv){
+		    			 tempValue =  document.getElementById(checkDivWithId).childElementCount;
+		    			 //console.log("tempValue: " + tempValue);
+		    			 if(tempValue > maxDivCount){
+		    				 maxDivCount = tempValue;
+		    				 //console.log("maxDivCount: " + maxDivCount);
+		    			 }
+		    			 		    			 
+		    		 }
+		    		 
+		    		 checkDivWithId = findNextDiv(checkDivWithId);
+		    		 
+		    		 
+		    	 }
+		    	 while (checkDiv!=null && tempValue != 0);
+		    	 
+		    	 
+		    	 
+		    	 var lastDivFromArea = findPreviousDiv(checkDivWithId);
+		    	 
+		    	 console.log("lastDivFromArea: " + lastDivFromArea);
+		    	 console.log("maxDivCount: " + maxDivCount);
+		    	 
+		    	 
+		    	 //---------------------------------------------------------------------
+		    	 
+		    	 checkDivWithId = startDivId;
+
+		    	 do {
+		    		 
+		    		 checkDiv = document.getElementById(checkDivWithId);
+		    		 console.log("Checking div: " + checkDivWithId);
+		    		 
+		    		 if(checkDiv){
+		    			 tempValue =  document.getElementById(checkDivWithId).childElementCount;
+		    			 console.log("tempValue: " + tempValue);
+		    			 if(tempValue > maxDivCount){
+		    				 maxDivCount = tempValue;
+		    				 console.log("maxDivCount: " + maxDivCount);
+		    			 }
+		    			 		    			 
+		    		 }
+		    		 
+		    		 checkDivWithId = findNextDiv(checkDivWithId);
+		    		 
+		    		 
+		    	 }
+		    	 while (checkDivWithId != findNextDiv(endDivId));
+		    	 
+		    	 console.log("maxDivCount: " + maxDivCount);
+		    	 
+		    	 //---------------------------------------------------------------------
+		    	 
+		    	 
+		    	 
+		    	 //Generate calendar view
+		    	 
+		    	 var tempDivId = firstDivFromArea;
+		    	 var tempDiv;
+		    	 var eventDivsArea = 0;
+		    	 var insideDivsAmount = 0;
+		    	 console.log("---------------------------------");
+		    	 console.log("Adding this event to calendar");
+		    	 
+		    	 do {
+		    		 
+		    		 if(tempDivId == startDivId) {
+		    			 eventDivsArea = 1;
+		    		 }
+		    		 
+		    		 console.log("tempDivId: " + tempDivId);
+		    		 console.log("eventDivsArea: " + eventDivsArea);
+		    		 
+		    		 //console.log("Checking div with id: " + tempDivId);
+		    		 
+		    		 
+		    		 tempDiv = document.getElementById(tempDivId);
+		    		 
+		    		 if(tempDiv){
+		    			 
+		    			 insideDivsAmount = document.getElementById(tempDivId).childElementCount;
+		    			 
+		    			 if(eventDivsArea == 0 && insideDivsAmount != 0) {
+		    				 
+		    				 
+		    				 var i;
+		    				 for (i = 0; i < (maxDivCount-insideDivsAmount+1); i++) {
+		    					 document.getElementById(tempDivId).innerHTML += '<div class="eventCalendarTile"></div>';
+		    					 
+		    					 console.log("fdfsfdadfdafadfdsfafdfas");
+		    				 } 
+		    				  				   				 
+		    				 
+		    			 }
+		    			 else if(eventDivsArea == 1) {
+		    				 
+		    				 var j;
+		    				 for (j = 0; j < (maxDivCount-insideDivsAmount); j++) {
+		    					 document.getElementById(tempDivId).innerHTML += '<div class="eventCalendarTile"></div>';
+		    				 } 
+		    				 
+					    	 document.getElementById(tempDivId).innerHTML += '<div class="eventCalendarTile" style = "background-color: ' 
+					    		 + color_code + '; opacity: 0.7;"><a class="eventCalendarTileLink" href="' + window.contextRoot + '/viewEvent/' 
+					    		 + value.id + '/basicView/' + '">' + value.title + '</a></div>';
+		    				 
+		    			 }
+		    			 
+		    			 
+
+		    		 
+		    		 
+		    		 }
+
+			    	 
+		    		 
+		    		 
+		    		 
+		    		 
+		    		 
+		    		 
+		    		 if(tempDivId == endDivId) {
+		    			 eventDivsArea = 0;
+		    		 }
+			    	 tempDivId = findNextDiv(tempDivId);
+			    	 
+			    	 //console.log("Next div id: " + tempDivId);
+		    	 }
+		    	 while (tempDivId != findNextDiv(lastDivFromArea));
+		    	 
+		    	 
+		    	 
+		    	 
+		    	 
+		    	 
+		    	 ///////////////////////////////////////////////
+		    	 
+		    	 
+		    	 
+		    	 /*
+		    	 var tempDivId = startDivId;
+		    	 var tempDiv;
+		    	 do {
+		    		 
+		    		 //console.log("Checking div with id: " + tempDivId);
+		    		 
+		    		 
+		    		 tempDiv = document.getElementById(tempDivId);
+		    		 
+		    		 if(tempDiv){
+				    	 document.getElementById(tempDivId).innerHTML += '<div class="eventCalendarTile" style = "background-color: ' 
+				    		 + color_code + '; opacity: 0.7;"><a class="eventCalendarTileLink" href="' + window.contextRoot + '/viewEvent/' 
+				    		 + value.id + '/basicView/' + '">' + value.title + '</a></div>';
+		    		 }
+
+			    	 
+			    	 tempDivId = findNextDiv(tempDivId);
+			    	 
+			    	 //console.log("Next div id: " + tempDivId);
+		    	 }
+		    	 while (tempDivId != findNextDiv(endDivId));
+		    	*/ 
+		    	 
+		    	 //console.log("#####################################");
+		    	 
+		    	 /*
+		    	 document.getElementById(startDivId).innerHTML += '<div class="eventCalendarTile" style = "background-color: ' 
+		    		 + color_code + '; opacity: 0.7;"><a class="eventCalendarTileLink" href="' + window.contextRoot + '/viewEvent/' 
+		    		 + value.id + '/basicView/' + '">' + value.title + '</a></div>';
+		    	 
+		    	 
+		    	 if(startDivId != endDivId) {
+			    	 document.getElementById(endDivId).innerHTML += '<div class="eventCalendarTile" style = "background-color: ' 
+			    		 + color_code + '; opacity: 0.7;"><a class="eventCalendarTileLink" href="' + window.contextRoot + '/viewEvent/' 
+			    		 + value.id + '/basicView/' + '">' + value.title + '</a></div>';
+			 
+		      	 }
+		    	 */
+		    	 
+		    	 //document.getElementById(startDivId).innerHTML += '<div class="eventCalendarTile" style="background-color: red;"></div>';
+		        	
+		    	 
+		    	 //'<div class="eventCalendarTile" style += "background-color: ' + color_code + ';"></div>';
+		    			    	 
+		    	 //<a href="${contextRoot}/home" class="d-none d-md-block"><img src="${images}/logo_white.png" alt="Logo" title="Main page"></a>
+		    	 
+		      });
+
+		  });
+		
+		///
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	if(viewType == "W") {
+	
+		
+		console.log("Week view");
+		
+		var choosenWeekFirstDay = calendarView.weekFirstDay;
+		var choosenWeekLastDay = calendarView.weekLastDay;
+		
+		console.log("Load events for week: " + choosenWeekFirstDay + "     -     " + choosenWeekLastDay);
+		
+	}
+	
 	
 }
+
+
+
+
+
+
+
+
+////////Pomocnicze funkcje
+
+//Generate color based on event's owner id
+function colorHashCode(owner_id) {
+	
+	owner_id = owner_id * 150;
+	str = owner_id + "A";
+	var hash = 0;
+	for (var i = 0; i < str.length; i++) {
+		hash = str.charCodeAt(i) + ((hash << 5) - hash);
+	}
+	var colour = '#';
+	for (var i = 0; i < 3; i++) {
+		var value = (hash >> (i * 8)) & 0xFF;
+		colour += ('00' + value.toString(16)).substr(-2);
+	}
+	return colour;
+} 
+
+
+
+//Check div id code for selected date
+function findDivIdForDate(date_year, date_month, date_day, date_hour, date_minutes) {
+	
+	var month_code = "";
+	var date_code = "";
+	var hour_code = "";
+	var minutes_code = "";
+	
+	if(date_month < 10) {
+		month_code = '0' + date_month;
+	}
+	else {
+		month_code = date_month;
+	}
+	
+	if(date_day < 10) {
+		date_code = '0' + date_day;
+	}
+	else {
+		date_code = date_day;
+	}
+	
+	if(date_hour < 10) {
+		hour_code = '0' + date_hour;
+	}
+	else {
+		hour_code = date_hour;
+	}
+	
+	if(date_minutes < 30) {
+		minutes_code = '00';
+	}
+	else {
+		minutes_code = '30';
+	}
+	
+	return date_year + month_code + date_code + '_' + hour_code + minutes_code;
+	
+}
+
+
+
+
+//znajdz wczesniejszy div
+function findPreviousDiv(divId) {
+	
+
+
+	var year = divId.slice(0, 4);
+	var month = divId.slice(4, 6);
+	var day = divId.slice(6, 8);
+	var hour = divId.slice(9, 11);
+	var minutes = divId.slice(11, 13);
+
+	//console.log("Year: " + year);
+	//console.log("Month: " + month);
+	//console.log("Day: " + day);
+	//console.log("Hour: " + hour);
+	//console.log("Minutes: " + minutes);
+
+
+
+	var now = new Date(year, month, day, hour, minutes, 0, 0);
+	//console.log(now);
+	var searchedDate = new Date((now.getTime()-(30*60*1000))); //30 minutes earlier
+	//console.log(searchedDate);
+	
+	
+	//Extract div id
+	var year_token = searchedDate.getFullYear();
+	
+	var month_token;
+	if (searchedDate.getMonth() < 10){
+		month_token = "0" + searchedDate.getMonth();		
+	}
+	else {
+		month_token = searchedDate.getMonth();
+	}
+	
+	var date_token;
+	if (searchedDate.getDate() < 10){
+		date_token = "0" + searchedDate.getDate();		
+	}
+	else {
+		date_token = searchedDate.getDate();
+	}
+	
+	
+	var hour_token;
+	if (searchedDate.getHours() < 10){
+		hour_token = "0" + searchedDate.getHours();		
+	}
+	else {
+		hour_token = searchedDate.getHours();
+	}
+	
+	
+	var minutes_token;
+	if (searchedDate.getMinutes() == 0){
+		minutes_token = "0" + searchedDate.getMinutes();		
+	}
+	else {
+		minutes_token = searchedDate.getMinutes();
+	}
+	
+	
+	
+	var searchedDivId = year_token + month_token + date_token + "_" + hour_token + minutes_token;
+	//var searchedDivId = searchedDate.getFullYear();
+	
+	return searchedDivId;
+	
+}
+
+
+//find next div
+function findNextDiv(divId) {
+	
+
+
+	var year = divId.slice(0, 4);
+	var month = divId.slice(4, 6);
+	var day = divId.slice(6, 8);
+	var hour = divId.slice(9, 11);
+	var minutes = divId.slice(11, 13);
+
+	//console.log("Year: " + year);
+	//console.log("Month: " + month);
+	//console.log("Day: " + day);
+	//console.log("Hour: " + hour);
+	//console.log("Minutes: " + minutes);
+
+
+
+	var now = new Date(year, month, day, hour, minutes, 0, 0);
+	//console.log(now);
+	var searchedDate = new Date((now.getTime()+(30*60*1000))); //30 minutes earlier
+	//console.log(searchedDate);
+	
+	
+	//Extract div id
+	var year_token = searchedDate.getFullYear();
+	
+	var month_token;
+	if (searchedDate.getMonth() < 10){
+		month_token = "0" + searchedDate.getMonth();		
+	}
+	else {
+		month_token = searchedDate.getMonth();
+	}
+	
+	var date_token;
+	if (searchedDate.getDate() < 10){
+		date_token = "0" + searchedDate.getDate();		
+	}
+	else {
+		date_token = searchedDate.getDate();
+	}
+	
+	
+	var hour_token;
+	if (searchedDate.getHours() < 10){
+		hour_token = "0" + searchedDate.getHours();		
+	}
+	else {
+		hour_token = searchedDate.getHours();
+	}
+	
+	
+	var minutes_token;
+	if (searchedDate.getMinutes() == 0){
+		minutes_token = "0" + searchedDate.getMinutes();		
+	}
+	else {
+		minutes_token = searchedDate.getMinutes();
+	}
+	
+	
+	
+	var searchedDivId = year_token + month_token + date_token + "_" + hour_token + minutes_token;
+	//var searchedDivId = searchedDate.getFullYear();
+	
+	return searchedDivId;
+	
+}
+
+
+
+
+//////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
 
 
 //Load initial view when page is loaded (by default it's week view)
@@ -869,7 +1404,7 @@ function loadCalendar()
 	document.getElementById("calendarViewWrapper").appendChild(test1);
 		
 	
-	addCalendarEvents(cal);
+	addCalendarEvents(cal, "W");
 	
 	
 }
@@ -890,7 +1425,7 @@ function generateCalendarView(dateSelected, viewType) {
 		cal.init();
 		document.getElementById("calendarViewWrapper").appendChild(cal.divCalendarCnt);
 		
-		addCalendarEvents(cal);
+		addCalendarEvents(cal, "W");
 
 
 
@@ -899,13 +1434,13 @@ function generateCalendarView(dateSelected, viewType) {
 		cal.init();
 		document.getElementById("calendarViewWrapper").appendChild(cal.divCalendarCnt);
 		
-		addCalendarEvents(cal);
+		addCalendarEvents(cal, "D");
 	} else if (viewType == "M") {
 		const cal = new CalendarMonth(dateSelected);
 		cal.init();
 		document.getElementById("calendarViewWrapper").appendChild(cal.divCalendarCnt);
 		
-		addCalendarEvents(cal);
+		addCalendarEvents(cal, "M");
 	} else {
 		str1 = "sdhhsds";
 	}

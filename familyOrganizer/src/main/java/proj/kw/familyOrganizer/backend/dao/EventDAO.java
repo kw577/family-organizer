@@ -1,5 +1,6 @@
 package proj.kw.familyOrganizer.backend.dao;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import proj.kw.familyOrganizer.backend.dto.Event;
@@ -32,6 +33,11 @@ public interface EventDAO {
 	
 	//get list of events started by certain user
 	List<Event> searchEventsWithKeyword(int family_id, String keyword);
+	
+	
+	//get list of events of certain family for selected day
+	List<Event> getEventsForDay(int family_id, LocalDateTime start, LocalDateTime end);
+
 	
 	
 }

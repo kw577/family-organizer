@@ -396,6 +396,8 @@ a, a:hover, a:focus {
 	border-bottom: 1px solid #787878;
 	border-right: 1px solid #787878;
 	
+	display: flex;
+	
 }	
 
 
@@ -1649,6 +1651,27 @@ table#eventNotificationTable {
 }
 
 
+/*------------------------------Present events on calendar------------------------------*/
+
+.eventCalendarTile {
+	
+	
+	width:100%;
+	margin-left: 5px;
+	margin-right: 5px;
+	height: 100%;
+	display:inline-block;
+	
+}
+
+.eventCalendarTileLink {
+	
+	
+	width:100%;
+	height: 100%;
+	display:inline-block;
+	
+}
 
 
 /*------------------------------Pomocnicze------------------------------*/

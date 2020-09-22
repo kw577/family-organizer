@@ -1,5 +1,6 @@
 package proj.kw.familyOrganizer.backend.restcontroller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -150,6 +151,23 @@ public class RESTEvent implements EventDAO {
 	}
 	
 	
+	
+	
+	
+	
+	
+	@Override
+	public List<Event> getEventsForDay(int family_id, LocalDateTime start_date, LocalDateTime end_date) {
+		String query = "FROM event WHERE family_id = :family_id AND end_date >= :start_date AND start_date < :end_date ORDER BY id";
+		
+		return sessionFactory
+				.getCurrentSession()
+				.createQuery(query, Event.class)
+				.setParameter("family_id", family_id)
+				.setParameter("start_date", start_date)
+				.setParameter("end_date", end_date)
+				.getResultList();
+	}
 	
 	
 	

@@ -61,6 +61,9 @@
 	<!-- Jquery timepicker ver 2 -->
 	<link href="${css}/timepicker.css" rel="stylesheet" type="text/css">
 		
+	<script>
+        window.contextRoot = '${contextRoot}'
+	</script>
 	
 	
 </head>
@@ -101,9 +104,6 @@
 					<a href="#" title="Today"><i class="icon-calendar-check-o"></i><span class="d-none d-md-inline-block ml-1">  Today </span></a>	
 				</li>
 				
-				<li>
-					<a href="#" title="Tasks"><i class="icon-check"></i><span class="d-none d-md-inline-block ml-1">  Tasks </span></a>
-				</li>
 			
 				<li class="active">
 					<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle abcde"><i class="icon-list-bullet"></i><span class="d-none d-md-inline-block ml-1">  My plans </span></a>
@@ -118,22 +118,12 @@
 							<a href="${contextRoot}/eventsControlPanel" title="Manage events">&#8227;&#32;<i class="icon-briefcase"></i><span class="d-none d-md-inline-block ml-1">  Manage events </span></a>
 						</li>
 					</ul>
+				</li>
+				
+				<li>
+					<a href="#" title="Tasks"><i class="icon-check"></i><span class="d-none d-md-inline-block ml-1">  Tasks </span></a>
 				</li>			
 				
-				<li>
-					<a href="#" title="Contacts"><i class="icon-address-card-o"></i><span class="d-none d-md-inline-block ml-1">  Contacts </span></a>
-				</li>
-				
-				<li>
-					<a href="${contextRoot}/notes" title="User Notes page"><i class="icon-edit"></i><span class="d-none d-md-inline-block ml-1">  Notes </span></a>
-				</li>
-
-				<li>
-					<a href="#" title="Conversations"><i class="icon-chat"></i><span class="d-none d-md-inline-block ml-1">  Conversations </span></a>
-				</li>
-				<li>
-					<a href="#" title="Files manager"><i class="icon-doc-inv"></i><span class="d-none d-md-inline-block ml-1">  Files manager </span></a>
-				</li>
 			</ul>
 		</nav>	
 	
@@ -277,6 +267,9 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="${js}/bootstrap.min.js"></script>
 
+	<!-- jQuery AJAX -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 	<!-- Bootbox -->
 	<script src="${js}/bootbox.min.js"></script>
 
@@ -297,7 +290,7 @@
 	<!-- jQuery validator -->
 	<script src="${js}/jquery.validate.js"></script>
 	
-
+	
 	<!-- Other scripts -->
 	<script src="${js}/scripts.js"></script>
 
