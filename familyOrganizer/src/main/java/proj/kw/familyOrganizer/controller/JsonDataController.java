@@ -53,5 +53,39 @@ public class JsonDataController {
 	
 	
 	
+	
+	
+	//return list of event from selected day in JSON
+	@RequestMapping("/calendarWeekView/getEvents")   
+	@ResponseBody 
+	public List<Event> getEventForWeek(@RequestParam("year") Integer year, 
+									@RequestParam("month") Integer month,
+									@RequestParam("day") Integer day,
+									@RequestParam("dayInWeek") Integer dayInWeek) {
+
+		
+		UserModel usrModel = (UserModel) session.getAttribute("userModel");
+		
+		//System.out.println("\n\n\n\nJsonDataController: Week view");
+		//System.out.println("\n\n\n\nJsonDataController: " + year + "-" + month + "-" + day + "\n\n\n\n");
+		
+		//selected_day.getDayOfWeek();
+		
+		LocalDateTime date_start = LocalDateTime.of(year, month + 1, day, 0, 0);
+		date_start = date_start.minusDays(dayInWeek);
+		//System.out.println(date_start);
+		LocalDateTime date_end = LocalDateTime.of(year, month + 1, day, 23, 59);
+		date_end = date_end.plusDays(7-dayInWeek-1);
+		//System.out.println(date_end + " " + date_end.getMonth());
+
+			
+		return eventDAO.getEventsForDay(usrModel.getFamily_id(), date_start, date_end);
+		
+	}
+	
+	
+	
+	
+	
 
 } 

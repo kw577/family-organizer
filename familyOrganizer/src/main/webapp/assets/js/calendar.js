@@ -848,29 +848,43 @@ function addCalendarEvents (calendarView, viewType)
 		document.getElementById(searchedId).classList.add('calendarMarkToday');
 	
 	
-	if(viewType == "D") {
+	if(viewType == "D" || viewType == "W") {
 	
 		
-		console.log("Day view");
+		//console.log("Day view");
 		
 		var choosenDay = calendarView.selectedDay;
 		
 		//console.log("Load events for day: " + choosenDay);
 		
 		//Test
-		var jsonUrl = window.contextRoot + '/json/data/calendarDayView/getEvents?year=' 
-						+ choosenDay.getFullYear() + '&month=' 
-						+ choosenDay.getMonth() + '&day=' + choosenDay.getDate();
+		var jsonUrl = ""; 
+		
+		if(viewType == "D"){
+			//day view
+			jsonUrl = window.contextRoot + '/json/data/calendarDayView/getEvents?year=' 
+							+ choosenDay.getFullYear() + '&month=' 
+							+ choosenDay.getMonth() + '&day=' + choosenDay.getDate();			
+			
+		} else {
+			//week view
+			jsonUrl = window.contextRoot + '/json/data/calendarWeekView/getEvents?year=' 
+							+ choosenDay.getFullYear() + '&month=' 
+							+ choosenDay.getMonth() + '&day=' + choosenDay.getDate() + '&dayInWeek=' + choosenDay.getDay();	
+			
+			
+		}
 		
 		
-		console.log(jsonUrl);
+		
+		//console.log(jsonUrl);
 		
 		
 		$.getJSON(jsonUrl, function(data){ 
 		      $.each(data, function(key, value){
 		   
-		    	 console.log("#################################"); 
-		    	 console.log("Checking event with id: " + value.id);
+		    	 //console.log("#################################"); 
+		    	 //console.log("Checking event with id: " + value.id);
 		    	 var color_code = colorHashCode(value.owner_id);
 		    	 
 		    	 		    	  
@@ -887,8 +901,8 @@ function addCalendarEvents (calendarView, viewType)
 							value.end_date.minute); 
 		    	 
 		    	 
-		    	 console.log("Start div: " + startDivId);
-		    	 console.log("End div: " + endDivId);
+		    	 //console.log("Start div: " + startDivId);
+		    	 //console.log("End div: " + endDivId);
 		    	 
 		    	 
 		    	 //check is another event already added in some of tiles booked for this event
@@ -923,8 +937,8 @@ function addCalendarEvents (calendarView, viewType)
 		    	 
 		    	 var firstDivFromArea = findNextDiv(checkDivWithId);
 		    	 
-		    	 console.log("firstDivFromArea: " + firstDivFromArea);
-		    	 console.log("maxDivCount: " + maxDivCount);
+		    	 //console.log("firstDivFromArea: " + firstDivFromArea);
+		    	 //console.log("maxDivCount: " + maxDivCount);
 		    	 
 		    	 
 		    	 
@@ -957,8 +971,8 @@ function addCalendarEvents (calendarView, viewType)
 		    	 
 		    	 var lastDivFromArea = findPreviousDiv(checkDivWithId);
 		    	 
-		    	 console.log("lastDivFromArea: " + lastDivFromArea);
-		    	 console.log("maxDivCount: " + maxDivCount);
+		    	 //console.log("lastDivFromArea: " + lastDivFromArea);
+		    	 //console.log("maxDivCount: " + maxDivCount);
 		    	 
 		    	 
 		    	 //---------------------------------------------------------------------
@@ -968,14 +982,14 @@ function addCalendarEvents (calendarView, viewType)
 		    	 do {
 		    		 
 		    		 checkDiv = document.getElementById(checkDivWithId);
-		    		 console.log("Checking div: " + checkDivWithId);
+		    		 //console.log("Checking div: " + checkDivWithId);
 		    		 
 		    		 if(checkDiv){
 		    			 tempValue =  document.getElementById(checkDivWithId).childElementCount;
-		    			 console.log("tempValue: " + tempValue);
+		    			 //console.log("tempValue: " + tempValue);
 		    			 if(tempValue > maxDivCount){
 		    				 maxDivCount = tempValue;
-		    				 console.log("maxDivCount: " + maxDivCount);
+		    				 //console.log("maxDivCount: " + maxDivCount);
 		    			 }
 		    			 		    			 
 		    		 }
@@ -986,7 +1000,7 @@ function addCalendarEvents (calendarView, viewType)
 		    	 }
 		    	 while (checkDivWithId != findNextDiv(endDivId));
 		    	 
-		    	 console.log("maxDivCount: " + maxDivCount);
+		    	 //console.log("maxDivCount: " + maxDivCount);
 		    	 
 		    	 //---------------------------------------------------------------------
 		    	 
@@ -998,8 +1012,8 @@ function addCalendarEvents (calendarView, viewType)
 		    	 var tempDiv;
 		    	 var eventDivsArea = 0;
 		    	 var insideDivsAmount = 0;
-		    	 console.log("---------------------------------");
-		    	 console.log("Adding this event to calendar");
+		    	 //console.log("---------------------------------");
+		    	 //console.log("Adding this event to calendar");
 		    	 
 		    	 do {
 		    		 
@@ -1007,8 +1021,8 @@ function addCalendarEvents (calendarView, viewType)
 		    			 eventDivsArea = 1;
 		    		 }
 		    		 
-		    		 console.log("tempDivId: " + tempDivId);
-		    		 console.log("eventDivsArea: " + eventDivsArea);
+		    		 //console.log("tempDivId: " + tempDivId);
+		    		 //console.log("eventDivsArea: " + eventDivsArea);
 		    		 
 		    		 //console.log("Checking div with id: " + tempDivId);
 		    		 
@@ -1026,7 +1040,7 @@ function addCalendarEvents (calendarView, viewType)
 		    				 for (i = 0; i < (maxDivCount-insideDivsAmount+1); i++) {
 		    					 document.getElementById(tempDivId).innerHTML += '<div class="eventCalendarTile"></div>';
 		    					 
-		    					 console.log("fdfsfdadfdafadfdsfafdfas");
+		    					 //console.log("fdfsfdadfdafadfdsfafdfas");
 		    				 } 
 		    				  				   				 
 		    				 
@@ -1039,7 +1053,7 @@ function addCalendarEvents (calendarView, viewType)
 		    				 } 
 		    				 
 					    	 document.getElementById(tempDivId).innerHTML += '<div class="eventCalendarTile" style = "background-color: ' 
-					    		 + color_code + '; opacity: 0.7;"><a class="eventCalendarTileLink" href="' + window.contextRoot + '/viewEvent/' 
+					    		 + color_code + '80;"><a class="eventCalendarTileLink" href="' + window.contextRoot + '/viewEvent/' 
 					    		 + value.id + '/basicView/' + '">' + value.title + '</a></div>';
 		    				 
 		    			 }
@@ -1072,76 +1086,18 @@ function addCalendarEvents (calendarView, viewType)
 		    	 
 		    	 
 		    	 ///////////////////////////////////////////////
-		    	 
-		    	 
-		    	 
-		    	 /*
-		    	 var tempDivId = startDivId;
-		    	 var tempDiv;
-		    	 do {
-		    		 
-		    		 //console.log("Checking div with id: " + tempDivId);
-		    		 
-		    		 
-		    		 tempDiv = document.getElementById(tempDivId);
-		    		 
-		    		 if(tempDiv){
-				    	 document.getElementById(tempDivId).innerHTML += '<div class="eventCalendarTile" style = "background-color: ' 
-				    		 + color_code + '; opacity: 0.7;"><a class="eventCalendarTileLink" href="' + window.contextRoot + '/viewEvent/' 
-				    		 + value.id + '/basicView/' + '">' + value.title + '</a></div>';
-		    		 }
-
-			    	 
-			    	 tempDivId = findNextDiv(tempDivId);
-			    	 
-			    	 //console.log("Next div id: " + tempDivId);
-		    	 }
-		    	 while (tempDivId != findNextDiv(endDivId));
-		    	*/ 
-		    	 
-		    	 //console.log("#####################################");
-		    	 
-		    	 /*
-		    	 document.getElementById(startDivId).innerHTML += '<div class="eventCalendarTile" style = "background-color: ' 
-		    		 + color_code + '; opacity: 0.7;"><a class="eventCalendarTileLink" href="' + window.contextRoot + '/viewEvent/' 
-		    		 + value.id + '/basicView/' + '">' + value.title + '</a></div>';
-		    	 
-		    	 
-		    	 if(startDivId != endDivId) {
-			    	 document.getElementById(endDivId).innerHTML += '<div class="eventCalendarTile" style = "background-color: ' 
-			    		 + color_code + '; opacity: 0.7;"><a class="eventCalendarTileLink" href="' + window.contextRoot + '/viewEvent/' 
-			    		 + value.id + '/basicView/' + '">' + value.title + '</a></div>';
-			 
-		      	 }
-		    	 */
-		    	 
-		    	 //document.getElementById(startDivId).innerHTML += '<div class="eventCalendarTile" style="background-color: red;"></div>';
-		        	
-		    	 
-		    	 //'<div class="eventCalendarTile" style += "background-color: ' + color_code + ';"></div>';
-		    			    	 
-		    	 //<a href="${contextRoot}/home" class="d-none d-md-block"><img src="${images}/logo_white.png" alt="Logo" title="Main page"></a>
-		    	 
+		    	     	 		    	 
+		    	
 		      });
 
 		  });
-		
-		///
-		
-		
-		
-		
-		
-		
-		
-		
-		
+			
 		
 	}
 	
 	
 	
-	
+	/*
 	if(viewType == "W") {
 	
 		
@@ -1153,7 +1109,7 @@ function addCalendarEvents (calendarView, viewType)
 		console.log("Load events for week: " + choosenWeekFirstDay + "     -     " + choosenWeekLastDay);
 		
 	}
-	
+	*/
 	
 }
 
